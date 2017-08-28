@@ -31,7 +31,7 @@
                            @click.stop="sideNav=!sideNav"
                            class="hidden-sm-and-up"
                     >
-                        <v-icon>mdi-list</v-icon>
+                        <v-icon>mdi-format-list-bulleted</v-icon>
                     </v-btn>
                     <v-btn icon
                            :to="{name: 'home'}"
