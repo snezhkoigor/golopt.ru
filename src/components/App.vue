@@ -28,12 +28,13 @@
             >
                 <v-toolbar-side-icon @click.stop="sideNav=!sideNav" class="hidden-sm-and-up" />
                 <v-toolbar-title>
-                    <router-link :to="{name: 'home'}" v-if="$route.name !== 'home'" tag="span" style="cursor: pointer">
-                        <v-icon left dark>mdi-home</v-icon>
+                    <v-icon left @click.stop="sideNav=!sideNav" class="hidden-sm-and-up">mdi-list</v-icon>
+                    <router-link :to="{name: 'home'}" v-if="$route.name !== 'home'" tag="span">
+                        <v-icon left>mdi-home</v-icon>
                     </router-link>
                 </v-toolbar-title>
                 <v-spacer />
-                <v-toolbar-items class="hidden-sm-and-up">
+                <v-toolbar-items class="hidden-xs-only">
                     <v-btn
                             flat
                             v-for="item in $router.options.routes"
