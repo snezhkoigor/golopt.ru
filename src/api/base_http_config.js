@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 let instance = axios.create({
-    baseURL: (process.env === 'production' ? 'http://api.goloption.com/api' : 'http://api.golopt/api'),
+    baseURL: (process.env.NODE_ENV === 'production' ? 'http://api.goloption.com/api' : 'http://api.golopt/api'),
     headers: {
         Authorization: 'Bearer ' + localStorage.getItem('jwt_token')
     },
