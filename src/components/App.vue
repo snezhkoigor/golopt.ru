@@ -34,7 +34,7 @@
                         <v-icon>mdi-format-list-bulleted</v-icon>
                     </v-btn>
                     <v-btn icon
-
+                           @click.stop="goHome"
                            v-if="$route.name !== 'home'"
                     >
                         <v-icon>mdi-home</v-icon>
@@ -115,7 +115,12 @@
             ]),
             ...mapActions('Dictionary', [
                 'list'
-            ])
+            ]),
+            goHome: function() {
+                this.$router.push({
+                    name: 'home'
+                })
+            }
         }
     }
 </script>
