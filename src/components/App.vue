@@ -28,7 +28,7 @@
             >
                 <v-toolbar-side-icon
                         @click.stop="sideNav = !sideNav"
-                        class="hidden-sm-and-up "></v-toolbar-side-icon>
+                        class="hidden-sm-and-up"></v-toolbar-side-icon>
                 <v-toolbar-title>
                     <router-link :to="{name: 'home'}" v-if="$route.name !== 'home'" tag="span" style="cursor: pointer">
                         <v-icon left dark>mdi-home</v-icon>
