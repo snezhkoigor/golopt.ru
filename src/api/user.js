@@ -90,14 +90,10 @@ export default {
         return HTTP.get('/me/status', { headers: headers });
     },
     cancelEmailChange(formBody) {
-        let data = {
-            new_email: formBody.new_email
-        };
-
         let headers = {
             Authorization: 'Bearer ' + localStorage.getItem('jwt_token')
         };
 
-        return HTTP.delete('/new/email/cancel', data, { headers: headers });
+        return HTTP.delete('/new/email/cancel/' + formBody.new_email, {headers: headers});
     }
 }
