@@ -1,111 +1,194 @@
-import api from '../api/product.js'
+import api from '../api/product.js';
 
-const GET_LIST = "GET_LIST"
-const GET_LIST_SUCCESS = "GET_LIST_SUCCESS"
-const GET_LIST_FAIL = "GET_LIST_FAIL"
-const SAVE_PRODUCT = "SAVE_PRODUCT"
-const SAVE_PRODUCT_SUCCESS = "SAVE_PRODUCT_SUCCESS"
-const SAVE_PRODUCT_FAIL = "SAVE_PRODUCT_FAIL"
-const ADD_ERRORS = "ADD_ERRORS"
-const REMOVE_ERRORS = "REMOVE_ERRORS"
+const GET_LIST = "GET_LIST";
+const GET_LIST_SUCCESS = "GET_LIST_SUCCESS";
+const GET_LIST_FAIL = "GET_LIST_FAIL";
+const SAVE_PRODUCT = "SAVE_PRODUCT";
+const SAVE_PRODUCT_SUCCESS = "SAVE_PRODUCT_SUCCESS";
+const SAVE_PRODUCT_FAIL = "SAVE_PRODUCT_FAIL";
+const PAY = "PAY";
+const PAY_FAIL = "PAY_FAIL";
+const PAY_SUCCESS = "PAY_SUCCESS";
 
 const state = {
     products: [],
-    pending: false,
-    errors: null,
-}
+    has_demo_products: [],
+    pending: false
+};
 
 const actions = {
     list({ commit }) {
-        commit(GET_LIST)
+        return new Promise((resolve, reject) => {
+            commit(GET_LIST);
 
-        api.list().then(function (response) {
-            if (response.data.status) {
-                let products = response.data.data
-                if (products !== undefined) {
-                    commit(GET_LIST_SUCCESS, products)
-                }
-            } else {
-                commit(GET_LIST_FAIL)
-
-                if ((response.data.message !== null) && (typeof( response.data.message ) === 'object')) {
-                    commit(ADD_ERRORS, response.data.message)
+            api.list().then(function (response) {
+                if (response.data.status) {
+                    commit(GET_LIST_SUCCESS, response.data.data);
+                    resolve(response);
                 } else {
-                    commit(ADD_ERRORS, {system: response.data.message})
-                }
-                window.console.log('error', response)
-            }
-        }.bind(this));
-    },
-    save({ commit }, formBody) {
-        commit(SAVE_PRODUCT)
+                    commit(GET_LIST_FAIL);
 
-        api.save(formBody).then(function (response) {
-            if (response.data.status) {
-                let products = response.data.data
-                if (products !== undefined) {
-                    commit(SAVE_PRODUCT_SUCCESS, products)
-                }
-            } else {
-                commit(SAVE_PRODUCT_FAIL)
+                    let errors = null;
+                    if ((response.data.message !== null) && (typeof( response.data.message ) === 'object')) {
+                        errors = response.data.message;
+                    } else {
+                        errors = {
+                            system: response.data.message
+                        };
+                    }
+                    if (process.env !== 'production')  window.console.log('error', response);
 
-                if ((response.data.message !== null) && (typeof( response.data.message ) === 'object')) {
-                    commit(ADD_ERRORS, response.data.message)
-                } else {
-                    commit(ADD_ERRORS, {system: response.data.message})
+                    reject(errors);
                 }
-                window.console.log('error', response)
-            }
+            }, error => {
+                commit(GET_LIST_FAIL);
+                reject(error);
+            })
         })
     },
-    clearErrors({ commit }, milliseconds) {
-        setTimeout(function() { commit(REMOVE_ERRORS) }, parseInt(milliseconds) ? milliseconds : 10000)
+    save({ commit }, formBody) {
+        return new Promise((resolve, reject) => {
+            commit(SAVE_PRODUCT);
+
+            api.save(formBody).then(response => {
+                if (response.data.status) {
+                    commit(SAVE_PRODUCT_SUCCESS, response.data.data);
+                    resolve(response);
+                } else {
+                    commit(SAVE_PRODUCT_FAIL);
+
+                    let errors = null;
+                    if ((response.data.message !== null) && (typeof( response.data.message ) === 'object')) {
+                        errors = response.data.message;
+                    } else {
+                        errors = {
+                            system: response.data.message
+                        };
+                    }
+                    if (process.env !== 'production')  window.console.log('error', response);
+
+                    reject(errors);
+                }
+            }, error => {
+                commit(SAVE_PRODUCT_FAIL);
+                reject(error);
+            })
+        })
+    },
+    pay({ commit }, formBody) {
+        return new Promise((resolve, reject) => {
+            commit(PAY);
+
+            api.pay(formBody).then(response => {
+                if (response.data.status) {
+                    commit(PAY_SUCCESS);
+                    resolve(response);
+                } else {
+                    commit(PAY_FAIL);
+
+                    let errors = null;
+                    if ((response.data.message !== null) && (typeof( response.data.message ) === 'object')) {
+                        errors = response.data.message;
+                    } else {
+                        errors = {
+                            system: response.data.message
+                        };
+                    }
+                    if (process.env !== 'production')  window.console.log('error', response);
+
+                    reject(errors);
+                }
+            }, error => {
+                commit(PAY_FAIL);
+                reject(error);
+            })
+        })
+    },
+    demo({ commit }, formBody) {
+        return new Promise((resolve, reject) => {
+            commit(PAY);
+
+            api.demo(formBody).then(response => {
+                if (response.data.status) {
+                    commit(PAY_SUCCESS);
+                    resolve(response);
+                } else {
+                    commit(PAY_FAIL);
+
+                    let errors = null;
+                    if ((response.data.message !== null) && (typeof( response.data.message ) === 'object')) {
+                        errors = response.data.message;
+                    } else {
+                        errors = {
+                            system: response.data.message
+                        };
+                    }
+                    if (process.env !== 'production')  window.console.log('error', response);
+
+                    reject(errors);
+                }
+            }, error => {
+                commit(PAY_FAIL);
+                reject(error);
+            })
+        })
     }
 }
 
 const mutations = {
-    ADD_ERRORS (state, errors) {
-        state.errors = errors
-    },
-    REMOVE_ERRORS (state) {
-        state.errors = null
-    },
     GET_LIST (state) {
-        state.pending = true
+        state.pending = true;
+    },
+    PAY (state) {
+        state.pending = true;
+    },
+    PAY_SUCCESS (state) {
+        state.pending = false;
+    },
+    PAY_FAIL (state) {
+        state.pending = false;
     },
     GET_LIST_SUCCESS (state, products) {
-        state.pending = false
-        state.products = products
+        state.pending = false;
+        state.products = products;
     },
     GET_LIST_FAIL (state) {
-        state.pending = false
-        state.products = []
+        state.pending = false;
+        state.products = [];
     },
     SAVE_PRODUCT (state) {
-        state.pending = true
+        state.pending = true;
     },
     SAVE_PRODUCT_SUCCESS (state, products) {
-        state.pending = false
-        state.products = products
+        state.pending = false;
+        state.products = products;
     },
     SAVE_PRODUCT_FAIL (state) {
-        state.pending = false
+        state.pending = false;
     }
 }
 
 const getters = {
     products (state) {
-        return state.products
-    },
-    errors (state) {
-        return state.errors
+        return state.products;
     },
     pending (state) {
-        return state.pending
+        return state.pending;
+    },
+    has_demo (state) {
+        if (!!state.products) {
+            state.products.forEach(function(value) {
+                if (value.has_demo === 1) {
+                    state.has_demo_products.push(value);
+                }
+            })
+        }
+
+        return state.has_demo_products;
     }
 }
 
-const namespaced = true
+const namespaced = true;
 
 export default {
     namespaced,

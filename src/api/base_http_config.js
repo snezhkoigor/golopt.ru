@@ -1,7 +1,7 @@
-import axios from 'axios'
+import axios from 'axios';
 
 let instance = axios.create({
-    baseURL: (process.env === 'production' ? 'http://api.goloption.ru/api' : 'http://api.golopt/api'),
+    baseURL: (process.env === 'production' ? 'http://api.goloption.com/api' : 'http://api.golopt/api'),
     headers: {
         Authorization: 'Bearer ' + localStorage.getItem('jwt_token')
     },
@@ -18,7 +18,7 @@ let instance = axios.create({
     // `timeout` specifies the number of milliseconds before the request times out.
     // If the request takes longer than `timeout`, the request will be aborted.
     // timeout: 1000,
-})
+});
 
 export default {
     instance

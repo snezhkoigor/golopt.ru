@@ -1,13 +1,21 @@
-import base_api_config from './base_http_config.js'
+import base_api_config from './base_http_config.js';
 
-const HTTP = base_api_config.instance
+const HTTP = base_api_config.instance;
 
 export default {
     list() {
-        return HTTP.get('/products', { headers: { Authorization: 'Bearer ' + localStorage.getItem('jwt_token') } })
+        let headers = {
+            Authorization: 'Bearer ' + localStorage.getItem('jwt_token')
+        };
+
+        return HTTP.get('/products', { headers: headers });
     },
     save(formBody) {
-        return HTTP.put('/products' + (formBody.id !== undefined ? formBody.id : ''), {
+        let headers = {
+            Authorization: 'Bearer ' + localStorage.getItem('jwt_token')
+        };
+
+        let data = {
             name: formBody.name,
             path: formBody.path,
             description: formBody.description,
@@ -15,6 +23,35 @@ export default {
             price_by: formBody.price_by,
             demo_access_days: formBody.demo_access_days,
             active: formBody.active
-        }, { headers: { Authorization: 'Bearer ' + localStorage.getItem('jwt_token') } })
+        };
+
+        return HTTP.put('/products' + (formBody.id !== undefined ? formBody.id : ''), data, { headers: headers });
+    },
+    pay(formBody) {
+        let headers = {
+            Authorization: 'Bearer ' + localStorage.getItem('jwt_token')
+        };
+
+        let data = {
+            payment_system: formBody.payment_system,
+            trade_account: formBody.trade_account,
+            broker: formBody.broker
+        };
+
+        return HTTP.post('/product/' + formBody.product_id + '/pay', data, { headers: headers });
+    },
+    demo(formBody) {
+        let headers = {
+            Authorization: 'Bearer ' + localStorage.getItem('jwt_token')
+        };
+
+        let data = {
+            payment_system: formBody.payment_system,
+            trade_account: formBody.trade_account,
+            broker: formBody.broker
+        };
+
+        return HTTP.post('/product/demo', data, { headers: headers });
     }
+
 }

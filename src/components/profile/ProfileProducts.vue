@@ -1,18 +1,309 @@
 <template>
     <v-card class="grey lighten-4 elevation-0">
         <v-card-text>
-            <v-container fluid>
-                <v-layout row>
-                    <v-flex xs12>
-                        ---
-                    </v-flex>
-                </v-layout>
-            </v-container>
+            <v-layout row-md column child-flex-md>
+                <template v-for="productItem in products">
+                    <v-card v-bind:class="{ 'cyan': productItem.users[0].pivot.active === 1, 'red lighten-2': productItem.users[0].pivot.active === 0 }"
+                            class="ma-2 darken-2 white--text"
+                            v-if="productItem.users.length > 0"
+                    >
+                        <v-card-title primary-title class="card-title">
+                            <p class="headline">
+                                {{ productItem.name }}
+
+                            </p>
+                            <p class="home-product-description">
+                                {{ productItem.description }}
+                            </p>
+                            <p class="subheadline" v-if="productItem.users.length > 0 && productItem.users[0].pivot.active === 1 && productItem.users[0].pivot.subscribe_date_until">
+                                <v-icon>mdi-calendar</v-icon> до {{ productItem.users[0].pivot.subscribe_date_until | moment('Do MMM') }}
+                            </p>
+                            <p class="subheadline subscribe_date_until-empty" v-if="!productItem.users[0].pivot.subscribe_date_until">
+
+                            </p>
+                            <p class="headline">
+                                {{ productItem.price }}$/{{ dictionary.price_by[productItem.price_by].text }}
+                            </p>
+                        </v-card-title>
+                        <v-card-actions>
+                            <v-menu
+                                    origin="center center"
+                                    transition="scale-transition"
+                                    bottom
+                            >
+                                <v-btn flat dark slot="activator">
+                                    Продлить
+                                </v-btn>
+                                <v-list>
+                                    <v-list-tile v-for="paymentSystemItem in dictionary.payment_systems" :key="paymentSystemItem.key"
+                                            v-if="paymentSystemItem.key !== dictionary.const.PAYMENT_SYSTEM_DEMO"
+                                    >
+                                        <v-list-tile-title
+                                                @click="paymentSystemSelected(paymentSystemItem, productItem)"
+                                        >
+                                            {{ paymentSystemItem.text }}
+                                        </v-list-tile-title>
+                                    </v-list-tile>
+                                </v-list>
+                            </v-menu>
+
+                            <v-btn fab small dark @click="editSelected(productItem)">
+                                <v-icon>mdi-pencil</v-icon>
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </template>
+                <template v-for="productItem in products">
+                    <v-card class="ma-2 cyan darken-2 white--text" v-if="productItem.users.length === 0">
+                        <v-card-title primary-title class="card-title">
+                            <p class="headline">{{ productItem.name }}</p>
+                            <p class="home-product-description">{{ productItem.description }}</p>
+                            <p class="subheadline subscribe_date_until-empty">
+
+                            </p>
+                            <p class="headline">{{ productItem.price }}$/{{ dictionary.price_by[productItem.price_by].text }}</p>
+                        </v-card-title>
+                        <v-card-actions>
+                            <v-menu
+                                    origin="center center"
+                                    transition="scale-transition"
+                                    bottom
+                            >
+                                <v-btn flat dark slot="activator">
+                                    Купить
+                                </v-btn>
+                                <v-list>
+                                    <v-list-tile v-for="paymentSystemItem in dictionary.payment_systems" :key="paymentSystemItem.key"
+                                                 v-if="paymentSystemItem.key !== dictionary.const.PAYMENT_SYSTEM_DEMO || (paymentSystemItem.key === dictionary.const.PAYMENT_SYSTEM_DEMO && productItem.has_demo === 1)"
+                                    >
+                                        <v-list-tile-title
+                                                @click="paymentSystemSelected(paymentSystemItem, productItem)"
+                                        >
+                                            {{ paymentSystemItem.text }}
+                                        </v-list-tile-title>
+                                    </v-list-tile>
+                                </v-list>
+                            </v-menu>
+                        </v-card-actions>
+                    </v-card>
+                </template>
+            </v-layout>
         </v-card-text>
+
+        <v-dialog v-model="systemDialog" persistent>
+            <v-card>
+                <v-card-title class="headline">
+                    <v-icon class="red--text darken-1">
+                        mdi-comment-alert-outline
+                    </v-icon>
+                </v-card-title>
+                <v-card-text>
+                    {{ errors.system }}
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn class="red--text darken-1" flat="flat" @click="systemDialog = false">Закрыть</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+
+        <v-dialog v-model="dialog" fullscreen transition="dialog-bottom-transition" :overlay=false persistent>
+            <v-card>
+                <v-toolbar dark class="primary">
+                    <v-btn icon @click.native="dialog = false" dark>
+                        <v-icon>close</v-icon>
+                    </v-btn>
+                    <v-toolbar-title v-if="psSelected">{{ dictionary.payment_systems[psSelected.key].text }} :: {{ productSelected.name }}</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                    <v-toolbar-items>
+                        <v-btn dark
+                               flat
+                               :loading="pending"
+                               :disabled="pending"
+                               v-if="isEdit === true"
+                               @click="saveProductSettings({ trade_account: trade_account, broker: broker, product_id: productSelected.id })"
+                        >
+                            Сохранить
+                            <span slot="loader">Обработка...</span>
+                        </v-btn>
+                        <v-btn dark
+                               flat
+                               v-if="isEdit === false"
+                               :loading="pending"
+                               :disabled="pending"
+                               @click="goToPayPage({email: profile.email, trade_account: trade_account, broker: broker, skype: skype, product_id: productSelected.id, payment_system: psSelected.key })"
+                        >
+                            Купить
+                            <span slot="loader">Обработка...</span>
+                        </v-btn>
+                    </v-toolbar-items>
+                </v-toolbar>
+                <v-card class="grey lighten-4 elevation-0">
+                    <v-card-text>
+                        <v-container fluid>
+                            <v-layout row>
+                                <v-flex xs12>
+                                    <v-text-field
+                                            label="Ваш торговый счет"
+                                            hint="Введите номер торгового счета. К нему будет привязан данный продукт."
+                                            v-model="trade_account"
+                                            required
+                                            :error-messages="errors && errors.trade_account ? errors.trade_account : []"
+                                            :error="errors && !!errors.trade_account"
+                                    ></v-text-field>
+                                </v-flex>
+                            </v-layout>
+                            <v-layout row>
+                                <v-flex xs12>
+                                    <v-text-field
+                                            label="Брокер торгового счета"
+                                            hint="Введите название брокера вашего торгового счета."
+                                            v-model="broker"
+                                            required
+                                            :error-messages="errors && errors.broker ? errors.broker : []"
+                                            :error="errors && !!errors.broker"
+                                    ></v-text-field>
+                                </v-flex>
+                            </v-layout>
+                            <v-layout row>
+                                <v-flex xs12>
+                                    <v-text-field
+                                            label="Skype"
+                                            hint="Введите ваш skype для более быстрой связи."
+                                            v-model="profile.skype"
+                                            :error-messages="errors && errors.skype ? errors.skype : []"
+                                            :error="errors && !!errors.skype"
+                                    ></v-text-field>
+                                </v-flex>
+                            </v-layout>
+                        </v-container>
+                    </v-card-text>
+                </v-card>
+            </v-card>
+        </v-dialog>
+
     </v-card>
 </template>
 
 <script>
+    import { mapGetters, mapActions } from 'vuex';
+
+    export default {
+        mounted() {
+            this.list()
+        },
+        data () {
+            return {
+                psSelected: null,
+                productSelected: null,
+                loader: null,
+                errors: [],
+                systemDialog: false,
+                dialog: false,
+                broker: '',
+                trade_account: '',
+                modifyProducts: [],
+                isEdit: false
+            }
+        },
+        computed: {
+            ...mapGetters('Product', [
+                'products'
+            ]),
+            ...mapGetters('Dictionary', [
+                'dictionary'
+            ]),
+            ...mapGetters('User', [
+                'profile', 'pending'
+            ]),
+        },
+        methods: {
+            ...mapActions('Product', [
+                'list'
+            ]),
+            ...mapActions('User', [
+                'findProduct'
+            ]),
+            editSelected: function(product) {
+                this.productSelected = product;
+                this.trade_account = product.users[0].pivot.trade_account;
+                this.broker = product.users[0].pivot.broker;
+                this.dialog = true;
+                this.isEdit = true;
+                this.errors = [];
+            },
+            paymentSystemSelected: function(paymentSystem, product) {
+                this.errors = [];
+                if (product.users.length) {
+                    let formBody = {
+                        trade_account: product.users[0].pivot.trade_account,
+                        broker: product.users[0].pivot.broker,
+                        product_id: product.id,
+                        payment_system: paymentSystem.key
+                    }
+
+                    this.goToPayPage(formBody);
+                } else {
+                    this.broker = '';
+                    this.trade_account = '';
+                    this.psSelected = paymentSystem;
+                    this.productSelected = product;
+                    this.dialog = true;
+                    this.isEdit = false;
+                }
+            },
+            saveProductSettings: function(formBody) {
+                this.$store.dispatch('User/updateProduct', formBody).then(response => {
+                    this.errors = [];
+                    this.dialog = false;
+                    this.systemDialog = false;
+
+                    this.$store.dispatch('Product/list')
+                }).catch(errors => {
+                    this.errors = errors;
+
+                    if (this.errors && this.errors.system) {
+                        this.systemDialog = true;
+                    }
+                })
+            },
+            goToPayPage: function (formBody) {
+                this.$store.dispatch('Product/pay', formBody).then(response => {
+                    this.errors = [];
+                    this.dialog = false;
+                    this.systemDialog = false;
+
+                    this.redirect(response.data.data);
+                }).catch(errors => {
+                    this.errors = errors;
+
+                    if (this.errors && this.errors.system) {
+                        this.systemDialog = true;
+                    }
+                })
+            },
+            redirect: function(formSettings) {
+                let form = document.createElement('form');
+                form.action = formSettings.actionUrl;
+                form.method = formSettings.method;
+                let keys = Object.keys(formSettings.params);
+
+                keys.forEach((item, i) => {
+                    form.innerHTML += '<input type="hidden" name="' + item + '" ' + (item === 'sum' ? 'data-type="number"' : '') + ' value="' + formSettings.params[item] + '">';
+                });
+
+                form.submit();
+            }
+        }
+    }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+    .card-title p {
+        width: 100%;
+    }
+
+    p.subscribe_date_until-empty {
+        min-height: 36px;
+    }
+</style>

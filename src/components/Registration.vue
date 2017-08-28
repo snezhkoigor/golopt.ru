@@ -19,17 +19,30 @@
                         <v-layout row>
                             <v-text-field
                                     label="Ваш пароль"
-                                    hint="Введите пароль, необходимый для авторизации."
+                                    hint="Введите пароль, необходимый для авторизации. Если его не указать, то он сгенерируется автоматически."
                                     v-model="password"
                                     :append-icon="e1 ? 'visibility_off' : 'visibility'"
                                     :append-icon-cb="() => (e1 = !e1)"
                                     :type="e1 ? 'password' : 'text'"
-                                    required
                                     :error-messages="errors && errors.password ? errors.password : []"
                                     :error="errors && !!errors.password"
                             ></v-text-field>
                         </v-layout>
-                        <v-layout row>
+                        <v-layout row class="hidden-sm-and-up">
+                            <v-text-field
+                                    label="Имя"
+                                    hint="Введите ваше имя."
+                                    v-model="first_name"
+                            ></v-text-field>
+                        </v-layout>
+                        <v-layout row class="hidden-sm-and-up">
+                            <v-text-field
+                                    label="Фамилия"
+                                    hint="Введите вашу фамилию."
+                                    v-model="last_name"
+                            ></v-text-field>
+                        </v-layout>
+                        <v-layout row class="hidden-xs-only" >
                             <v-flex xs12 sm6>
                                 <v-text-field
                                         label="Имя"
@@ -88,13 +101,12 @@
         },
         methods: {
             submitForm: function (formData) {
-                this.$store.dispatch('User/registration', formData)
-                    .then(response => {
-
-                    })
-                    .catch(errors => {
-                        this.errors = errors
-                    })
+                this.$store.dispatch('User/registration', formData).then(response => {
+                    this.errors = []
+                    this.$router.push('/login')
+                }).catch(errors => {
+                    this.errors = errors
+                })
             }
         }
     }

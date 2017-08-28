@@ -91,11 +91,9 @@
         },
         methods: {
             submitForm: function (formData) {
-                this.$store.dispatch('User/login', formData)
-                .then(response => {
-
-                })
-                .catch(errors => {
+                this.$store.dispatch('User/login', formData).then(response => {
+                    this.errors = []
+                }).catch(errors => {
                     this.errors = errors
 
                     if (this.errors && this.errors.system) {

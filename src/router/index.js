@@ -1,14 +1,17 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from '../components/Home.vue'
-import Login from '../components/Login.vue'
-import Registration from '../components/Registration.vue'
-import ResetPassword from '../components/profile/ProfileResetPassword.vue'
-import Profile from '../components/Profile.vue'
-import Product from '../components/Product.vue'
-import NotFound from '../components/NotFound.vue'
+import Vue from 'vue';
+import Router from 'vue-router';
+import Home from '../components/Home.vue';
+import Login from '../components/Login.vue';
+import Registration from '../components/Registration.vue';
+import ResetPassword from '../components/profile/ProfileResetPassword.vue';
+import Activate from '../components/profile/ProfileActivate.vue';
+import Profile from '../components/Profile.vue';
+import Product from '../components/Product.vue';
+import NotFound from '../components/NotFound.vue';
+import PaySuccess from '../components/Pay/Success.vue';
+import PayFail from '../components/Pay/Fail.vue';
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
     mode: 'history',
@@ -27,10 +30,11 @@ export default new Router({
             }
         },
         {
-            path: '/',
+            path: '/:lang?',
             name: 'home',
             component: Home,
             meta: {
+                localized: true,
                 access: {
                     guest: true,
                     auth: true
@@ -39,7 +43,7 @@ export default new Router({
             }
         },
         {
-            path: '/login',
+            path: '/:lang?/login',
             name: 'login',
             component: Login,
             meta: {
@@ -53,7 +57,7 @@ export default new Router({
             }
         },
         {
-            path: '/registration',
+            path: '/:lang?/registration',
             name: 'registration',
             component: Registration,
             meta: {
@@ -67,7 +71,7 @@ export default new Router({
             }
         },
         {
-            path: '/profile',
+            path: '/:lang?/profile',
             name: 'profile',
             component: Profile,
             meta: {
@@ -101,7 +105,7 @@ export default new Router({
             }
         },
         {
-            path: '/new/email/:token',
+            path: '/:lang?/new/email/:token',
             name: 'changeEmail',
             component: null,
             meta: {
@@ -118,9 +122,9 @@ export default new Router({
             }
         },
         {
-            path: '/activate/:token',
+            path: '/:lang?/activate/:token',
             name: 'emailActivation',
-            component: null,
+            component: Activate,
             meta: {
                 access: {
                     guest: true,
@@ -135,7 +139,7 @@ export default new Router({
             }
         },
         {
-            path: '/new/password',
+            path: '/:lang?/new/password',
             name: 'resetPassword',
             component: ResetPassword,
             meta: {
@@ -152,7 +156,7 @@ export default new Router({
             }
         },
         {
-            path: '/logout',
+            path: '/:lang?/logout',
             name: 'logout',
             component: null,
             meta: {
@@ -166,6 +170,40 @@ export default new Router({
                 title: 'Выход',
                 icon: 'mdi-exit-to-app',
                 available: true
+            }
+        },
+        {
+            path: '/:lang?/pay/success',
+            name: 'paySuccess',
+            component: PaySuccess,
+            meta: {
+                access: {
+                    guest: true,
+                    auth: true,
+                    roles: [
+                        ''
+                    ]
+                },
+                title: 'Успешаня оплата',
+                icon: null,
+                available: false
+            }
+        },
+        {
+            path: '/:lang?/pay/fail',
+            name: 'payFail',
+            component: PayFail,
+            meta: {
+                access: {
+                    guest: true,
+                    auth: true,
+                    roles: [
+                        ''
+                    ]
+                },
+                title: 'Ошибка при оплате',
+                icon: null,
+                available: false
             }
         }
     ]

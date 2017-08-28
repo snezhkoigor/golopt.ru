@@ -1,23 +1,52 @@
-import Vue from 'vue'
-import VueResource from 'vue-resource'
-import VueMoment from 'vue-moment'
-import router from './router/index'
-import App from './components/App.vue'
-import store from './store/index'
-import momentLocaleRu from '../node_modules/moment/locale/ru'
-import Vuetify from 'vuetify'
-import { sync } from 'vuex-router-sync'
-import base_api_config from '../src/api/base_http_config.js'
+import Vue from 'vue';
+import VueResource from 'vue-resource';
+import VueMoment from 'vue-moment';
+import router from './router/index';
+import App from './components/App.vue';
+import store from './store/index';
+import momentLocaleRu from '../node_modules/moment/locale/ru';
+import Vuetify from 'vuetify';
+import { sync } from 'vuex-router-sync';
+import VueI18nManager from 'vue-i18n-manager';
+import base_api_config from './api/base_http_config.js';
 
-const HTTP = base_api_config.instance
+const HTTP = base_api_config.instance;
 
-sync(store, router)
+sync(store, router);
 
-Vue.use(Vuetify)
-Vue.use(VueResource)
+Vue.use(Vuetify);
+Vue.use(VueResource);
 Vue.use(VueMoment, {
     momentLocaleRu
-})
+});
+
+const proxy = {
+    getTranslation: function ({ translationKey }) {
+        return HTTP.get(`/dictionary/fragment/${translationKey}`).then(function (response) {
+            return response.data
+        })
+    }
+};
+
+Vue.use(VueI18nManager, {
+    store,
+    config: {
+        defaultCode: 'ru-Ru',
+        languages: [
+            {
+                name: 'Русский',
+                code: 'ru-Ru',
+                urlPrefix: 'ru',
+                translationKey: 'ru'
+            }
+        ],
+        translations: {},
+    },
+    router,
+    proxy
+});
+
+Vue.initI18nManager();
 
 router.beforeEach((to, from, next) => {
     if (to.name === 'changeEmail') {
@@ -36,22 +65,8 @@ router.beforeEach((to, from, next) => {
         }
     }
 
-    if (to.name === 'emailActivation') {
-        if (to.params.token !== undefined) {
-            store.dispatch('User/activation', to.params.token).then(() => {
-                router.push({
-                    name: 'login'
-                })
-            }).catch(error => {
-                router.push({
-                    name: 'login'
-                })
-            })
-        }
-    }
-
     if (to.meta.access.guest === false) {
-        store.dispatch('User/checkProfile').then(() => {
+        store.dispatch('User/profile').then(() => {
             next()
         }).catch(error => {
             router.push({
@@ -67,13 +82,17 @@ router.beforeEach((to, from, next) => {
             router.push({
                 name: 'home'
             })
+        }).catch(error => {
+            router.push({
+                name: 'home'
+            })
         })
     }
-})
+});
 
 new Vue({
     el: '#app',
     router,
     store,
     render: h => h(App)
-})
+});
