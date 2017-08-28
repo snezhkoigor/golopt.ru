@@ -27,10 +27,18 @@
                     class="primary"
             >
                 <v-toolbar-title>
-                    <v-icon left @click.stop="sideNav=!sideNav" class="hidden-sm-and-up">mdi-list</v-icon>
-                    <router-link :to="{name: 'home'}" v-if="$route.name !== 'home'" tag="span">
+                    <v-btn icon
+                           @click.stop="sideNav=!sideNav"
+                           class="hidden-sm-and-up"
+                    >
+                        <v-icon>mdi-list</v-icon>
+                    </v-btn>
+                    <v-btn icon
+                           :to="{name: 'home'}"
+                           v-if="$route.name !== 'home'"
+                    >
                         <v-icon left>mdi-home</v-icon>
-                    </router-link>
+                    </v-btn>
                 </v-toolbar-title>
                 <v-spacer />
                 <v-toolbar-items class="hidden-xs-only">
