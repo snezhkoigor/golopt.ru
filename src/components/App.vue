@@ -37,7 +37,7 @@
                            :to="{name: 'home'}"
                            v-if="$route.name !== 'home'"
                     >
-                        <v-icon left>mdi-home</v-icon>
+                        <v-icon>mdi-home</v-icon>
                     </v-btn>
                 </v-toolbar-title>
                 <v-spacer />
