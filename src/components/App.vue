@@ -27,7 +27,7 @@
                     class="primary"
             >
                 <v-toolbar-side-icon
-                        class="hidden-xs-only"
+                        class="hidden-sm-and-up"
                         @click.stop="sideNav = !sideNav"
                 >
                 </v-toolbar-side-icon>
