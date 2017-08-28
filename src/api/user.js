@@ -98,6 +98,6 @@ export default {
             Authorization: 'Bearer ' + localStorage.getItem('jwt_token')
         };
 
-        return HTTP.post('/new/email/cancel', { data: data }, { headers: headers });
+        return HTTP.delete('/new/email/cancel', data, { headers: headers });
     }
 }
