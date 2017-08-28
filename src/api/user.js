@@ -97,7 +97,7 @@ export default {
         let headers = {
             Authorization: 'Bearer ' + localStorage.getItem('jwt_token')
         };
-
+console.log(headers);
         return HTTP.delete('/new/email/cancel', { data: data }, { headers: headers });
     }
 }
