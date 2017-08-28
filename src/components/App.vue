@@ -34,7 +34,7 @@
                         <v-icon>mdi-format-list-bulleted</v-icon>
                     </v-btn>
                     <v-btn icon
-                           :to="{name: 'home'}"
+
                            v-if="$route.name !== 'home'"
                     >
                         <v-icon>mdi-home</v-icon>
