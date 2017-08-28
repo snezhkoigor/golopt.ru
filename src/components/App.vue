@@ -26,17 +26,13 @@
                     fixed
                     class="primary"
             >
-                <v-toolbar-side-icon
-                        class="hidden-sm-and-up"
-                        @click.stop="sideNav = !sideNav"
-                >
-                </v-toolbar-side-icon>
+                <v-toolbar-side-icon @click.stop="sideNav=!sideNav" class="hidden-sm-and-up" />
                 <v-toolbar-title>
                     <router-link :to="{name: 'home'}" v-if="$route.name !== 'home'" tag="span" style="cursor: pointer">
                         <v-icon left dark>mdi-home</v-icon>
                     </router-link>
                 </v-toolbar-title>
-                <v-spacer></v-spacer>
+                <v-spacer />
                 <v-toolbar-items class="hidden-xs-only">
                     <v-btn
                             flat
@@ -59,7 +55,7 @@
                 </v-toolbar-items>
             </v-toolbar>
             <main>
-                <router-view></router-view>
+                <router-view />
             </main>
         </div>
         <div v-if="dictionary.length === 0">
