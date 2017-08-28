@@ -33,7 +33,7 @@
                     </router-link>
                 </v-toolbar-title>
                 <v-spacer />
-                <v-toolbar-items class="hidden-xs-only">
+                <v-toolbar-items class="hidden-sm-and-up">
                     <v-btn
                             flat
                             v-for="item in $router.options.routes"
