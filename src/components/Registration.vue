@@ -4,58 +4,58 @@
             <v-flex xs12 md6 offset-md3>
                 <v-card>
                     <v-card-text>
-                        <span class="title">Регистрация</span>
+                        <span class="title">{{ $t('Registration') }}</span>
                         <v-layout row>
                             <v-text-field
-                                    label="Ваш e-mail/логин"
+                                    :label="$t('Your e-mail/login')"
                                     class="mt-5"
-                                    hint="Введите e-mail, необходимый для авторизации."
+                                    :hint="$t('Enter the e-mail address required for authorization')"
                                     v-model="email"
                                     required
-                                    :error-messages="errors && errors.email ? errors.email : []"
+                                    :error-messages="errors && errors.email ? $t(errors.email[0]) : []"
                                     :error="errors && !!errors.email"
                             ></v-text-field>
                         </v-layout>
                         <v-layout row>
                             <v-text-field
-                                    label="Ваш пароль"
-                                    hint="Введите пароль, необходимый для авторизации. Если его не указать, то он сгенерируется автоматически."
+                                    :label="$t('Your password')"
+                                    :hint="$t('Enter the password required for authorization')"
                                     v-model="password"
                                     :append-icon="e1 ? 'visibility_off' : 'visibility'"
                                     :append-icon-cb="() => (e1 = !e1)"
                                     :type="e1 ? 'password' : 'text'"
-                                    :error-messages="errors && errors.password ? errors.password : []"
+                                    :error-messages="errors && errors.password ? $t(errors.password[0]) : []"
                                     :error="errors && !!errors.password"
                             ></v-text-field>
                         </v-layout>
                         <v-layout row class="hidden-sm-and-up">
                             <v-text-field
-                                    label="Имя"
-                                    hint="Введите ваше имя."
+                                    :label="$t('First name')"
+                                    :hint="$t('Enter your first name')"
                                     v-model="first_name"
                             ></v-text-field>
                         </v-layout>
                         <v-layout row class="hidden-sm-and-up">
                             <v-text-field
-                                    label="Фамилия"
-                                    hint="Введите вашу фамилию."
+                                    :label="$t('Last name')"
+                                    :hint="$t('Enter your last name')"
                                     v-model="last_name"
                             ></v-text-field>
                         </v-layout>
                         <v-layout row class="hidden-xs-only" >
                             <v-flex xs12 sm6>
                                 <v-text-field
-                                        label="Имя"
+                                        :label="$t('First name')"
                                         class="mt-5"
-                                        hint="Введите ваше имя."
+                                        :hint="$t('Enter your first name')"
                                         v-model="first_name"
                                 ></v-text-field>
                             </v-flex>
                             <v-flex xs12 sm6>
                                 <v-text-field
-                                        label="Фамилия"
+                                        :label="$t('Last name')"
                                         class="mt-5"
-                                        hint="Введите вашу фамилию."
+                                        :hint="$t('Enter your last name')"
                                         v-model="last_name"
                                 ></v-text-field>
                             </v-flex>
@@ -69,8 +69,8 @@
                                 :disabled="pending"
                                 @click="submitForm({first_name: first_name, last_name: last_name, email: email, password: password})"
                         >
-                            Зарегистрироваться
-                            <span slot="loader">Обработка...</span>
+                            {{ $t('Sing Up') }}
+                            <span slot="loader">{{ $t('Processing') }}...</span>
                         </v-btn>
                     </v-card-text>
                 </v-card>
@@ -101,11 +101,11 @@
         },
         methods: {
             submitForm: function (formData) {
-                this.$store.dispatch('User/registration', formData).then(response => {
-                    this.errors = []
-                    this.$router.push('/login')
+                this.$store.dispatch('User/registration', formData).then(() => {
+                    this.errors = [];
+                    this.$router.push('/login');
                 }).catch(errors => {
-                    this.errors = errors
+                    this.errors = errors;
                 })
             }
         }

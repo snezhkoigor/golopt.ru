@@ -4,25 +4,25 @@
             <v-flex xs12 md6 offset-md3>
                 <v-card>
                     <v-card-text>
-                        <span class="title">Авторизация</span>
+                        <span class="title">{{ $t('Authorization') }}</span>
                         <v-text-field
-                                label="Ваш e-mail/логин"
+                                :label="$t('Your e-mail/login')"
                                 class="mt-5"
-                                hint="Введите e-mail, указанный при регистрации."
+                                :hint="$t('Enter the e-mail provided during registration')"
                                 v-model="email"
                                 required
-                                :error-messages="errors && errors.email ? errors.email : []"
+                                :error-messages="errors && errors.email ? $t(errors.email) : []"
                                 :error="errors && !!errors.email"
                         ></v-text-field>
                         <v-text-field
-                                label="Ваш пароль"
-                                hint="Введите пароль, указанный при регистрации."
+                                :label="$t('Your password')"
+                                :hint="$t('Enter the password you provided during registration')"
                                 v-model="password"
                                 :append-icon="e1 ? 'visibility_off' : 'visibility'"
                                 :append-icon-cb="() => (e1 = !e1)"
                                 :type="e1 ? 'password' : 'text'"
                                 required
-                                :error-messages="errors && errors.password ? errors.password : []"
+                                :error-messages="errors && errors.password ? $t(errors.password) : []"
                                 :error="errors && !!errors.password"
                         ></v-text-field>
                         <v-btn
@@ -33,8 +33,8 @@
                                 :disabled="pending"
                                 @click="submitForm({email: email, password: password})"
                         >
-                            Войти
-                            <span slot="loader">Обработка...</span>
+                            {{ $t('Login') }}
+                            <span slot="loader">{{ $t('Processing') }}...</span>
                         </v-btn>
                     </v-card-text>
                 </v-card>
@@ -45,7 +45,7 @@
                            primary
                            :to="'/new/password'"
                     >
-                        Сбросить пароль
+                        {{ $t('Reset password') }}
                     </v-btn>
                 </p>
             </v-flex>
@@ -58,12 +58,12 @@
                         mdi-comment-alert-outline
                     </v-icon>
                 </v-card-title>
-                <v-card-text>
-                    {{ errors.system }}
+                <v-card-text v-if="errors.system">
+                    {{ $t(errors.system) }}
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn class="red--text darken-1" flat="flat" @click.native="dialog = false">Закрыть</v-btn>
+                    <v-btn class="red--text darken-1" flat="flat" @click.native="dialog = false">{{ $t('Close') }}</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -91,7 +91,7 @@
         },
         methods: {
             submitForm: function (formData) {
-                this.$store.dispatch('User/login', formData).then(response => {
+                this.$store.dispatch('User/login', formData).then(() => {
                     this.errors = []
                 }).catch(errors => {
                     this.errors = errors

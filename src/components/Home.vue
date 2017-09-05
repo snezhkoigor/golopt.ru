@@ -1,6 +1,6 @@
-<template xmlns="http://www.w3.org/1999/html">
+<template>
     <v-container fluid class="pa-0">
-        <v-parallax src="./src/assets/images/cme.jpg">
+        <v-parallax src="./src/assets/images/cme.jpg" style="margin-top: -40px;">
             <v-layout row>
                 <v-flex xs6 order-xs2>
                     <v-card light class="light right">
@@ -354,35 +354,3 @@
         }
     }
 </script>
-
-<style lang="scss">
-    .home-product-advantages {
-        margin-bottom: 20px;
-        text-align: justify;
-    }
-    .what-you-will-get {
-        min-height: 95px;
-        text-align: center;
-    }
-    .content-title {
-        text-align: center;
-        position: relative;
-        margin-bottom: 30px;
-        padding-bottom: 15px;
-        margin-top: 0;
-    }
-    .content-title:after {
-        content: '';
-        display: block;
-        position: absolute;
-        width: 40px;
-        background: #242a30;
-        height: 2px;
-        bottom: 0;
-        left: 50%;
-        margin-left: -20px;
-    }
-    .home-product-description {
-        min-height: 100px;
-    }
-</style>

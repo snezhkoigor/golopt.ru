@@ -1,15 +1,18 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from '../components/Home.vue';
-import Login from '../components/Login.vue';
-import Registration from '../components/Registration.vue';
-import ResetPassword from '../components/profile/ProfileResetPassword.vue';
-import Activate from '../components/profile/ProfileActivate.vue';
-import Profile from '../components/Profile.vue';
-import Product from '../components/Product.vue';
-import NotFound from '../components/NotFound.vue';
-import PaySuccess from '../components/Pay/Success.vue';
-import PayFail from '../components/Pay/Fail.vue';
+import Home from '@/components/Home.vue';
+import Login from '@/components/Login.vue';
+import Registration from '@/components/Registration.vue';
+import ResetPassword from '@/components/profile/ProfileResetPassword.vue';
+import Activate from '@/components/profile/ProfileActivate.vue';
+import Profile from '@/components/Profile.vue';
+import Product from '@/components/Product.vue';
+import NotFound from '@/components/NotFound.vue';
+import PaySuccess from '@/components/Pay/Success.vue';
+import PayFail from '@/components/Pay/Fail.vue';
+import OdrPlus from '@/components/OdrPlus.vue';
+
+import AuthGuard from '@/router/guard';
 
 Vue.use(Router);
 
@@ -18,15 +21,34 @@ export default new Router({
     routes: [
         {
             path: '*',
+            name: 'notFound',
             component: NotFound,
+            template: null,
             meta: {
                 access: {
                     guest: true,
                     auth: true
                 },
                 title: 'Пропала страница',
+                description: 'Пропала страница',
                 icon: null,
                 available: false
+            }
+        },
+        {
+            path: '/:lang?/odrplus',
+            name: 'odrplus',
+            component: OdrPlus,
+            meta: {
+                title: 'Odr Plus',
+                description: 'Торговая система ODR Plus.',
+                localized: true,
+                access: {
+                    guest: true,
+                    auth: true
+                },
+                icon: 'mdi-auto-fix',
+                available: true
             }
         },
         {
@@ -34,6 +56,7 @@ export default new Router({
             name: 'home',
             component: Home,
             meta: {
+                description: 'Индикатор опционных уровней Option Profit. Прибыльная торговля.',
                 localized: true,
                 access: {
                     guest: true,
@@ -51,7 +74,7 @@ export default new Router({
                     guest: true,
                     auth: false
                 },
-                title: 'Войти',
+                title: 'Login',
                 icon: 'mdi-login-variant',
                 available: true
             }
@@ -65,7 +88,7 @@ export default new Router({
                     guest: true,
                     auth: false
                 },
-                title: 'Регистрация',
+                title: 'Registration',
                 icon: 'mdi-account-plus',
                 available: true
             }
@@ -74,6 +97,7 @@ export default new Router({
             path: '/:lang?/profile',
             name: 'profile',
             component: Profile,
+            beforeEnter: AuthGuard,
             meta: {
                 access: {
                     guest: false,
@@ -82,7 +106,7 @@ export default new Router({
                         ''
                     ]
                 },
-                title: 'Профиль',
+                title: 'Profile',
                 icon: 'mdi-contacts',
                 available: true
             }
@@ -91,6 +115,7 @@ export default new Router({
             path: '/product',
             name: 'product',
             component: Product,
+            beforeEnter: AuthGuard,
             meta: {
                 access: {
                     guest: false,
@@ -156,23 +181,6 @@ export default new Router({
             }
         },
         {
-            path: '/:lang?/logout',
-            name: 'logout',
-            component: null,
-            meta: {
-                access: {
-                    guest: false,
-                    auth: true,
-                    roles: [
-                        ''
-                    ]
-                },
-                title: 'Выход',
-                icon: 'mdi-exit-to-app',
-                available: true
-            }
-        },
-        {
             path: '/:lang?/pay/success',
             name: 'paySuccess',
             component: PaySuccess,
@@ -205,6 +213,24 @@ export default new Router({
                 icon: null,
                 available: false
             }
-        }
+        },
+        {
+            path: '/:lang?/logout',
+            name: 'logout',
+            component: null,
+            beforeEnter: AuthGuard,
+            meta: {
+                access: {
+                    guest: false,
+                    auth: true,
+                    roles: [
+                        ''
+                    ]
+                },
+                title: 'Logout',
+                icon: 'mdi-exit-to-app',
+                available: true
+            }
+        },
     ]
 })
