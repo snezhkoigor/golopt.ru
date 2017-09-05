@@ -11,7 +11,7 @@
                                 :hint="$t('Enter the e-mail provided during registration')"
                                 v-model="email"
                                 required
-                                :error-messages="errors && errors.email ? $t(errors.email) : []"
+                                :error-messages="errors && errors.email ? $t(errors.email[0]) : []"
                                 :error="errors && !!errors.email"
                         ></v-text-field>
                         <v-text-field
@@ -22,7 +22,7 @@
                                 :append-icon-cb="() => (e1 = !e1)"
                                 :type="e1 ? 'password' : 'text'"
                                 required
-                                :error-messages="errors && errors.password ? $t(errors.password) : []"
+                                :error-messages="errors && errors.password ? $t(errors.password[0]) : []"
                                 :error="errors && !!errors.password"
                         ></v-text-field>
                         <v-btn

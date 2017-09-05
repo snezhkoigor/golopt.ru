@@ -31,7 +31,7 @@
                                     secondary
                                     @click="paymentSystemSelected(dictionary.payment_systems[dictionary.const.PAYMENT_SYSTEM_DEMO], (has_demo.length ? has_demo[0] : null))"
                             >
-                                Протестировать бесплатно
+                                {{ $t('Test for free') }}
                             </v-btn>
                         </v-card-text>
                     </v-card>
@@ -135,7 +135,7 @@
                                             bottom
                                         >
                                             <v-btn flat dark slot="activator">
-                                                Купить
+                                                {{ $t('Buy') }}
                                             </v-btn>
                                             <v-list>
                                                 <v-list-tile
@@ -166,12 +166,12 @@
                         mdi-comment-alert-outline
                     </v-icon>
                 </v-card-title>
-                <v-card-text>
-                    {{ errors.system }}
+                <v-card-text v-if="errors.system">
+                    {{ $t(errors.system) }}
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn class="red--text darken-1" flat="flat" @click="systemDialog = false">Закрыть</v-btn>
+                    <v-btn class="red--text darken-1" flat="flat" @click="systemDialog = false">{{ $t('Close') }}</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -191,8 +191,8 @@
                                :disabled="pending"
                                @click="submitForm({ email: email, trade_account: trade_account, broker: broker, skype: skype, product_id: productSelected.id, payment_system: psSelected.key })"
                         >
-                            Купить
-                            <span slot="loader">Обработка...</span>
+                            {{ $t('Buy') }}
+                            <span slot="loader">{{ $t('Processing') }}...</span>
                         </v-btn>
                     </v-toolbar-items>
                 </v-toolbar>
@@ -202,12 +202,12 @@
                             <v-layout row>
                                 <v-flex xs12>
                                     <v-text-field
-                                            label="Ваш e-mail/логин"
-                                            hint="Введите e-mail, необходимый для авторизации."
+                                            :label="$t('Your e-mail/login')"
+                                            :hint="$t('Enter the e-mail provided during registration')"
                                             v-model="email"
                                             required
                                             :disabled="this.isLogin === true"
-                                            :error-messages="errors && errors.email ? errors.email : []"
+                                            :error-messages="errors && errors.email ? $t(errors.email[0]) : []"
                                             :error="errors && !!errors.email"
                                     ></v-text-field>
                                 </v-flex>
@@ -256,7 +256,7 @@
 </template>
 
 <script>
-    import { mapGetters, mapActions } from 'vuex'
+    import { mapGetters, mapActions } from 'vuex';
 
     export default {
         mounted() {
@@ -292,64 +292,64 @@
                 'list'
             ]),
             paymentSystemSelected: function(paymentSystem, product) {
-                this.psSelected = paymentSystem
-                this.productSelected = product
-                this.dialog = true
+                this.psSelected = paymentSystem;
+                this.productSelected = product;
+                this.dialog = true;
 
                 if (!!this.isLogin) {
-                    this.email = this.profile.email
+                    this.email = this.profile.email;
                 }
             },
             submitForm: function (formBody) {
                 if (this.isLogin === false) {
-                    this.$store.dispatch('User/registration', formBody).then(response => {
+                    this.$store.dispatch('User/registration', formBody).then(() => {
                         this.$store.dispatch('Product/pay', formBody).then(response => {
-                            this.errors = []
-                            this.dialog = false
-                            this.systemDialog = false
+                            this.errors = [];
+                            this.dialog = false;
+                            this.systemDialog = false;
                             this.redirect(response.data.data)
                         }).catch(errors => {
-                            this.errors = errors
+                            this.errors = errors;
 
                             if (this.errors && this.errors.system) {
-                                this.systemDialog = true
+                                this.systemDialog = true;
                             }
                         })
                     }).catch(errors => {
-                        this.errors = errors
+                        this.errors = errors;
 
                         if (this.errors && this.errors.system) {
-                            this.systemDialog = true
+                            this.systemDialog = true;
                         }
                     })
                 } else {
                     let path = (formBody.payment_system === this.dictionary.const.PAYMENT_SYSTEM_DEMO ? 'demo' : 'pay')
                     this.$store.dispatch('Product/' + path, formBody).then(response => {
-                        this.errors = []
-                        this.dialog = false
-                        this.systemDialog = false
+                        this.errors = [];
+                        this.dialog = false;
+                        this.systemDialog = false;
 
                         this.redirect(response.data.data)
                     }).catch(errors => {
-                        this.errors = errors
+                        this.errors = errors;
 
                         if (this.errors && this.errors.system) {
-                            this.systemDialog = true
+                            this.systemDialog = true;
                         }
                     })
                 }
             },
             redirect: function(formSettings) {
-                let form = document.createElement('form')
-                form.action = formSettings.actionUrl
-                form.method = formSettings.method
-                let keys = Object.keys(formSettings.params)
+                let form = document.createElement('form');
+                form.action = formSettings.actionUrl;
+                form.method = formSettings.method;
+                let keys = Object.keys(formSettings.params);
 
                 keys.forEach((key) => {
                     form.innerHTML = '<input name="' + key + '" value="' + formSettings.params.key + '">';
-                })
+                });
 
-                form.submit()
+                form.submit();
             }
         }
     }

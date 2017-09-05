@@ -23,6 +23,7 @@
             LoaderComponent
         },
         mounted() {
+            window.document.title = this.$route.meta.title;
             this.$store.dispatch('Dictionary/list').then(() => {
                 const code = 'ru-Ru';
                 const trans = this.dictionary.locales;
@@ -35,6 +36,12 @@
             ...mapGetters('Dictionary', [
                 'dictionary'
             ])
+        },
+        watch: {
+            '$route' (toRoute) {
+                window.document.title = toRoute.meta.title ? toRoute.meta.title : toRoute.name;
+//                window.document.getElementById("description").setAttribute("content", toRoute.meta.description);
+            }
         }
     }
 </script>
