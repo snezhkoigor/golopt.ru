@@ -6,14 +6,14 @@
                     <v-card-text
                             v-if="success.status === false"
                     >
-                        <span class="title">Сброс пароля</span>
+                        <span class="title">{{ $t('Reset password') }}</span>
                         <v-text-field
-                                label="Ваш e-mail/логин"
+                                :label="$t('Your e-mail/login')"
                                 class="mt-5"
-                                hint="Введите e-mail, указанный при регистрации."
+                                :hint="$t('Enter the e-mail provided during registration')"
                                 v-model="email"
                                 required
-                                :error-messages="errors && errors.email ? errors.email : []"
+                                :error-messages="errors && errors.email ? $t(errors.email[0]) : []"
                                 :error="errors && !!errors.email"
                         ></v-text-field>
                         <v-btn
@@ -24,17 +24,19 @@
                                 :disabled="pending"
                                 @click="submitForm({email: email})"
                         >
-                            Сбросить
-                            <span slot="loader">Обработка...</span>
+                            {{ $t('Reset') }}
+                            <span slot="loader">{{ $t('Processing') }}...</span>
                         </v-btn>
                     </v-card-text>
 
                     <v-card-text
                             v-if="success.status === true"
                     >
-                        <span class="title">Сброс пароля</span>
+                        <span class="title">{{ $t('Reset password') }}</span>
 
-                        <p class="subheading mt-5 text-xs-center">{{ success.message }}</p>
+                        <p class="subheading mt-5 text-xs-center" v-if="success.message">
+                            {{ $t(success.message) }}
+                        </p>
                     </v-card-text>
                 </v-card>
             </v-flex>
@@ -68,11 +70,11 @@
             submitForm: function (formData) {
                 this.$store.dispatch('User/resetPassword', formData)
                     .then(response => {
-                        this.success.status = true
-                        this.success.message = response.data.message
+                        this.success.status = true;
+                        this.success.message = response.data.message;
                     })
                     .catch(errors => {
-                        this.errors = errors
+                        this.errors = errors;
                     })
             }
         }
