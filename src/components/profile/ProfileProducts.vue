@@ -22,7 +22,7 @@
 
                             </p>
                             <p class="headline">
-                                {{ productItem.price }}$/{{ dictionary.price_by[productItem.price_by].text }}
+                                {{ productItem.price }}$/{{ $t(productItem.price_by) }}
                             </p>
                         </v-card-title>
                         <v-card-actions>
@@ -32,7 +32,7 @@
                                     bottom
                             >
                                 <v-btn flat dark slot="activator">
-                                    Продлить
+                                    {{ $t('Renew subscription') }}
                                 </v-btn>
                                 <v-list>
                                     <v-list-tile v-for="paymentSystemItem in dictionary.payment_systems" :key="paymentSystemItem.key"
@@ -41,7 +41,7 @@
                                         <v-list-tile-title
                                                 @click="paymentSystemSelected(paymentSystemItem, productItem)"
                                         >
-                                            {{ paymentSystemItem.text }}
+                                            {{ $t(paymentSystemItem.text) }}
                                         </v-list-tile-title>
                                     </v-list-tile>
                                 </v-list>
@@ -61,7 +61,7 @@
                             <p class="subheadline subscribe_date_until-empty">
 
                             </p>
-                            <p class="headline">{{ productItem.price }}$/{{ dictionary.price_by[productItem.price_by].text }}</p>
+                            <p class="headline">{{ productItem.price }}$/{{ $t(productItem.price_by) }}</p>
                         </v-card-title>
                         <v-card-actions>
                             <v-menu
@@ -70,7 +70,7 @@
                                     bottom
                             >
                                 <v-btn flat dark slot="activator">
-                                    Купить
+                                    {{ $t('Buy') }}
                                 </v-btn>
                                 <v-list>
                                     <v-list-tile v-for="paymentSystemItem in dictionary.payment_systems" :key="paymentSystemItem.key"
@@ -79,7 +79,7 @@
                                         <v-list-tile-title
                                                 @click="paymentSystemSelected(paymentSystemItem, productItem)"
                                         >
-                                            {{ paymentSystemItem.text }}
+                                            {{ $t(paymentSystemItem.text) }}
                                         </v-list-tile-title>
                                     </v-list-tile>
                                 </v-list>
@@ -97,12 +97,12 @@
                         mdi-comment-alert-outline
                     </v-icon>
                 </v-card-title>
-                <v-card-text>
-                    {{ errors.system }}
+                <v-card-text v-if="errors.system">
+                    {{ $t(errors.system) }}
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn class="red--text darken-1" flat="flat" @click="systemDialog = false">Закрыть</v-btn>
+                    <v-btn class="red--text darken-1" flat="flat" @click="systemDialog = false">{{ $t('Close') }}</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -113,7 +113,7 @@
                     <v-btn icon @click.native="dialog = false" dark>
                         <v-icon>close</v-icon>
                     </v-btn>
-                    <v-toolbar-title v-if="psSelected">{{ dictionary.payment_systems[psSelected.key].text }} :: {{ productSelected.name }}</v-toolbar-title>
+                    <v-toolbar-title v-if="psSelected">{{ $t(dictionary.payment_systems[psSelected.key].text) }} :: {{ productSelected.name }}</v-toolbar-title>
                     <v-spacer></v-spacer>
                     <v-toolbar-items>
                         <v-btn dark
@@ -123,8 +123,8 @@
                                v-if="isEdit === true"
                                @click="saveProductSettings({ trade_account: trade_account, broker: broker, product_id: productSelected.id })"
                         >
-                            Сохранить
-                            <span slot="loader">Обработка...</span>
+                            {{ $t('Save') }}
+                            <span slot="loader">{{ $t('Processing') }}...</span>
                         </v-btn>
                         <v-btn dark
                                flat
@@ -133,8 +133,8 @@
                                :disabled="pending"
                                @click="goToPayPage({email: profile.email, trade_account: trade_account, broker: broker, skype: skype, product_id: productSelected.id, payment_system: psSelected.key })"
                         >
-                            Купить
-                            <span slot="loader">Обработка...</span>
+                            {{ $t('Buy') }}
+                            <span slot="loader">{{ $t('Processing') }}...</span>
                         </v-btn>
                     </v-toolbar-items>
                 </v-toolbar>
@@ -144,8 +144,8 @@
                             <v-layout row>
                                 <v-flex xs12>
                                     <v-text-field
-                                            label="Ваш торговый счет"
-                                            hint="Введите номер торгового счета. К нему будет привязан данный продукт."
+                                            :label="$t('Your trade account')"
+                                            :hint="$t('Enter your trade account number')"
                                             v-model="trade_account"
                                             required
                                             :error-messages="errors && errors.trade_account ? errors.trade_account : []"
@@ -156,8 +156,8 @@
                             <v-layout row>
                                 <v-flex xs12>
                                     <v-text-field
-                                            label="Брокер торгового счета"
-                                            hint="Введите название брокера вашего торгового счета."
+                                            :label="$t('Trade account broker')"
+                                            :hint="$t('Enter broker name of your trade account')"
                                             v-model="broker"
                                             required
                                             :error-messages="errors && errors.broker ? errors.broker : []"
@@ -169,7 +169,7 @@
                                 <v-flex xs12>
                                     <v-text-field
                                             label="Skype"
-                                            hint="Введите ваш skype для более быстрой связи."
+                                            :hint="$t('Enter your skype for fast contact with you')"
                                             v-model="profile.skype"
                                             :error-messages="errors && errors.skype ? errors.skype : []"
                                             :error="errors && !!errors.skype"
@@ -181,7 +181,6 @@
                 </v-card>
             </v-card>
         </v-dialog>
-
     </v-card>
 </template>
 

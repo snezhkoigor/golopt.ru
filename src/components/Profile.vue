@@ -8,7 +8,7 @@
                         :href="'#' + tab.name"
                         ripple
                 >
-                    {{ tab.title }}
+                    {{ $t(tab.title) }}
                     <!--<span v-badge:4.left>{{ tab.title }}</span>-->
                 </v-tabs-item>
                 <v-tabs-slider class="blue"></v-tabs-slider>
@@ -51,15 +51,15 @@
                 tabs: [
                     {
                         name: 'edit',
-                        title: 'Настройки'
+                        title: 'Settings'
                     },
                     {
                         name: 'product',
-                        title: 'Подписки'
+                        title: 'Products'
                     },
                     {
                         name: 'payment',
-                        title: 'Платежи'
+                        title: 'Payments'
                     }
                 ],
                 active: 'edit'

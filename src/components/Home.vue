@@ -145,7 +145,7 @@
                                                     <v-list-tile-title
                                                             @click="paymentSystemSelected(paymentSystemItem, productItem)"
                                                     >
-                                                        {{ paymentSystemItem.text }}
+                                                        {{ $t(paymentSystemItem.text) }}
                                                     </v-list-tile-title>
                                                 </v-list-tile>
                                             </v-list>
@@ -182,7 +182,7 @@
                     <v-btn icon @click.native="dialog = false" dark>
                         <v-icon>close</v-icon>
                     </v-btn>
-                    <v-toolbar-title v-if="psSelected">{{ dictionary.payment_systems[psSelected.key].text }} :: {{ productSelected.name }}</v-toolbar-title>
+                    <v-toolbar-title v-if="psSelected">{{ $t(dictionary.payment_systems[psSelected.key].text) }} :: {{ productSelected.name }}</v-toolbar-title>
                     <v-spacer></v-spacer>
                     <v-toolbar-items>
                         <v-btn dark
@@ -215,11 +215,11 @@
                             <v-layout row>
                                 <v-flex xs12>
                                     <v-text-field
-                                            label="Ваш торговый счет"
-                                            hint="Введите номер торгового счета. К нему будет привязан данный продукт."
+                                            :label="$t('Your trade account')"
+                                            :hint="$t('Enter your trade account number')"
                                             v-model="trade_account"
                                             required
-                                            :error-messages="errors && errors.trade_account ? errors.trade_account : []"
+                                            :error-messages="errors && errors.trade_account ? $t(errors.trade_account[0]) : []"
                                             :error="errors && !!errors.trade_account"
                                     ></v-text-field>
                                 </v-flex>
@@ -227,11 +227,11 @@
                             <v-layout row>
                                 <v-flex xs12>
                                     <v-text-field
-                                            label="Брокер торгового счета"
-                                            hint="Введите название брокера вашего торгового счета."
+                                            :label="$t('Trade account broker')"
+                                            :hint="$t('Enter broker name of your trade account')"
                                             v-model="broker"
                                             required
-                                            :error-messages="errors && errors.broker ? errors.broker : []"
+                                            :error-messages="errors && errors.broker ? $t(errors.broker[0]) : []"
                                             :error="errors && !!errors.broker"
                                     ></v-text-field>
                                 </v-flex>
@@ -240,9 +240,9 @@
                                 <v-flex xs12>
                                     <v-text-field
                                             label="Skype"
-                                            hint="Введите ваш skype для более быстрой связи."
+                                            :hint="$t('Enter your skype for fast contact with you')"
                                             v-model="skype"
-                                            :error-messages="errors && errors.skype ? errors.skype : []"
+                                            :error-messages="errors && errors.skype ? $t(errors.skype[0]) : []"
                                             :error="errors && !!errors.skype"
                                     ></v-text-field>
                                 </v-flex>

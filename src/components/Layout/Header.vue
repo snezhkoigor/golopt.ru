@@ -15,7 +15,7 @@
                         <v-icon>{{ item.meta.icon }}</v-icon>
                     </v-list-tile-action>
                     <v-list-tile-content>
-                        {{ $t(item.meta.title) }}
+                        {{ $t(item.meta.name) }}
                     </v-list-tile-content>
                 </v-list-tile>
             </v-list>
@@ -50,7 +50,7 @@
                         :to="{ name: item.name, params: { lang: urlPrefix } }"
                 >
                     <v-icon left dark>{{ item.meta.icon }}</v-icon>
-                    {{ $t(item.meta.title) }}
+                    {{ $t(item.meta.name) }}
                 </v-btn>
             </v-toolbar-items>
             <v-select

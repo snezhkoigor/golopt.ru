@@ -4,8 +4,7 @@
             <v-icon class="red--text display-4">mdi-emoticon-sad</v-icon>
         </p>
         <p class="display-1 ma-5 text-xs-center">
-            Что-то пошло не так. Ваш платеж не будет обработан. <br/>
-            Мы очень сожалеем.
+            {{ $t('Fail pay text') }}
         </p>
     </v-container>
 </template>

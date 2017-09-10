@@ -4,8 +4,7 @@
             <v-icon class="green--text display-4">mdi-emoticon-happy</v-icon>
         </p>
         <p class="display-1 ma-5 text-xs-center">
-            Спасибо. Ваш платеж будет обработан в ближайшее время. <br/>
-            Вы получите соответствующее уведомление. {{ translation }}
+            {{ $t('Success pay text') }}
         </p>
     </v-container>
 </template>

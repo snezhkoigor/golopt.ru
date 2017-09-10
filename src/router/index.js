@@ -13,6 +13,7 @@ import PayFail from '@/components/Pay/Fail.vue';
 import OdrPlus from '@/components/OdrPlus.vue';
 
 import AuthGuard from '@/router/guard';
+import store from '@/store/index';
 
 Vue.use(Router);
 
@@ -29,8 +30,8 @@ export default new Router({
                     guest: true,
                     auth: true
                 },
-                title: 'Пропала страница',
-                description: 'Пропала страница',
+                title: 'Not found title',
+                description: 'Not found description',
                 icon: null,
                 available: false
             }
@@ -40,8 +41,9 @@ export default new Router({
             name: 'odrplus',
             component: OdrPlus,
             meta: {
-                title: 'Odr Plus',
-                description: 'Торговая система ODR Plus.',
+                title: 'Odrplus title',
+                name: 'Odrplus',
+                description: 'Odrplus description',
                 localized: true,
                 access: {
                     guest: true,
@@ -56,7 +58,9 @@ export default new Router({
             name: 'home',
             component: Home,
             meta: {
-                description: 'Индикатор опционных уровней Option Profit. Прибыльная торговля.',
+                title: 'Home title',
+                name: 'Home',
+                description: 'Home description',
                 localized: true,
                 access: {
                     guest: true,
@@ -74,7 +78,9 @@ export default new Router({
                     guest: true,
                     auth: false
                 },
-                title: 'Login',
+                title: 'Login title',
+                name: 'Login',
+                description: 'Login description',
                 icon: 'mdi-login-variant',
                 available: true
             }
@@ -88,7 +94,9 @@ export default new Router({
                     guest: true,
                     auth: false
                 },
-                title: 'Registration',
+                title: 'Registration title',
+                name: 'Registration',
+                description: 'Registration description',
                 icon: 'mdi-account-plus',
                 available: true
             }
@@ -106,6 +114,7 @@ export default new Router({
                         ''
                     ]
                 },
+                name: 'Profile',
                 title: 'Profile',
                 icon: 'mdi-contacts',
                 available: true
@@ -124,7 +133,9 @@ export default new Router({
                         ''
                     ]
                 },
-                title: 'Продукты',
+                name: 'Products',
+                title: 'Products',
+                description: 'Products',
                 icon: 'mdi-apps',
                 available: false
             }
@@ -133,6 +144,17 @@ export default new Router({
             path: '/:lang?/new/email/:token',
             name: 'changeEmail',
             component: null,
+            beforeEnter: function (to, from, next) {
+                if (to.params.token !== undefined) {
+                    store.dispatch('User/changeEmail', { token: to.params.token }).then(() => {
+                        store.dispatch('User/profile').then(() => {
+                            next('/' + store.getters.currentLanguage.urlPrefix + '/profile');
+                        })
+                    }).catch(() => {
+                        next('/' + store.getters.currentLanguage.urlPrefix + '/login');
+                    })
+                }
+            },
             meta: {
                 access: {
                     guest: true,
@@ -141,7 +163,9 @@ export default new Router({
                         ''
                     ]
                 },
-                title: 'Изменение e-mail',
+                name: 'Change email',
+                title: 'Change email title',
+                description: 'Change email description',
                 icon: null,
                 available: false
             }
@@ -158,7 +182,9 @@ export default new Router({
                         ''
                     ]
                 },
-                title: 'Активация аккаунта',
+                name: 'Email activation',
+                title: 'Email activation title',
+                description: 'Email activation description',
                 icon: null,
                 available: false
             }
@@ -175,7 +201,9 @@ export default new Router({
                         ''
                     ]
                 },
-                title: 'Сброс пароля',
+                name: 'Reset password',
+                title: 'Reset password title',
+                description: 'Reset password description',
                 icon: null,
                 available: false
             }
@@ -192,7 +220,9 @@ export default new Router({
                         ''
                     ]
                 },
-                title: 'Успешаня оплата',
+                name: 'Success pay',
+                title: 'Success pay title',
+                description: 'Success pay description',
                 icon: null,
                 available: false
             }
@@ -209,7 +239,9 @@ export default new Router({
                         ''
                     ]
                 },
-                title: 'Ошибка при оплате',
+                name: 'Filed pay',
+                title: 'Filed pay title',
+                description: 'Filed pay description',
                 icon: null,
                 available: false
             }
@@ -218,7 +250,11 @@ export default new Router({
             path: '/:lang?/logout',
             name: 'logout',
             component: null,
-            beforeEnter: AuthGuard,
+            beforeEnter: function(to, from, next) {
+                store.dispatch('User/logout').then(() => {
+                    next('/' + store.getters.currentLanguage.urlPrefix);
+                });
+            },
             meta: {
                 access: {
                     guest: false,
@@ -227,7 +263,9 @@ export default new Router({
                         ''
                     ]
                 },
-                title: 'Logout',
+                name: 'Logout',
+                title: 'Logout title',
+                description: 'Logout description',
                 icon: 'mdi-exit-to-app',
                 available: true
             }

@@ -7,16 +7,16 @@
                         <v-layout row>
                             <v-text-field
                                     name="first_name"
-                                    label="Имя"
-                                    hint="Вводите свое реальное имя, пожалуйста"
+                                    :label="$t('First name')"
+                                    :hint="$t('Enter your first name')"
                                     v-model="profile.first_name"
                             ></v-text-field>
                         </v-layout>
                         <v-layout row>
                             <v-text-field
                                     name="last_name"
-                                    label="Фамилия"
-                                    hint="Вводите свою реальную фамилию, пожалуйста"
+                                    :label="$t('Last name')"
+                                    :hint="$t('Enter your last name')"
                                     v-model="profile.last_name"
                             ></v-text-field>
                         </v-layout>
@@ -24,11 +24,11 @@
                         <v-layout row>
                             <v-text-field
                                     name="email"
-                                    label="Ваш e-mail"
-                                    hint="После изменения вам необходимо будет подтвердить свое действие, перейдя по ссылке из письма"
+                                    :label="$t('Your e-mail')"
+                                    :hint="$t('You must provide your e-mail change request')"
                                     v-model="profile.email"
                                     :disabled="profile.active_change_email_requests.length !== 0"
-                                    :error-messages="errors && errors.email ? errors.email : []"
+                                    :error-messages="errors && errors.email ? $t(errors.email[0]) : []"
                                     :error="errors && !!errors.email"
                             ></v-text-field>
                         </v-layout>
@@ -36,7 +36,7 @@
                             <div v-for="item in profile.active_change_email_requests" class="mb-3">
                                 <v-icon class="active-change-email">mdi-subdirectory-arrow-right</v-icon>
                                 <span class="subheading">
-                                    {{ item.created_at | moment('calendar') }} был запрос на изменение {{ item.new }}
+                                    {{ item.created_at | moment('calendar') }} {{ $t('was request for change') }} {{ item.new }}
 
                                     <v-btn flat
                                            class="red--text darken-1"
@@ -44,8 +44,8 @@
                                            :disabled="localPending.newEmail"
                                            @click="submitCancelChangeNewEmail({new_email: item.new})"
                                     >
-                                        отменить
-                                        <span slot="loader">Обработка...</span>
+                                        {{ $t('cancel') }}
+                                        <span slot="loader">{{ $t('Processing') }}...</span>
                                     </v-btn>
 
                                 </span>
@@ -54,26 +54,26 @@
                         <v-layout row>
                             <v-text-field
                                     name="new_password"
-                                    label="Новый пароль"
-                                    hint="Введите желаемый новый пароль"
+                                    :label="$t('New password')"
+                                    :hint="$t('Enter new password')"
                                     v-model="profile.new_password"
                                     :append-icon="e1 ? 'visibility_off' : 'visibility'"
                                     :append-icon-cb="() => (e1 = !e1)"
                                     :type="e1 ? 'password' : 'text'"
-                                    :error-messages="errors && errors.new_password ? errors.new_password : []"
+                                    :error-messages="errors && errors.new_password ? $t(errors.new_password[0]) : []"
                                     :error="errors && !!errors.new_password"
                             ></v-text-field>
                         </v-layout>
                         <v-layout row>
                             <v-text-field
                                     name="old_password"
-                                    label="Текущий пароль"
-                                    hint="Для изменения пароля, вам необходимо знать текущий. В противном случае, воспользуйтесь формой восстановления пароля."
+                                    :label="$t('Current password')"
+                                    :hint="$t('Current password for new set')"
                                     v-model="profile.old_password"
                                     :append-icon="e2 ? 'visibility_off' : 'visibility'"
                                     :append-icon-cb="() => (e2 = !e2)"
                                     :type="e2 ? 'password' : 'text'"
-                                    :error-messages="errors && errors.old_password ? errors.old_password : []"
+                                    :error-messages="errors && errors.old_password ? $t(errors.old_password[0]) : []"
                                     :error="errors && !!errors.old_password"
                             ></v-text-field>
                         </v-layout>
@@ -81,21 +81,21 @@
                     <div class="hidden-xs-only">
                         <v-layout row>
                             <v-flex xs4>
-                                <v-subheader>ФИО</v-subheader>
+                                <v-subheader>{{ $t('Credentials') }}</v-subheader>
                             </v-flex>
                             <v-flex xs12 sm5>
                                 <v-text-field
                                         name="first_name"
-                                        label="Имя"
-                                        hint="Вводите свое реальное имя, пожалуйста"
+                                        :label="$t('First name')"
+                                        :hint="$t('Enter your first name')"
                                         v-model="profile.first_name"
                                 ></v-text-field>
                             </v-flex>
                             <v-flex xs12 sm5>
                                 <v-text-field
                                         name="last_name"
-                                        label="Фамилия"
-                                        hint="Вводите свою реальную фамилию, пожалуйста"
+                                        :label="$t('Last name')"
+                                        :hint="$t('Enter your last name')"
                                         v-model="profile.last_name"
                                 ></v-text-field>
                             </v-flex>
@@ -107,18 +107,18 @@
                             <v-flex xs10>
                                 <v-text-field
                                         name="email"
-                                        label="Ваш e-mail"
-                                        hint="После изменения вам необходимо будет подтвердить свое действие, перейдя по ссылке из письма"
+                                        :label="$t('Your e-mail')"
+                                        :hint="$t('You must provide your e-mail change request')"
                                         v-model="profile.email"
                                         :disabled="profile.active_change_email_requests.length !== 0"
-                                        :error-messages="errors && errors.email ? errors.email : []"
+                                        :error-messages="errors && errors.email ? $t(errors.email[0]) : []"
                                         :error="errors && !!errors.email"
                                 ></v-text-field>
                                 <div v-if="profile.active_change_email_requests">
                                     <div v-for="item in profile.active_change_email_requests" class="mb-3">
                                         <v-icon class="active-change-email">mdi-subdirectory-arrow-right</v-icon>
                                         <span class="subheading">
-                                            {{ item.created_at | moment('calendar') }} был запрос на изменение {{ item.new }}
+                                            {{ item.created_at | moment('calendar') }} {{ $t('was request for change') }} {{ item.new }}
                                         </span>
                                         <span>
                                             <v-btn flat
@@ -127,8 +127,8 @@
                                                    :disabled="localPending.newEmail"
                                                    @click="submitCancelChangeNewEmail({new_email: item.new})"
                                             >
-                                                отменить
-                                                <span slot="loader">Обработка...</span>
+                                                {{ $t('cancel') }}
+                                                <span slot="loader">{{ $t('Processing') }}...</span>
                                             </v-btn>
                                         </span>
                                     </div>
@@ -138,31 +138,31 @@
 
                         <v-layout row class="mt-4">
                             <v-flex xs4>
-                                <v-subheader>Изменить пароль</v-subheader>
+                                <v-subheader>{{ $t('Change password') }}</v-subheader>
                             </v-flex>
                             <v-flex xs12 sm5>
                                 <v-text-field
                                         name="new_password"
-                                        label="Новый пароль"
-                                        hint="Введите желаемый новый пароль"
+                                        :label="$t('New password')"
+                                        :hint="$t('Enter new password')"
                                         v-model="profile.new_password"
                                         :append-icon="e1 ? 'visibility_off' : 'visibility'"
                                         :append-icon-cb="() => (e1 = !e1)"
                                         :type="e1 ? 'password' : 'text'"
-                                        :error-messages="errors && errors.new_password ? errors.new_password : []"
+                                        :error-messages="errors && errors.new_password ? $t(errors.new_password[0]) : []"
                                         :error="errors && !!errors.new_password"
                                 ></v-text-field>
                             </v-flex>
                             <v-flex xs12 sm5>
                                 <v-text-field
                                         name="old_password"
-                                        label="Текущий пароль"
-                                        hint="Для изменения пароля, вам необходимо знать текущий. В противном случае, воспользуйтесь формой восстановления пароля."
+                                        :label="$t('Current password')"
+                                        :hint="$t('Current password for new set')"
                                         v-model="profile.old_password"
                                         :append-icon="e2 ? 'visibility_off' : 'visibility'"
                                         :append-icon-cb="() => (e2 = !e2)"
                                         :type="e2 ? 'password' : 'text'"
-                                        :error-messages="errors && errors.old_password ? errors.old_password : []"
+                                        :error-messages="errors && errors.old_password ? $t(errors.old_password[0]) : []"
                                         :error="errors && !!errors.old_password"
                                 ></v-text-field>
                             </v-flex>
@@ -178,8 +178,8 @@
                                @click="submitForm(profile)"
                                class="hidden-sm-and-up"
                         >
-                            Сохранить
-                            <span slot="loader">Обработка...</span>
+                            {{ $t('Save') }}
+                            <span slot="loader">{{ $t('Processing') }}...</span>
                         </v-btn>
                     </p>
                     <p class="mt-4 button-for-big-screens">
@@ -190,8 +190,8 @@
                                @click="submitForm(profile)"
                                class="hidden-xs-only"
                         >
-                            Сохранить
-                            <span slot="loader">Обработка...</span>
+                            {{ $t('Save') }}
+                            <span slot="loader">{{ $t('Processing') }}...</span>
                         </v-btn>
                     </p>
                 </v-container>
@@ -205,12 +205,12 @@
                         mdi-comment-alert-outline
                     </v-icon>
                 </v-card-title>
-                <v-card-text>
-                    {{ errors.system }}
+                <v-card-text v-if="errors.system">
+                    {{ $t(errors.system) }}
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn class="red--text darken-1" flat="flat" @click.native="dialog = false">Закрыть</v-btn>
+                    <v-btn class="red--text darken-1" flat="flat" @click.native="dialog = false">{{ $t('Close') }}</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -239,23 +239,23 @@
         methods: {
             submitForm: function (formData) {
                 this.$store.dispatch('User/updateProfile', formData).then(response => {
-                        this.errors = []
+                        this.errors = [];
                     }).catch(errors => {
-                        this.errors = errors
+                        this.errors = errors;
 
                         if (this.errors && this.errors.system) {
-                            this.dialog = true
+                            this.dialog = true;
                         }
                     })
             },
             submitCancelChangeNewEmail: function(formData) {
                 this.$store.dispatch('User/cancelEmailChange', formData).then(response => {
-                        this.errors = []
+                        this.errors = [];
                     }).catch(errors => {
-                        this.errors = errors
+                        this.errors = errors;
 
                         if (this.errors && this.errors.system) {
-                            this.dialog = true
+                            this.dialog = true;
                         }
                     })
             }

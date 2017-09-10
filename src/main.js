@@ -1,22 +1,22 @@
 import Vue from 'vue';
 import VueResource from 'vue-resource';
 import VueMoment from 'vue-moment';
+import momentLocaleRu from '../node_modules/moment/locale/ru';
+import momentLocaleEn from '../node_modules/moment/locale/en-gb';
 import router from '@/router/index';
 import App from '@/components/App.vue';
 import store from '@/store/index';
-import momentLocaleRu from '../node_modules/moment/locale/ru';
 import Vuetify from 'vuetify';
 import { sync } from 'vuex-router-sync';
 import VueI18nManager from 'vue-i18n-manager';
 import i18nSettings from '@/config/i18n';
+import Meta from 'vue-meta';
 
 sync(store, router);
 
 Vue.use(Vuetify);
 Vue.use(VueResource);
-Vue.use(VueMoment, {
-    momentLocaleRu
-});
+Vue.use(VueMoment);
 
 Vue.use(VueI18nManager, {
     store: store,
@@ -25,37 +25,8 @@ Vue.use(VueI18nManager, {
     proxy: i18nSettings.proxy
 });
 
+Vue.use(Meta);
 Vue.initI18nManager();
-
-// router.beforeEach((to, from, next) => {
-//     if (to.name === 'changeEmail') {
-//         if (to.params.token !== undefined) {
-//             store.dispatch('User/changeEmail', { token: to.params.token }).then(() => {
-//                 store.dispatch('User/profile').then(() => {
-//                     router.push({
-//                         name: 'profile'
-//                     })
-//                 })
-//             }).catch(error => {
-//                 router.push({
-//                     name: 'login'
-//                 })
-//             })
-//         }
-//     }
-//
-//     if (to.name === 'logout') {
-//         store.dispatch('User/logout').then(() => {
-//             router.push({
-//                 name: 'home'
-//             })
-//         }).catch(error => {
-//             router.push({
-//                 name: 'home'
-//             })
-//         })
-//     }
-// });
 
 new Vue({
     el: '#app',
