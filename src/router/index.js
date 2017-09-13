@@ -11,6 +11,7 @@ import NotFound from '@/components/NotFound.vue';
 import PaySuccess from '@/components/Pay/Success.vue';
 import PayFail from '@/components/Pay/Fail.vue';
 import OdrPlus from '@/components/OdrPlus.vue';
+import Feedback from '@/components/Feedback.vue';
 
 import AuthGuard from '@/router/guard';
 import store from '@/store/index';
@@ -247,12 +248,33 @@ export default new Router({
             }
         },
         {
+            path: '/:lang?/feedback',
+            name: 'feedback',
+            component: Feedback,
+            meta: {
+                access: {
+                    guest: true,
+                    auth: true,
+                    roles: [
+                        ''
+                    ]
+                },
+                name: 'Feedback',
+                title: 'Feedback title',
+                description: 'Feedback description',
+                icon: 'mdi-email-outline',
+                available: true
+            }
+        },
+        {
             path: '/:lang?/logout',
             name: 'logout',
             component: null,
             beforeEnter: function(to, from, next) {
                 store.dispatch('User/logout').then(() => {
                     next('/' + store.getters.currentLanguage.urlPrefix);
+                }).catch(() => {
+                    store.dispatch('User/checkProfile')
                 });
             },
             meta: {
@@ -269,6 +291,6 @@ export default new Router({
                 icon: 'mdi-exit-to-app',
                 available: true
             }
-        },
+        }
     ]
 })

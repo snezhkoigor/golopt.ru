@@ -69,8 +69,9 @@
 </template>
 
 <script>
-    import { events } from 'vue-i18n-manager'
-    import { mapGetters, mapActions } from 'vuex'
+    import { events } from 'vue-i18n-manager';
+    import { mapGetters, mapActions } from 'vuex';
+    import moment from '../../../node_modules/moment/min/moment-with-locales.min';
 
     export default {
         data () {
@@ -80,13 +81,8 @@
             }
         },
         mounted() {
-            this.$store.dispatch('Dictionary/list').then(() => {
-                const code = 'ru-Ru';
-                const trans = this.dictionary.locales;
-
-                this.$store.dispatch(events.ADD_TRANSLATION, { trans, code })
-                this.selectedLanguage = this.currentLanguage;
-            });
+            this.selectedLanguage = this.currentLanguage;
+            moment.locale(this.currentLanguage.urlPrefix);
         },
         computed: {
             ...mapGetters([
@@ -115,11 +111,13 @@
         watch: {
             selectedLanguage: function(language) {
                 if (language.urlPrefix !== this.currentLanguage.urlPrefix) {
+                    moment.locale(language.urlPrefix);
+
                     this.$store.dispatch(events.SET_LANGUAGE, language.code).then(() => {
                         this.$router.push({
                             name: this.$router.currentRoute.name
                         });
-                    });
+                    })
                 }
             }
         }

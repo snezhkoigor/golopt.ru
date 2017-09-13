@@ -1,5 +1,6 @@
 import store from '../store/index';
 import base_api_config from '../api/base_http_config.js';
+import { events } from 'vue-i18n-manager'
 
 const HTTP = base_api_config.instance;
 

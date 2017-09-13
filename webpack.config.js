@@ -55,6 +55,12 @@ module.exports = {
     performance: {
         hints: false
     },
+    plugins: [
+
+        // Fixes warning in moment-with-locales.min.js
+        //   Module not found: Error: Can't resolve './locale' in ...
+        new webpack.IgnorePlugin(/\.\/locale$/)
+    ],
     devtool: '#eval-source-map'
 }
 

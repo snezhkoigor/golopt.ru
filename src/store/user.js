@@ -34,6 +34,12 @@ const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 const UPDATE_PRODUCT_SUCCESS = "UPDATE_PRODUCT_SUCCESS";
 const UPDATE_PRODUCT_FAIL = "UPDATE_PRODUCT_FAIL";
 
+const FEEDBACK = "FEEDBACK";
+const FEEDBACK_SUCCESS = "FEEDBACK_SUCCESS";
+const FEEDBACK_FAIL = "FEEDBACK_FAIL";
+
+const RESET_PENDING = "RESET_PENDING";
+
 
 const state = {
     isLoggedIn: !!localStorage.getItem('jwt_token'),
@@ -328,6 +334,35 @@ const actions = {
             })
         })
     },
+    feedback({ commit }, formBody) {
+        return new Promise((resolve, reject) => {
+            commit(FEEDBACK);
+
+            api.feedback(formBody).then(response => {
+                if (response.data.status) {
+                    commit(FEEDBACK_SUCCESS);
+                    resolve(response);
+                } else {
+                    commit(FEEDBACK_FAIL);
+
+                    let errors = null;
+                    if ((response.data.message !== null) && (typeof( response.data.message ) === 'object')) {
+                        errors = response.data.message;
+                    } else {
+                        errors = {
+                            system: response.data.message
+                        };
+                    }
+                    if (process.env !== 'production')  window.console.log('error', response);
+
+                    reject(errors);
+                }
+            }, error => {
+                commit(FEEDBACK_FAIL);
+                reject(error);
+            })
+        })
+    },
     checkProfile({ commit }) {
         return new Promise((resolve, reject) => {
             api.checkProfile().then(response => {
@@ -394,10 +429,25 @@ const actions = {
         }
 
         return result;
+    },
+    resetPending({ commit }) {
+        commit(RESET_PENDING);
     }
 }
 
 const mutations = {
+    RESET_PENDING (state) {
+        state.pending = false;
+    },
+    FEEDBACK (state) {
+        state.pending = true;
+    },
+    FEEDBACK_SUCCESS (state) {
+        state.pending = false;
+    },
+    FEEDBACK_FAIL (state) {
+        state.pending = false;
+    },
     CANCEL_EMAIL_CHANGE (state) {
         state.localPending.newEmail = true;
     },

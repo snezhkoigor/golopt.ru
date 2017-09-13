@@ -94,6 +94,14 @@ export default {
             Authorization: 'Bearer ' + localStorage.getItem('jwt_token')
         };
 
-        return HTTP.delete('/new/email/cancel/' + formBody.new_email, {headers: headers});
+        return HTTP.delete('/new/email/cancel/' + formBody.new_email, { headers: headers });
+    },
+    feedback(formBody) {
+        let data = {
+            email: formBody.email,
+            text: formBody.text
+        };
+
+        return HTTP.post('/feedback', data);
     }
 }

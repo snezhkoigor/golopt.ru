@@ -16,8 +16,6 @@
     import { mapGetters, mapActions } from 'vuex';
     import HeaderComponent from '@/components/Layout/Header.vue';
     import LoaderComponent from '@/components/Layout/Loader.vue';
-    import momentLocaleRu from '../../node_modules/moment/locale/ru';
-    import momentLocaleEn from '../../node_modules/moment/locale/en-gb';
 
     export default {
         data () {
@@ -30,19 +28,19 @@
             HeaderComponent,
             LoaderComponent
         },
-        mounted() {
+        beforeMount() {
             this.$store.dispatch('Dictionary/list').then(() => {
-//                const code = 'ru-Ru';
-//                const trans = this.dictionary.locales;
-//
-//                this.$store.dispatch(events.ADD_TRANSLATION, { trans, code })
+                const code = 'ru-Ru';
+                const trans = this.dictionary.locales;
 
-                this.$moment.locale('ru').format("LLL");
-console.log(this.$moment);
-                this.title = this.$t(this.$route.meta.title);
-                this.description = this.$t(this.$route.meta.description);
-                this.selectedLanguage = this.currentLanguage;
+                this.$store.dispatch(events.ADD_TRANSLATION, { trans, code });
+
+                this.title = this.$router.currentRoute.meta.title ? this.$t(this.$router.currentRoute.meta.title) : this.$router.currentRoute.name;
+                this.description = this.$router.currentRoute.meta.description ? this.$t(this.$router.currentRoute.meta.description) : this.$router.currentRoute.name;
             });
+        },
+        mounted() {
+            console.log(this.dictionary);
         },
         computed: {
             ...mapGetters('Dictionary', [
@@ -59,7 +57,6 @@ console.log(this.$moment);
             return {
                 title: this.title,
                 meta: [
-                    {charset: 'utf-8'},
                     { name: 'description', content: this.description }
                 ]
             }
