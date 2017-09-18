@@ -436,6 +436,9 @@ const actions = {
 }
 
 const mutations = {
+    GET_PRICING_LIST (state) {
+        state.pending = true;
+    },
     RESET_PENDING (state) {
         state.pending = false;
     },

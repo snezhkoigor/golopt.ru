@@ -52,6 +52,12 @@ export default {
         };
 
         return HTTP.post('/product/demo', data, { headers: headers });
-    }
+    },
+    pricing() {
+        let headers = {
+            Authorization: 'Bearer ' + localStorage.getItem('jwt_token')
+        };
 
+        return HTTP.get('/products/pricing', { headers: headers });
+    }
 }

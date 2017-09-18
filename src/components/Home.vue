@@ -5,22 +5,22 @@
                 <v-flex xs6 order-xs2>
                     <v-card light class="light right">
                         <v-card-text>
-                            <div class="headline ma-3 gray--text">Опционный анализ с Option Profit на рынке Forex - путь к стабильному заработку</div>
+                            <div class="headline ma-3 gray--text">{{ $t('Option analysis with Option Profit indicator in the Forex market - the path to stable profit') }}</div>
                             <div
                                     class="subheading ma-3 gray--text hidden-xs-only"
                             >
                                 <ul>
                                     <li>
-                                        Самые актуальные данные с Чикагской товарной биржи.
+                                        {{ $t('Actual data from CME') }}
                                     </li>
                                     <li>
-                                        Потоковая трансляция данных в терминал МetaТrader4. Автоматическое обновление каждые 5 минут.
+                                        {{ $t('Streaming data to the MetaTrader 4 terminal') }}
                                     </li>
                                     <li>
-                                        Свежие данные 24 часа в сутки.
+                                        {{ $t('Actual data 24 hours a day') }}
                                     </li>
                                     <li>
-                                        Бесплатное тестирование в течении двух торговых недель.
+                                        {{ $t('Free testing within two trading weeks') }}
                                     </li>
                                 </ul>
                             </div>
@@ -29,7 +29,9 @@
                                     large
                                     block
                                     secondary
-                                    @click="paymentSystemSelected(dictionary.payment_systems[dictionary.const.PAYMENT_SYSTEM_DEMO], (has_demo.length ? has_demo[0] : null))"
+                                    :to="'#pricing'"
+                                    v-smooth-scroll="{ duration: 1000, offset: -50 }"
+                                    :disabled="!products"
                             >
                                 {{ $t('Test for free') }}
                             </v-btn>
@@ -47,17 +49,9 @@
                     <v-card-text>
                         <div>
                             <p class="ma-3 headline text-xs-center content-title">
-                                Революция в области торговли на рынке Форекс.<br/> Индикатор опционных уровней Option Profit.
+                                {{ $t('Home revolution title') }}
                             </p>
-                            <p>
-                                Как известно финансовые рынки между собой взаимосвязаны, а именно срочный рынок Форекс, рынок Фьючерсов и рынок Опционов и, как следствие, они оказывают влияние друг на друга. Таким образом глубокий анализ доступной рыночной информации позволяет с большой долей вероятности прогнозировать движение цены.
-                            </p>
-                            <p>
-                                Однако далеко не каждому эта информация доступна. Большинство трейдеров пытается заработать на рынке Форекс, применяя в своей торговле стандартные инструменты технического анализа. Не секрет, что использование в анализе и торговле обычных индикаторов далеко не самый лучший способ достичь успеха в этом ремесле. Так как все стандартные индикаторы имеют существенный недостаток — они строят графические объекты на основе исторических данных, а так как рынок не линейная структура, есть велика вероятность, что торговая система, основанная на стандартном индикаторе или наборе индикаторов, давшая в прошлом прибыльный сигнал, может с большой долей вероятности в следующий раз выдать ложный, убыточный сигнал.
-                            </p>
-                            <p>
-                                Мы представляем вам индикатор, позволяющий анализировать рынок на основе самой свежей рыночной информации. С помощью индикатора опционных уровней OptionProfit можно с большой долей вероятности спрогнозировать ценовые уровни, где будет происходить, как минимум, коррекционные движения для внутридневной торговли, а так же вы сможете совершать сделки с большим потенциалом прибыли и малым риском в каждой, отдельно взятой сделке.
-                            </p>
+                            <p v-html="$t('Home revolution text')"></p>
                         </div>
                     </v-card-text>
                 </v-card>
@@ -69,7 +63,7 @@
                     <v-card-text>
                         <div>
                             <p class="ma-3 headline text-xs-center content-title">
-                                Что вы получаете в версии Lite
+                                {{ $t('What you will get in the Basic version') }}
                             </p>
                         </div>
                         <v-layout row-sm column child-flex-sm class="mb-10" >
@@ -78,7 +72,7 @@
                                         <v-icon class="display-2 red--text darken-1">mdi-truck-fast</v-icon>
                                     </v-card-title>
                                     <v-card-text class="subheading">
-                                        Самые актуальные данные с Чикагской товарной биржи.
+                                        {{ $t('Actual data from CME') }}
                                     </v-card-text>
                                 </v-card>
                                 <v-card dark class="ma-2 what-you-will-get">
@@ -86,7 +80,7 @@
                                         <v-icon class="display-2 red--text darken-1">mdi-cached</v-icon>
                                     </v-card-title>
                                     <v-card-text class="subheading">
-                                        Потоковая трансляция данных в терминал МetaТrader4. Автоматическое обновление каждые 5 минут.
+                                        {{ $t('Streaming data to the MetaTrader 4 terminal') }}
                                     </v-card-text>
                                 </v-card>
                                 <v-card dark class="ma-2 what-you-will-get">
@@ -94,7 +88,7 @@
                                         <v-icon class="display-2 red--text darken-1">mdi-alarm</v-icon>
                                     </v-card-title>
                                     <v-card-text class="subheading">
-                                        Свежие данные 24 часа в сутки.
+                                        {{ $t('Actual data 24 hours a day') }}
                                     </v-card-text>
                                 </v-card>
                                 <v-card dark class="ma-2 what-you-will-get ">
@@ -102,7 +96,7 @@
                                         <v-icon class="display-2 red--text darken-1">mdi-cart-off</v-icon>
                                     </v-card-title>
                                     <v-card-text class="subheading">
-                                        Бесплатное тестирование в течении двух торговых недель.
+                                        {{ $t('Free testing within two trading weeks') }}
                                     </v-card-text>
                                 </v-card>
 
@@ -111,48 +105,87 @@
                 </v-card>
             </v-flex>
         </v-layout>
-        <v-layout row wrap class="mb-10 home-product-advantages">
+        <v-layout row wrap id="pricing" class="mb-10 home-product-advantages" v-if="products && activeTab">
             <v-flex xs12>
                 <v-card light class="elevation-0">
                     <v-card-text>
                         <div>
                             <p class="ma-3 headline text-xs-center content-title">
-                                Продвинутые версии индикатора
+                                {{ $t('Our products') }}
                             </p>
                         </div>
                         <v-layout row-sm column child-flex-sm>
-                            <template v-for="productItem in products">
-                                <v-card class="ma-2 cyan darken-2 white--text">
-                                    <v-card-title primary-title>
-                                        <div class="headline">{{ productItem.name }}</div>
-                                        <div class="home-product-description">{{ productItem.description }}</div>
-                                        <div class="headline mt-4">{{ productItem.price }}$/{{ dictionary.price_by[productItem.price_by].text }}</div>
-                                    </v-card-title>
-                                    <v-card-actions>
-                                        <v-menu
-                                            origin="center center"
-                                            transition="scale-transition"
-                                            bottom
-                                        >
-                                            <v-btn flat dark slot="activator">
-                                                {{ $t('Buy') }}
-                                            </v-btn>
-                                            <v-list>
-                                                <v-list-tile
-                                                        v-for="paymentSystemItem in dictionary.payment_systems" :key="paymentSystemItem.key"
-                                                        v-if="paymentSystemItem.key !== dictionary.const.PAYMENT_SYSTEM_DEMO || (paymentSystemItem.key === dictionary.const.PAYMENT_SYSTEM_DEMO && productItem.has_demo === 1)"
+                            <v-tabs light fixed centered v-model="activeTab">
+                                <v-tabs-bar slot="activators" class="white lighten-4" light>
+                                    <v-tabs-item
+                                            v-for="(val, key) in products"
+                                            :key="key"
+                                            :href="'#' + key"
+                                            ripple
+                                    >
+                                        {{ key }}
+                                    </v-tabs-item>
+                                    <v-tabs-slider class="blue"></v-tabs-slider>
+                                </v-tabs-bar>
+
+                                <v-tabs-content
+                                        v-for="(val, key) in products"
+                                        :key="key"
+                                        :id="key"
+                                        class="mt-3"
+                                >
+                                    <v-layout row-md column child-flex-md style="justify-content: center;">
+                                        <v-card class="ma-2 grey darken-2 white--text" v-for="productItem in products[key]" style="max-width: 400px; display: inline-block; margin-right: -0.25em; align-items: center;">
+                                            <v-card-title primary-title>
+                                                <div class="headline mb-3" style="width: 100%">{{ productItem.name }}</div>
+                                                <div class="display-1 mb-3">{{ productItem.price | currency}}/{{ $t(productItem.price_by) }}</div>
+                                                <div class="home-product-description white elevation-3">
+                                                    <v-list two-line>
+                                                        <template v-for="(val, key) in productItem.functional">
+                                                            <v-list-tile>
+                                                                <v-list-tile-avatar>
+                                                                    <v-icon v-if="val" class="green--text">mdi-check</v-icon>
+                                                                    <v-icon v-if="!val" class="red--text">mdi-close</v-icon>
+                                                                </v-list-tile-avatar>
+                                                                <v-list-tile-content>
+                                                                    {{ $t(key) }}
+                                                                </v-list-tile-content>
+                                                            </v-list-tile>
+                                                        </template>
+                                                    </v-list>
+                                                </div>
+                                            </v-card-title>
+                                            <v-card-actions>
+                                                <v-menu
+                                                        origin="center center"
+                                                        transition="scale-transition"
+                                                        bottom
                                                 >
-                                                    <v-list-tile-title
-                                                            @click="paymentSystemSelected(paymentSystemItem, productItem)"
-                                                    >
-                                                        {{ $t(paymentSystemItem.text) }}
-                                                    </v-list-tile-title>
-                                                </v-list-tile>
-                                            </v-list>
-                                        </v-menu>
-                                    </v-card-actions>
-                                </v-card>
-                            </template>
+                                                    <v-btn flat dark slot="activator" v-if="!isLogin">
+                                                        {{ $t('Buy') }}
+                                                    </v-btn>
+                                                    <v-btn flat dark slot="activator" v-else="isLogin">
+                                                        <span v-if="!productItem.users[0]">{{ $t('Buy') }}</span>
+                                                        <span v-if="!!productItem.users[0]">{{ $t('Renew subscription') }}</span>
+                                                    </v-btn>
+                                                    <v-list>
+                                                        <v-list-tile
+                                                                v-for="paymentSystemItem in dictionary.payment_systems" :key="paymentSystemItem.key"
+                                                                v-if="paymentSystemItem.key !== dictionary.const.PAYMENT_SYSTEM_DEMO || (paymentSystemItem.key === dictionary.const.PAYMENT_SYSTEM_DEMO && productItem.has_demo === 1)"
+                                                        >
+                                                            <v-list-tile-title
+                                                                    @click="paymentSystemSelected(paymentSystemItem, productItem)"
+                                                            >
+                                                                {{ $t(paymentSystemItem.text) }}
+                                                            </v-list-tile-title>
+                                                        </v-list-tile>
+                                                    </v-list>
+                                                </v-menu>
+                                            </v-card-actions>
+                                        </v-card>
+                                    </v-layout>
+                                </v-tabs-content>
+                            </v-tabs>
                         </v-layout>
                     </v-card-text>
                 </v-card>
@@ -191,7 +224,8 @@
                                :disabled="pending"
                                @click="submitForm({ email: email, trade_account: trade_account, broker: broker, skype: skype, product_id: productSelected.id, payment_system: psSelected.key })"
                         >
-                            {{ $t('Buy') }}
+                            <span v-if="productSelected && productSelected.users.length === 0">{{ $t('Buy') }}</span>
+                            <span v-else="productSelected && !!productSelected.users[0]">{{ $t('Renew subscription') }}</span>
                             <span slot="loader">{{ $t('Processing') }}...</span>
                         </v-btn>
                     </v-toolbar-items>
@@ -260,7 +294,9 @@
 
     export default {
         mounted() {
-            this.list()
+            this.pricing().then(() => {
+                this.activeTab = 'lite';
+            });
         },
         data () {
             return {
@@ -273,7 +309,8 @@
                 broker: '',
                 trade_account: '',
                 loader: null,
-                errors: []
+                errors: [],
+                activeTab: null
             }
         },
         computed: {
@@ -289,7 +326,7 @@
         },
         methods: {
             ...mapActions('Product', [
-                'list'
+                'pricing'
             ]),
             paymentSystemSelected: function(paymentSystem, product) {
                 this.psSelected = paymentSystem;
@@ -354,3 +391,11 @@
         }
     }
 </script>
+
+<style lang="scss">
+
+        .tabs__items {
+            border-width: 0
+        }
+
+</style>

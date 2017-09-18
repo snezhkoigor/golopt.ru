@@ -62,7 +62,7 @@
                         title: 'Payments'
                     }
                 ],
-                active: 'edit'
+                active: 'product'
             }
         }
     }

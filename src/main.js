@@ -10,7 +10,9 @@ import { sync } from 'vuex-router-sync';
 import VueI18nManager from 'vue-i18n-manager';
 import i18nSettings from '@/config/i18n';
 import Meta from 'vue-meta';
-import { events } from 'vue-i18n-manager'
+import { events } from 'vue-i18n-manager';
+import vueSmoothScroll from 'vue-smooth-scroll';
+import Vue2Filters from 'vue2-filters';
 
 sync(store, router);
 
@@ -19,6 +21,8 @@ Vue.use(VueResource);
 Vue.use(VueMoment, {
     moment
 });
+Vue.use(vueSmoothScroll);
+Vue.use(Vue2Filters);
 
 Vue.use(VueI18nManager, {
     store: store,

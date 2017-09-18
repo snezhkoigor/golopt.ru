@@ -17,6 +17,35 @@ const state = {
 };
 
 const actions = {
+    pricing({ commit }) {
+        return new Promise((resolve, reject) => {
+            commit(GET_LIST);
+
+            api.pricing().then(function (response) {
+                if (response.data.status) {
+                    commit(GET_LIST_SUCCESS, response.data.data);
+                    resolve(response);
+                } else {
+                    commit(GET_LIST_FAIL);
+
+                    let errors = null;
+                    if ((response.data.message !== null) && (typeof( response.data.message ) === 'object')) {
+                        errors = response.data.message;
+                    } else {
+                        errors = {
+                            system: response.data.message
+                        };
+                    }
+                    if (process.env !== 'production')  window.console.log('error', response);
+
+                    reject(errors);
+                }
+            }, error => {
+                commit(GET_LIST_FAIL);
+                reject(error);
+            })
+        })
+    },
     list({ commit }) {
         return new Promise((resolve, reject) => {
             commit(GET_LIST);

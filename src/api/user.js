@@ -49,6 +49,8 @@ export default {
             first_name: formBody.first_name,
             last_name: formBody.last_name,
             email: formBody.email,
+            skype: formBody.skype,
+            phone: formBody.phone,
             new_password: formBody.new_password,
             old_password: formBody.old_password
         };

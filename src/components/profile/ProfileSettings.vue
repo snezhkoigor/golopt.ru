@@ -1,5 +1,5 @@
 <template>
-    <div class="profile-settings">
+    <div class="profile-settings" v-if="isLogin">
         <v-card class="grey lighten-4 elevation-0">
             <v-card-text>
                 <v-container fluid>
@@ -20,7 +20,15 @@
                                     v-model="profile.last_name"
                             ></v-text-field>
                         </v-layout>
-
+                        <v-layout row>
+                            <v-text-field
+                                    name="Skype"
+                                    :hint="$t('Enter your skype for fast contact with you')"
+                                    v-model="profile.skype"
+                                    :error-messages="errors && errors.skype ? $t(errors.skype[0]) : []"
+                                    :error="errors && !!errors.skype"
+                            ></v-text-field>
+                        </v-layout>
                         <v-layout row>
                             <v-text-field
                                     name="email"
@@ -79,6 +87,7 @@
                         </v-layout>
                     </div>
                     <div class="hidden-xs-only">
+
                         <v-layout row>
                             <v-flex xs4>
                                 <v-subheader>{{ $t('Credentials') }}</v-subheader>
@@ -133,6 +142,30 @@
                                         </span>
                                     </div>
                                 </div>
+                            </v-flex>
+                        </v-layout>
+
+                        <v-layout row>
+                            <v-flex xs4>
+                                <v-subheader>{{ $t('Contacts') }}</v-subheader>
+                            </v-flex>
+                            <v-flex xs12 sm5>
+                                <v-text-field
+                                        name="skype"
+                                        :label="$t('Skype')"
+                                        :hint="$t('Enter your skype for fast contact with you')"
+                                        v-model="profile.skype"
+                                        :error-messages="errors && errors.skype ? $t(errors.skype[0]) : []"
+                                        :error="errors && !!errors.skype"
+                                ></v-text-field>
+                            </v-flex>
+                            <v-flex xs12 sm5>
+                                <v-text-field
+                                        name="phone"
+                                        :label="$t('Phone number')"
+                                        :hint="$t('Enter your phone number without country code')"
+                                        v-model="profile.phone"
+                                ></v-text-field>
                             </v-flex>
                         </v-layout>
 
@@ -233,7 +266,7 @@
         },
         computed: {
             ...mapGetters('User', [
-                'profile', 'pending', 'localPending'
+                'profile', 'pending', 'localPending', 'isLogin'
             ])
         },
         methods: {
