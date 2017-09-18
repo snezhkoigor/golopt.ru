@@ -224,7 +224,7 @@
                                :disabled="pending"
                                @click="submitForm({ email: email, trade_account: trade_account, broker: broker, skype: skype, product_id: productSelected.id, payment_system: psSelected.key })"
                         >
-                            <span v-if="productSelected && productSelected.users.length === 0">{{ $t('Buy') }}</span>
+                            <span v-if="productSelected && !productSelected.users">{{ $t('Buy') }}</span>
                             <span v-else="productSelected && !!productSelected.users[0]">{{ $t('Renew subscription') }}</span>
                             <span slot="loader">{{ $t('Processing') }}...</span>
                         </v-btn>
