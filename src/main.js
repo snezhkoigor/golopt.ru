@@ -12,7 +12,7 @@ import i18nSettings from '@/config/i18n';
 import Meta from 'vue-meta';
 import { events } from 'vue-i18n-manager';
 import vueSmoothScroll from 'vue-smooth-scroll';
-import Vue2Filters from 'vue2-filters';
+import VueCurrencyFilter from 'vue-currency-filter';
 
 sync(store, router);
 
@@ -22,7 +22,6 @@ Vue.use(VueMoment, {
     moment
 });
 Vue.use(vueSmoothScroll);
-Vue.use(Vue2Filters);
 
 Vue.use(VueI18nManager, {
     store: store,
@@ -32,6 +31,7 @@ Vue.use(VueI18nManager, {
 });
 
 Vue.use(Meta);
+Vue.use(VueCurrencyFilter, {symbol : '$'})
 Vue.initI18nManager();
 
 new Vue({
