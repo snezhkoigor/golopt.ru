@@ -135,7 +135,7 @@
                                         class="mt-3"
                                 >
                                     <v-layout row-md column child-flex-md style="justify-content: center;">
-                                        <v-card class="ma-2 grey darken-2 white--text" v-for="productItem in products[key]" style="max-width: 340px; display: inline-block; margin-right: -0.25em; align-items: center;">
+                                        <v-card class="ma-2 grey darken-2 white--text" v-for="productItem in products[key]" style="max-width: 300px; display: inline-block; margin-right: -0.25em; align-items: center;">
                                             <v-card-title primary-title>
                                                 <div class="headline mb-3" style="width: 100%">{{ productItem.name }}</div>
                                                 <div class="display-1 mb-3">{{ productItem.price | currency}}/{{ $t(productItem.price_by) }}</div>
@@ -143,11 +143,7 @@
                                                     <v-list two-line>
                                                         <template v-for="(val, key) in productItem.functional">
                                                             <v-list-tile>
-                                                                <v-list-tile-avatar>
-                                                                    <v-icon v-if="val" class="green--text">mdi-check</v-icon>
-                                                                    <v-icon v-if="!val" class="red--text">mdi-close</v-icon>
-                                                                </v-list-tile-avatar>
-                                                                <v-list-tile-content>
+                                                                <v-list-tile-content v-bind:class="{ 'green--text': val, 'red--text': !val }">
                                                                     {{ $t(key) }}
                                                                 </v-list-tile-content>
                                                             </v-list-tile>
