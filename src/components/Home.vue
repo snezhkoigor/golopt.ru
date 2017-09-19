@@ -1,9 +1,9 @@
 <template>
     <v-container fluid class="pa-0">
-        <v-parallax src="./src/assets/images/cme.jpg" style="margin-top: -20px;">
+        <v-parallax src="./src/assets/images/cme.jpg" style="margin-top: -30px;">
             <v-layout row>
                 <v-flex xs6 order-xs2>
-                    <v-card light class="light right" elevation-7 style="width: 450px; margin-top: -80px">
+                    <v-card light class="light right" elevation-7 style="width: 450px; margin-top: -60px">
                         <v-card-text>
                             <div class="headline ma-3 gray--text">{{ $t('Option analysis with Option Profit indicator in the Forex market - the path to stable profit') }}</div>
                             <div
@@ -135,15 +135,19 @@
                                         class="mt-3"
                                 >
                                     <v-layout row-md column child-flex-md style="justify-content: center;">
-                                        <v-card class="ma-2 grey darken-2 white--text" v-for="productItem in products[key]" style="max-width: 300px; display: inline-block; margin-right: -0.25em; align-items: center;">
+                                        <v-card class="ma-2 grey darken-2 white--text" v-for="productItem in products[key]" style="display: inline-block; margin-right: -0.25em; align-items: center;">
                                             <v-card-title primary-title>
                                                 <div class="headline mb-3" style="width: 100%">{{ productItem.name }}</div>
                                                 <div class="display-1 mb-3">{{ productItem.price | currency}}/{{ $t(productItem.price_by) }}</div>
                                                 <div class="home-product-description white elevation-3">
                                                     <v-list two-line>
                                                         <template v-for="(val, key) in productItem.functional">
-                                                            <v-list-tile>
-                                                                <v-list-tile-content v-bind:class="{ 'green--text': val, 'red--text': !val }">
+                                                            <v-list-tile class="subheadline">
+                                                                <v-list-tile-avatar>
+                                                                    <v-icon v-if="val" class="green--text">mdi-check</v-icon>
+                                                                    <v-icon v-if="!val" class="red--text">mdi-close</v-icon>
+                                                                </v-list-tile-avatar>
+                                                                <v-list-tile-content>
                                                                     {{ $t(key) }}
                                                                 </v-list-tile-content>
                                                             </v-list-tile>
