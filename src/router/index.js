@@ -2,7 +2,8 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '@/components/Home.vue';
 import Login from '@/components/Login.vue';
-import Registration from '@/components/Registration.vue';
+import Registration from '@/components/Registration/Registration.vue';
+import RegistrationSuccess from '@/components/Registration/Success.vue';
 import ResetPassword from '@/components/profile/ProfileResetPassword.vue';
 import Activate from '@/components/profile/ProfileActivate.vue';
 import Profile from '@/components/Profile.vue';
@@ -100,6 +101,25 @@ export default new Router({
                 description: 'Registration description',
                 icon: 'mdi-account-plus',
                 available: true
+            }
+        },
+        {
+            path: '/:lang?/registration/success',
+            name: 'registrationSuccess',
+            component: RegistrationSuccess,
+            meta: {
+                access: {
+                    guest: true,
+                    auth: false,
+                    roles: [
+                        ''
+                    ]
+                },
+                name: 'Registration success pay',
+                title: 'Registration success pay title',
+                description: 'Registration success pay description',
+                icon: null,
+                available: false
             }
         },
         {

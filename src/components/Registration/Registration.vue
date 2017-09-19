@@ -103,7 +103,9 @@
             submitForm: function (formData) {
                 this.$store.dispatch('User/registration', formData).then(() => {
                     this.errors = [];
-                    this.$router.push('/login');
+                    this.$router.push({
+                        'name': 'registrationSuccess'
+                    });
                 }).catch(errors => {
                     this.errors = errors;
                 })

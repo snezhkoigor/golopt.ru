@@ -43,14 +43,17 @@
                                                     transition="scale-transition"
                                                     bottom
                                             >
-                                                <v-btn flat dark slot="activator">
+                                                <v-btn dark slot="activator" v-if="!isLogin">
+                                                    {{ $t('Buy') }}
+                                                </v-btn>
+                                                <v-btn dark slot="activator" v-else="isLogin">
                                                     <span v-if="!productItem.users[0]">{{ $t('Buy') }}</span>
                                                     <span v-if="!!productItem.users[0]">{{ $t('Renew subscription') }}</span>
                                                 </v-btn>
                                                 <v-list>
                                                     <v-list-tile
                                                             v-for="paymentSystemItem in dictionary.payment_systems" :key="paymentSystemItem.key"
-                                                            v-if="paymentSystemItem.key !== dictionary.const.PAYMENT_SYSTEM_DEMO || (paymentSystemItem.key === dictionary.const.PAYMENT_SYSTEM_DEMO && productItem.has_demo === 1)"
+                                                            v-if="paymentSystemItem.key !== dictionary.const.PAYMENT_SYSTEM_DEMO"
                                                     >
                                                         <v-list-tile-title
                                                                 @click="paymentSystemSelected(paymentSystemItem, productItem)"
@@ -60,8 +63,10 @@
                                                     </v-list-tile>
                                                 </v-list>
                                             </v-menu>
-                                            <v-btn dark v-if="!!productItem.users[0]" flat @click="editSelected(productItem)">
-                                                {{ $t('Edit') }}
+                                            <v-btn dark
+                                                   v-if="productItem.has_demo === 1"
+                                                   @click="paymentSystemSelected(dictionary.payment_systems[dictionary.const.PAYMENT_SYSTEM_DEMO], productItem)">
+                                                {{ $t(dictionary.payment_systems[dictionary.const.PAYMENT_SYSTEM_DEMO].text) }}
                                             </v-btn>
                                         </v-card-actions>
                                     </v-card>
@@ -127,7 +132,12 @@
                             :disabled="pending"
                             @click="goToPayPage({email: profile.email, trade_account: trade_account, broker: broker, skype: skype, product_id: productSelected.id, payment_system: psSelected.key })"
                         >
-                            {{ $t('Buy') }}
+                            <span v-if="psSelected && psSelected.key !== dictionary.const.PAYMENT_SYSTEM_DEMO">
+                                {{ $t('Buy') }}
+                            </span>
+                            <span v-else="psSelected && psSelected.key === dictionary.const.PAYMENT_SYSTEM_DEMO">
+                                {{ $t('Get') }}
+                            </span>
                             <span slot="loader">{{ $t('Processing') }}...</span>
                         </v-btn>
                     </v-toolbar-items>

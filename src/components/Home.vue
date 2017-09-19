@@ -1,9 +1,9 @@
 <template>
     <v-container fluid class="pa-0">
-        <v-parallax src="./src/assets/images/cme.jpg" style="margin-top: -40px;">
+        <v-parallax src="./src/assets/images/cme.jpg" style="margin-top: -20px;">
             <v-layout row>
                 <v-flex xs6 order-xs2>
-                    <v-card light class="light right">
+                    <v-card light class="light right" elevation-7 style="width: 450px; margin-top: -80px">
                         <v-card-text>
                             <div class="headline ma-3 gray--text">{{ $t('Option analysis with Option Profit indicator in the Forex market - the path to stable profit') }}</div>
                             <div
@@ -161,17 +161,17 @@
                                                         transition="scale-transition"
                                                         bottom
                                                 >
-                                                    <v-btn flat dark slot="activator" v-if="!isLogin">
+                                                    <v-btn dark slot="activator" v-if="!isLogin">
                                                         {{ $t('Buy') }}
                                                     </v-btn>
-                                                    <v-btn flat dark slot="activator" v-else="isLogin">
+                                                    <v-btn dark slot="activator" v-else="isLogin">
                                                         <span v-if="!productItem.users[0]">{{ $t('Buy') }}</span>
                                                         <span v-if="!!productItem.users[0]">{{ $t('Renew subscription') }}</span>
                                                     </v-btn>
                                                     <v-list>
                                                         <v-list-tile
                                                                 v-for="paymentSystemItem in dictionary.payment_systems" :key="paymentSystemItem.key"
-                                                                v-if="paymentSystemItem.key !== dictionary.const.PAYMENT_SYSTEM_DEMO || (paymentSystemItem.key === dictionary.const.PAYMENT_SYSTEM_DEMO && productItem.has_demo === 1)"
+                                                                v-if="paymentSystemItem.key !== dictionary.const.PAYMENT_SYSTEM_DEMO"
                                                         >
                                                             <v-list-tile-title
                                                                     @click="paymentSystemSelected(paymentSystemItem, productItem)"
@@ -181,6 +181,11 @@
                                                         </v-list-tile>
                                                     </v-list>
                                                 </v-menu>
+                                                <v-btn dark
+                                                       v-if="productItem.has_demo === 1"
+                                                       @click="paymentSystemSelected(dictionary.payment_systems[dictionary.const.PAYMENT_SYSTEM_DEMO], productItem)">
+                                                    {{ $t(dictionary.payment_systems[dictionary.const.PAYMENT_SYSTEM_DEMO].text) }}
+                                                </v-btn>
                                             </v-card-actions>
                                         </v-card>
                                     </v-layout>
@@ -224,8 +229,15 @@
                                :disabled="pending"
                                @click="submitForm({ email: email, trade_account: trade_account, broker: broker, skype: skype, product_id: productSelected.id, payment_system: psSelected.key })"
                         >
-                            <span v-if="productSelected && (!isLogin || !productSelected.users[0])">{{ $t('Buy') }}</span>
-                            <span v-else="productSelected && !!productSelected.users[0]">{{ $t('Renew subscription') }}</span>
+                            <span v-if="psSelected && psSelected.key !== dictionary.const.PAYMENT_SYSTEM_DEMO">
+                                {{ $t('Buy') }}
+                            </span>
+                            <span v-else="psSelected && psSelected.key === dictionary.const.PAYMENT_SYSTEM_DEMO">
+                                {{ $t('Get') }}
+                            </span>
+                            <!--<span slot="loader">{{ $t('Processing') }}...</span>-->
+                            <!--<span v-if="productSelected && (!isLogin || !productSelected.users[0])">{{ $t('Buy') }}</span>-->
+                            <!--<span v-else="productSelected && !!productSelected.users[0]">{{ $t('Renew subscription') }}</span>-->
                             <span slot="loader">{{ $t('Processing') }}...</span>
                         </v-btn>
                     </v-toolbar-items>
