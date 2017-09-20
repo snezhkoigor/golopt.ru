@@ -3,11 +3,11 @@
         <v-parallax src="./src/assets/images/cme.jpg" style="margin-top: -30px;">
             <v-layout row>
                 <v-flex xs6 order-xs2>
-                    <v-card light class="light right" elevation-7 style="width: 450px; margin-top: -60px">
+                    <v-card light class="light right" elevation-7 style="width: 450px; margin-top: -40px">
                         <v-card-text>
                             <div class="headline ma-3 gray--text">{{ $t('Option analysis with Option Profit indicator in the Forex market - the path to stable profit') }}</div>
                             <div
-                                    class="subheading ma-3 gray--text hidden-xs-only"
+                                    class="subheading ma-3 gray--text hidden-sm-and-down"
                             >
                                 <ul>
                                     <li>
@@ -134,12 +134,12 @@
                                         :id="key"
                                         class="mt-3"
                                 >
-                                    <v-layout row-md column child-flex-md style="justify-content: center;">
-                                        <v-card class="ma-2 grey darken-2 white--text" v-for="productItem in products[key]" style="display: inline-block; margin-right: -0.25em; align-items: center;">
+                                    <v-layout row-md column child-flex-md class="product">
+                                        <v-card class="ma-2 grey darken-2 white--text product-item" v-for="productItem in products[key]">
                                             <v-card-title primary-title>
-                                                <div class="headline mb-3" style="width: 100%">{{ productItem.name }}</div>
-                                                <div class="display-1 mb-3">{{ productItem.price | currency}}/{{ $t(productItem.price_by) }}</div>
-                                                <div class="home-product-description white elevation-3">
+                                                <div class="headline mb-3 product-item-name">{{ productItem.name }}</div>
+                                                <div class="display-1 mb-3 product-item-price">{{ productItem.price | currency}}/{{ $t(productItem.price_by) }}</div>
+                                                <div class="white elevation-3 product-item-description">
                                                     <v-list two-line>
                                                         <template v-for="(val, key) in productItem.functional">
                                                             <v-list-tile class="subheadline">
@@ -406,11 +406,3 @@
         }
     }
 </script>
-
-<style lang="scss">
-
-        .tabs__items {
-            border-width: 0
-        }
-
-</style>

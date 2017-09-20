@@ -11,17 +11,17 @@
                                     :id="key"
                                     class="mt-3"
                             >
-                                <v-layout row-md column child-flex-md style="justify-content: center;">
-                                    <v-card class="ma-2 grey darken-2 white--text" v-for="productItem in products[key]" style="max-width: 400px; display: inline-block; margin-right: -0.25em; align-items: center;">
+                                <v-layout row-md column child-flex-md class="product">
+                                    <v-card class="ma-2 grey darken-2 white--text product-item" v-for="productItem in products[key]">
                                         <v-card-title primary-title>
-                                            <div class="headline mb-3" style="width: 100%">
+                                            <div class="headline mb-3 product-item-name">
                                                 {{ productItem.name }}
                                                 <span v-if="!!productItem.users[0]" v-bind:class="{ 'green--text': productItem.users[0].pivot.active === 1, 'red--text': productItem.users[0].pivot.active === 0 }">
                                                      {{ $t('untill') }} {{ productItem.users[0].pivot.subscribe_date_until | moment('Do MMM') }}
                                                 </span>
                                             </div>
-                                            <div class="display-1 mb-3">{{ productItem.price | currency }}/{{ $t(productItem.price_by) }}</div>
-                                            <div class="home-product-description white elevation-3"  style="width: 100%">
+                                            <div class="display-1 mb-3 product-item-price">{{ productItem.price | currency }}/{{ $t(productItem.price_by) }}</div>
+                                            <div class="home-product-description white elevation-3 product-item-description">
                                                 <v-list two-line >
                                                     <template v-for="(val, key) in productItem.functional">
                                                         <v-list-tile>

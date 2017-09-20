@@ -1,3 +1,24 @@
+.product {
+    justify-content: center;
+}
+
+.product-item {
+    display: inline-block; margin-right: -0.25em; align-items: center;
+}
+
+.product-item-name {
+    width: 100%;
+}
+
+.product-item-price {
+    width: 100%;
+}
+
+.product-item-description {
+    width: 100%;
+    min-height: 100px;
+}
+
 .button-for-big-screens .btn--large {
     width: 250px;
 }
@@ -101,11 +122,12 @@
     left: 50%;
     margin-left: -20px;
 }
-.home-product-description {
-    min-height: 100px;
-}
 
 .odr-advantages {
     margin-bottom: 20px;
     text-align: justify;
+}
+
+.tabs__items {
+    border-width: 0
 }
