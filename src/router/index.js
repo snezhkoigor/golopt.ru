@@ -13,6 +13,7 @@ import PaySuccess from '@/components/Pay/Success.vue';
 import PayFail from '@/components/Pay/Fail.vue';
 import OdrPlus from '@/components/OdrPlus.vue';
 import Feedback from '@/components/Feedback.vue';
+import Youtube from '@/components/Youtube.vue';
 
 import AuthGuard from '@/router/guard';
 import store from '@/store/index';
@@ -35,7 +36,8 @@ export default new Router({
                 title: 'Not found title',
                 description: 'Not found description',
                 icon: null,
-                available: false
+                available: false,
+                externalUrl: null
             }
         },
         {
@@ -52,7 +54,26 @@ export default new Router({
                     auth: true
                 },
                 icon: 'mdi-auto-fix',
-                available: true
+                available: true,
+                externalUrl: null
+            }
+        },
+        {
+            path: '',
+            name: 'youtube',
+            component: Youtube,
+            meta: {
+                title: 'youtube title',
+                name: 'youtube',
+                description: 'youtube description',
+                localized: true,
+                access: {
+                    guest: true,
+                    auth: true
+                },
+                icon: 'mdi-youtube-play',
+                available: true,
+                externalUrl: 'https://www.youtube.com/channel/UCaCmSeb1GwQ9OHTXkpXAJVg'
             }
         },
         {
@@ -68,7 +89,8 @@ export default new Router({
                     guest: true,
                     auth: true
                 },
-                showIfAuth: true
+                showIfAuth: true,
+                externalUrl: null
             }
         },
         {
@@ -84,7 +106,8 @@ export default new Router({
                 name: 'Login',
                 description: 'Login description',
                 icon: 'mdi-login-variant',
-                available: true
+                available: true,
+                externalUrl: null
             }
         },
         {
@@ -100,7 +123,8 @@ export default new Router({
                 name: 'Registration',
                 description: 'Registration description',
                 icon: 'mdi-account-plus',
-                available: true
+                available: true,
+                externalUrl: null
             }
         },
         {
@@ -119,7 +143,8 @@ export default new Router({
                 title: 'Registration success pay title',
                 description: 'Registration success pay description',
                 icon: null,
-                available: false
+                available: false,
+                externalUrl: null
             }
         },
         {
@@ -138,7 +163,8 @@ export default new Router({
                 name: 'Profile',
                 title: 'Profile',
                 icon: 'mdi-contacts',
-                available: true
+                available: true,
+                externalUrl: null
             }
         },
         {
@@ -158,7 +184,8 @@ export default new Router({
                 title: 'Products',
                 description: 'Products',
                 icon: 'mdi-apps',
-                available: false
+                available: false,
+                externalUrl: null
             }
         },
         {
@@ -188,7 +215,8 @@ export default new Router({
                 title: 'Change email title',
                 description: 'Change email description',
                 icon: null,
-                available: false
+                available: false,
+                externalUrl: null
             }
         },
         {
@@ -207,7 +235,8 @@ export default new Router({
                 title: 'Email activation title',
                 description: 'Email activation description',
                 icon: null,
-                available: false
+                available: false,
+                externalUrl: null
             }
         },
         {
@@ -226,7 +255,8 @@ export default new Router({
                 title: 'Reset password title',
                 description: 'Reset password description',
                 icon: null,
-                available: false
+                available: false,
+                externalUrl: null
             }
         },
         {
@@ -245,7 +275,8 @@ export default new Router({
                 title: 'Success pay title',
                 description: 'Success pay description',
                 icon: null,
-                available: false
+                available: false,
+                externalUrl: null
             }
         },
         {
@@ -264,7 +295,8 @@ export default new Router({
                 title: 'Filed pay title',
                 description: 'Filed pay description',
                 icon: null,
-                available: false
+                available: false,
+                externalUrl: null
             }
         },
         {
@@ -283,7 +315,8 @@ export default new Router({
                 title: 'Feedback title',
                 description: 'Feedback description',
                 icon: 'mdi-email-outline',
-                available: true
+                available: true,
+                externalUrl: null
             }
         },
         {
@@ -309,7 +342,8 @@ export default new Router({
                 title: 'Logout title',
                 description: 'Logout description',
                 icon: 'mdi-exit-to-app',
-                available: true
+                available: true,
+                externalUrl: null
             }
         }
     ]

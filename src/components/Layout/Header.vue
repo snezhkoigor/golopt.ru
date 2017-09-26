@@ -47,7 +47,7 @@
                         v-for="item in $router.options.routes"
                         :key="item.name"
                         v-if="item.meta.available && ((isLogin && item.meta.access.auth === true) || (!isLogin && item.meta.access.guest === true))"
-                        :to="{ name: item.name, params: { lang: urlPrefix } }"
+                        @click.native="goByMenu((!item.meta.externalUrl ? item.name : item.meta.externalUrl), urlPrefix, !!item.meta.externalUrl)"
                 >
                     <v-icon left dark>{{ item.meta.icon }}</v-icon>
                     {{ $t(item.meta.name) }}
@@ -106,6 +106,16 @@
                 this.$router.push({
                     name: 'home'
                 })
+            },
+            goByMenu: function(url, urlPrefix, isExternal) {
+                if (isExternal) {
+                    window.open(url, '_blank');
+                } else {
+                    this.$router.push({
+                        name: url,
+                        params: { lang: urlPrefix }
+                    });
+                }
             }
         },
         watch: {

@@ -3,27 +3,27 @@
         <v-parallax src="./src/assets/images/cme.jpg" style="margin-top: -30px;">
             <v-layout row>
                 <v-flex xs6 order-xs2>
-                    <v-card light class="light right" elevation-7 style="width: 450px; margin-top: -40px">
+                    <v-card light class="light right" elevation-7 style="width: 450px; margin-top: -200px">
                         <v-card-text>
                             <div class="headline ma-3 gray--text">{{ $t('Option analysis with Option Profit indicator in the Forex market - the path to stable profit') }}</div>
-                            <div
-                                    class="subheading ma-3 gray--text hidden-sm-and-down"
-                            >
-                                <ul>
-                                    <li>
-                                        {{ $t('Actual data from CME') }}
-                                    </li>
-                                    <li>
-                                        {{ $t('Streaming data to the MetaTrader 4 terminal') }}
-                                    </li>
-                                    <li>
-                                        {{ $t('Actual data 24 hours a day') }}
-                                    </li>
-                                    <li>
-                                        {{ $t('Free testing within two trading weeks') }}
-                                    </li>
-                                </ul>
-                            </div>
+                            <!--<div-->
+                                    <!--class="subheading ma-3 gray&#45;&#45;text hidden-sm-and-down"-->
+                            <!--&gt;-->
+                                <!--<ul>-->
+                                    <!--<li>-->
+                                        <!--{{ $t('Actual data from CME') }}-->
+                                    <!--</li>-->
+                                    <!--<li>-->
+                                        <!--{{ $t('Streaming data to the MetaTrader 4 terminal') }}-->
+                                    <!--</li>-->
+                                    <!--<li>-->
+                                        <!--{{ $t('Actual data 24 hours a day') }}-->
+                                    <!--</li>-->
+                                    <!--<li>-->
+                                        <!--{{ $t('Free testing within two trading weeks') }}-->
+                                    <!--</li>-->
+                                <!--</ul>-->
+                            <!--</div>-->
                             <v-btn
                                     info
                                     large

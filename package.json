@@ -13,6 +13,7 @@
     "moment": "^2.18.1",
     "style-loader": "^0.18.2",
     "vue": "^2.3.3",
+    "vue-currency-filter": "^0.0.3",
     "vue-i18n-manager": "^3.3.1",
     "vue-localize": "^1.0.7",
     "vue-localizer": "^1.1.1",
@@ -21,11 +22,11 @@
     "vue-moment": "^2.0.2",
     "vue-router": "^2.3.0",
     "vue-smooth-scroll": "^1.0.13",
+    "vue-youtube-embed": "^2.1.2",
     "vuetify": "^0.14.8",
     "vuex": "^2.3.0",
     "vuex-persistedstate": "^2.0.0",
-    "vuex-router-sync": "^4.1.2",
-    "vue-currency-filter":"^0.0.3"
+    "vuex-router-sync": "^4.1.2"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",

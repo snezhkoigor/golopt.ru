@@ -13,6 +13,7 @@ import Meta from 'vue-meta';
 import { events } from 'vue-i18n-manager';
 import vueSmoothScroll from 'vue-smooth-scroll';
 import VueCurrencyFilter from 'vue-currency-filter';
+import VueYouTubeEmbed from 'vue-youtube-embed';
 
 sync(store, router);
 
@@ -33,6 +34,7 @@ Vue.use(VueI18nManager, {
 Vue.use(Meta);
 Vue.use(VueCurrencyFilter, {symbol : '$'})
 Vue.initI18nManager();
+Vue.use(VueYouTubeEmbed)
 
 new Vue({
     el: '#app',
@@ -46,13 +48,13 @@ new Vue({
         this.$store.dispatch('User/resetPending');
 
         this.$store.dispatch('Dictionary/list').then(() => {
-            const code = 'ru-Ru';
-            const trans = this.dictionary.locales;
-
-            this.$store.dispatch(events.ADD_TRANSLATION, { trans, code });
-
-            this.title = this.$router.currentRoute.meta.title ? this.$t(this.$router.currentRoute.meta.title) : this.$router.currentRoute.name;
-            this.description = this.$router.currentRoute.meta.description ? this.$t(this.$router.currentRoute.meta.description) : this.$router.currentRoute.name;
+            // const code = 'ru-Ru';
+            // const trans = this.dictionary.locales;
+            //
+            // this.$store.dispatch(events.ADD_TRANSLATION, { trans, code });
+            //
+            // this.title = this.$router.currentRoute.meta.title ? this.$t(this.$router.currentRoute.meta.title) : this.$router.currentRoute.name;
+            // this.description = this.$router.currentRoute.meta.description ? this.$t(this.$router.currentRoute.meta.description) : this.$router.currentRoute.name;
         });
     },
     render: h => h(App)

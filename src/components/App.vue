@@ -16,6 +16,7 @@
     import { mapGetters, mapActions } from 'vuex';
     import HeaderComponent from '@/components/Layout/Header.vue';
     import LoaderComponent from '@/components/Layout/Loader.vue';
+    import { events } from 'vue-i18n-manager';
 
     export default {
         data () {
@@ -39,9 +40,7 @@
                 this.description = this.$router.currentRoute.meta.description ? this.$t(this.$router.currentRoute.meta.description) : this.$router.currentRoute.name;
             });
         },
-        mounted() {
-
-        },
+        mounted() {},
         computed: {
             ...mapGetters('Dictionary', [
                 'dictionary'
