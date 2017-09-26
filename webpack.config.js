@@ -1,13 +1,15 @@
-var path = require('path')
-var webpack = require('webpack')
-var resolve = require('resolve')
+var path = require('path');
+var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: './src/main.js',
     output: {
         path: path.resolve(__dirname, './dist'),
         publicPath: '/dist/',
-        filename: 'build.js'
+        chunkFilename: "[name].[hash:8].js",
+        // filename: 'build.js'
+        filename: "[name].[hash:8].js"
     },
     module: {
         rules: [{
@@ -59,7 +61,11 @@ module.exports = {
 
         // Fixes warning in moment-with-locales.min.js
         //   Module not found: Error: Can't resolve './locale' in ...
-        new webpack.IgnorePlugin(/\.\/locale$/)
+        new webpack.IgnorePlugin(/\.\/locale$/),
+
+        new HtmlWebpackPlugin({
+            template: './index.ejs'
+        })
     ],
     devtool: '#eval-source-map'
 }
