@@ -59,24 +59,6 @@ export default new Router({
             }
         },
         {
-            path: '',
-            name: 'youtube',
-            component: Youtube,
-            meta: {
-                title: 'youtube title',
-                name: 'youtube',
-                description: 'youtube description',
-                localized: true,
-                access: {
-                    guest: true,
-                    auth: true
-                },
-                icon: 'mdi-youtube-play',
-                available: true,
-                externalUrl: 'https://www.youtube.com/channel/UCaCmSeb1GwQ9OHTXkpXAJVg'
-            }
-        },
-        {
             path: '/:lang?',
             name: 'home',
             component: Home,

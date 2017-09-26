@@ -2,9 +2,10 @@
     <v-app class="subheading">
         <div v-if="dictionary.length !== 0">
             <header-component v-if="$route.name !== 'notFound'" class="mb-5"/>
-            <main>
+            <main class="content">
                 <router-view />
             </main>
+            <footer-component />
         </div>
         <div v-if="dictionary.length === 0">
             <loader-component />
@@ -16,6 +17,7 @@
     import { mapGetters, mapActions } from 'vuex';
     import HeaderComponent from '@/components/Layout/Header.vue';
     import LoaderComponent from '@/components/Layout/Loader.vue';
+    import FooterComponent from '@/components/Layout/Footer.vue';
     import { events } from 'vue-i18n-manager';
 
     export default {
@@ -27,7 +29,8 @@
         },
         components: {
             HeaderComponent,
-            LoaderComponent
+            LoaderComponent,
+            FooterComponent
         },
         beforeMount() {
             this.$store.dispatch('Dictionary/list').then(() => {
