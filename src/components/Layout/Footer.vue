@@ -11,7 +11,7 @@
                         @click="goTo('https://www.youtube.com/channel/UCaCmSeb1GwQ9OHTXkpXAJVg')"
                 >
                     <v-icon left dark>mdi-youtube-play</v-icon>
-                    Youtube
+                    Youtube1
                 </v-btn>
             </span>
         </div>
