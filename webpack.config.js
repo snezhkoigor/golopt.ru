@@ -7,9 +7,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, './dist'),
         publicPath: '/dist/',
-        chunkFilename: "[name].[hash:8].js",
-        // filename: 'build.js'
-        filename: "[name].[hash:8].js"
+        filename: 'build.js'
     },
     module: {
         rules: [{
@@ -62,16 +60,18 @@ module.exports = {
         // Fixes warning in moment-with-locales.min.js
         //   Module not found: Error: Can't resolve './locale' in ...
         new webpack.IgnorePlugin(/\.\/locale$/),
-
-        new HtmlWebpackPlugin({
-            template: './index.ejs'
-        })
     ],
     devtool: '#eval-source-map'
 }
 
 if (process.env.NODE_ENV === 'production') {
-    module.exports.devtool = '#source-map'
+    module.exports.output = {
+        path: path.resolve(__dirname, './dist'),
+            publicPath: '/dist/',
+            chunkFilename: "[name].[hash:8].js",
+            filename: "[name].[hash:8].js"
+    };
+    module.exports.devtool = '#source-map';
     // http://vue-loader.vuejs.org/en/workflow/production.html
     module.exports.plugins = (module.exports.plugins || []).concat([
         new webpack.DefinePlugin({
@@ -87,6 +87,9 @@ if (process.env.NODE_ENV === 'production') {
         }),
         new webpack.LoaderOptionsPlugin({
             minimize: true
+        }),
+        new HtmlWebpackPlugin({
+            template: './index.ejs'
         })
-    ])
+    ]);
 }

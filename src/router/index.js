@@ -13,7 +13,7 @@ import PaySuccess from '@/components/Pay/Success.vue';
 import PayFail from '@/components/Pay/Fail.vue';
 import OdrPlus from '@/components/OdrPlus.vue';
 import Feedback from '@/components/Feedback.vue';
-import Youtube from '@/components/Youtube.vue';
+import Theory from '@/components/Theory.vue';
 
 import AuthGuard from '@/router/guard';
 import store from '@/store/index';
@@ -37,6 +37,24 @@ export default new Router({
                 description: 'Not found description',
                 icon: null,
                 available: false,
+                externalUrl: null
+            }
+        },
+        {
+            path: '/:lang?/theory',
+            name: 'theory',
+            component: Theory,
+            meta: {
+                title: 'Theory title',
+                name: 'Theory',
+                description: 'Theory description',
+                localized: true,
+                access: {
+                    guest: true,
+                    auth: true
+                },
+                icon: 'mdi-book-open',
+                available: true,
                 externalUrl: null
             }
         },
