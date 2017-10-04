@@ -1,7 +1,7 @@
 <template>
     <div class="profile">
         <v-tabs centered v-model="active">
-            <v-tabs-bar slot="activators" class="white">
+            <v-tabs-bar class="white">
                 <v-tabs-item
                         v-for="tab in tabs"
                         :key="tab.name"

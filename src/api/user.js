@@ -23,9 +23,10 @@ export default {
             first_name: formBody.first_name !== undefined ? formBody.first_name : null,
             last_name: formBody.last_name !== undefined ? formBody.last_name : null,
             email: formBody.email,
+            phone: formBody.phone,
+            country: formBody.country,
             password: formBody.password !== undefined ? formBody.password : null,
-            skype: formBody.skype !== undefined ? formBody.skype : null,
-            phone: formBody.phone !== undefined ? formBody.phone : null
+            skype: formBody.skype !== undefined ? formBody.skype : null
         };
 
         return HTTP.post('/register', data);

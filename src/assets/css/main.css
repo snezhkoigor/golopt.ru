@@ -1,9 +1,16 @@
+.parallax-text {
+    text-align: center;
+    text-shadow: 1px 1px 2px black, 0 0 1em black;
+}
+
 .product {
     justify-content: center;
 }
 
 .product-item {
-    display: inline-block; margin-right: -0.25em; align-items: center;
+    display: inline-block;
+    margin-right: -0.25em;
+    align-items: center;
 }
 
 .product-item-name {
@@ -150,4 +157,8 @@
 .footer-menu a {
     color: white;
     text-decoration: none;
+}
+
+.toolbar__title {
+    margin-left: 0 !important;
 }

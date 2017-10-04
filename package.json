@@ -23,7 +23,7 @@
     "vue-router": "^2.3.0",
     "vue-smooth-scroll": "^1.0.13",
     "vue-youtube-embed": "^2.1.2",
-    "vuetify": "^0.14.8",
+    "vuetify": "^0.15.7",
     "vuex": "^2.3.0",
     "vuex-persistedstate": "^2.0.0",
     "vuex-router-sync": "^4.1.2"

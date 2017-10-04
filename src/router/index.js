@@ -6,6 +6,7 @@ import Registration from '@/components/Registration/Registration.vue';
 import RegistrationSuccess from '@/components/Registration/Success.vue';
 import ResetPassword from '@/components/profile/ProfileResetPassword.vue';
 import Activate from '@/components/profile/ProfileActivate.vue';
+import ActivateByPhone from '@/components/profile/ProfileActivateByPhone.vue';
 import Profile from '@/components/Profile.vue';
 import Product from '@/components/Product.vue';
 import NotFound from '@/components/NotFound.vue';
@@ -223,6 +224,26 @@ export default new Router({
             path: '/:lang?/activate/:token',
             name: 'emailActivation',
             component: Activate,
+            meta: {
+                access: {
+                    guest: true,
+                    auth: true,
+                    roles: [
+                        ''
+                    ]
+                },
+                name: 'Email activation',
+                title: 'Email activation title',
+                description: 'Email activation description',
+                icon: null,
+                available: false,
+                externalUrl: null
+            }
+        },
+        {
+            path: '/:lang?/activate-by-phone-code',
+            name: 'activationByPhone',
+            component: ActivateByPhone,
             meta: {
                 access: {
                     guest: true,

@@ -1,8 +1,9 @@
 <template>
     <v-container fluid>
         <v-navigation-drawer
-            temporary
-            v-model="sideNav"
+                v-model="drawer"
+                light
+                class="hidden-lg-and-up"
         >
             <v-list>
                 <v-list-tile
@@ -26,13 +27,7 @@
                 class="primary"
         >
             <v-toolbar-title>
-                <v-btn
-                        icon
-                        @click.stop="sideNav=!sideNav"
-                        class="hidden-sm-and-up"
-                >
-                    <v-icon>mdi-format-list-bulleted</v-icon>
-                </v-btn>
+                <v-toolbar-side-icon class="hidden-lg-and-up" @click.stop="drawer=!drawer"></v-toolbar-side-icon>
                 <v-btn icon
                        @click.stop="goHome"
                        v-if="$route.name !== 'home'"
@@ -41,7 +36,7 @@
                 </v-btn>
             </v-toolbar-title>
             <v-spacer />
-            <v-toolbar-items class="hidden-xs-only">
+            <v-toolbar-items class="hidden-md-and-down">
                 <v-btn
                         flat
                         v-for="item in $router.options.routes"
@@ -61,8 +56,9 @@
                     item-value="code"
                     return-object
                     persistent-hint
+                    ref="select_language"
                     class="ml-2"
-                    style="margin-top: 20px; max-width: 100px"
+                    style="max-width: 100px; margin-top: 8px"
             ></v-select>
         </v-toolbar>
     </v-container>
@@ -76,7 +72,7 @@
     export default {
         data () {
             return {
-                sideNav: false,
+                drawer: false,
                 selectedLanguage: null
             }
         },
@@ -129,6 +125,8 @@
                         });
                     })
                 }
+
+                this.$refs.select_language.blur();
             }
         }
     }

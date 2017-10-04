@@ -17,6 +17,30 @@
                             ></v-text-field>
                         </v-layout>
                         <v-layout row>
+                            <v-select
+                                    :items="dictionary.countries"
+                                    v-model="country"
+                                    :label="$t('Country')"
+                                    :hint="$t('Enter your country (in eng)')"
+                                    persistent-hint
+                                    required
+                                    autocomplete
+                                    :error-messages="errors && errors.country ? $t(errors.country[0]) : []"
+                                    :error="errors && !!errors.country"
+                            ></v-select>
+                        </v-layout>
+                        <v-layout row>
+                            <v-text-field
+                                    :label="$t('Phone number')"
+                                    :hint="$t('Enter your phone number without country code')"
+                                    v-model="phone"
+                                    v-on:keypress="isNumber()"
+                                    required
+                                    :error-messages="errors && errors.phone ? $t(errors.phone[0]) : []"
+                                    :error="errors && !!errors.phone"
+                            ></v-text-field>
+                        </v-layout>
+                        <v-layout row>
                             <v-text-field
                                     :label="$t('Your password')"
                                     :hint="$t('Enter the password required for authorization')"
@@ -67,7 +91,7 @@
                                 block
                                 :loading="pending"
                                 :disabled="pending"
-                                @click="submitForm({first_name: first_name, last_name: last_name, email: email, password: password})"
+                                @click="submitForm({first_name: first_name, last_name: last_name, email: email, password: password, country: country, phone: phone})"
                         >
                             {{ $t('Sing Up') }}
                             <span slot="loader">{{ $t('Processing') }}...</span>
@@ -89,12 +113,17 @@
                 email: '',
                 password: '',
                 first_name: '',
+                phone: '',
                 last_name: '',
+                country: null,
                 loader: null,
                 errors: []
             }
         },
         computed: {
+            ...mapGetters('Dictionary', [
+                'dictionary'
+            ]),
             ...mapGetters('User', [
                 'pending'
             ])
@@ -104,11 +133,21 @@
                 this.$store.dispatch('User/registration', formData).then(() => {
                     this.errors = [];
                     this.$router.push({
-                        'name': 'registrationSuccess'
+                        'name': 'activationByPhone'
                     });
                 }).catch(errors => {
                     this.errors = errors;
                 })
+            },
+            isNumber: function(evt) {
+                evt = (evt) ? evt : window.event;
+                let charCode = (evt.which) ? evt.which : evt.keyCode;
+
+                if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+                    evt.preventDefault();
+                } else {
+                    return true;
+                }
             }
         }
     }

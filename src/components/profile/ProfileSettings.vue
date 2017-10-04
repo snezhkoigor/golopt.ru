@@ -2,7 +2,7 @@
     <div class="profile-settings" v-if="isLogin">
         <v-card class="grey lighten-4 elevation-0">
             <v-card-text>
-                <v-container fluid>
+                <v-container fluid grid-list-md>
                     <div class="hidden-sm-and-up">
                         <v-layout row>
                             <v-text-field
@@ -18,15 +18,6 @@
                                     :label="$t('Last name')"
                                     :hint="$t('Enter your last name')"
                                     v-model="profile.last_name"
-                            ></v-text-field>
-                        </v-layout>
-                        <v-layout row>
-                            <v-text-field
-                                    name="Skype"
-                                    :hint="$t('Enter your skype for fast contact with you')"
-                                    v-model="profile.skype"
-                                    :error-messages="errors && errors.skype ? $t(errors.skype[0]) : []"
-                                    :error="errors && !!errors.skype"
                             ></v-text-field>
                         </v-layout>
                         <v-layout row>
@@ -61,6 +52,26 @@
                         </v-layout>
                         <v-layout row>
                             <v-text-field
+                                    :label="$t('Skype')"
+                                    name="Skype"
+                                    :hint="$t('Enter your skype for fast contact with you')"
+                                    v-model="profile.skype"
+                                    :error-messages="errors && errors.skype ? $t(errors.skype[0]) : []"
+                                    :error="errors && !!errors.skype"
+                            ></v-text-field>
+                        </v-layout>
+
+                        <v-layout row>
+                            <v-text-field
+                                    name="phone"
+                                    :label="$t('Phone number')"
+                                    disabled
+                                    :hint="$t('Enter your phone number without country code')"
+                                    v-model="profile.phone"
+                            ></v-text-field>
+                        </v-layout>
+                        <v-layout row>
+                            <v-text-field
                                     name="new_password"
                                     :label="$t('New password')"
                                     :hint="$t('Enter new password')"
@@ -87,7 +98,6 @@
                         </v-layout>
                     </div>
                     <div class="hidden-xs-only">
-
                         <v-layout row>
                             <v-flex xs4>
                                 <v-subheader>{{ $t('Credentials') }}</v-subheader>
@@ -163,6 +173,7 @@
                                 <v-text-field
                                         name="phone"
                                         :label="$t('Phone number')"
+                                        disabled
                                         :hint="$t('Enter your phone number without country code')"
                                         v-model="profile.phone"
                                 ></v-text-field>

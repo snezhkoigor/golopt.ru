@@ -328,10 +328,6 @@ const actions = {
                 commit(LOGOUT);
                 reject(error);
             })
-        }).then(() => {
-            router.push({
-                name: 'login'
-            })
         })
     },
     feedback({ commit }, formBody) {
