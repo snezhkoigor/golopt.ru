@@ -47,6 +47,7 @@
                                             </v-list>
                                         </div>
                                     </v-card-title>
+
                                     <v-card-actions>
                                         <v-menu
                                                 origin="center center"
