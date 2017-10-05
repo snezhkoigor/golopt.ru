@@ -40,7 +40,6 @@
     import HeaderComponent from '@/components/Layout/Header.vue';
     import LoaderComponent from '@/components/Layout/Loader.vue';
     import FooterComponent from '@/components/Layout/Footer.vue';
-    import BackTop from '@/components/Layout/BackTop.vue';
     import { events } from 'vue-i18n-manager';
     import $ from 'jquery';
 
@@ -66,8 +65,7 @@
         components: {
             HeaderComponent,
             LoaderComponent,
-            FooterComponent,
-            BackTop
+            FooterComponent
         },
         beforeMount() {
             this.$store.dispatch('Dictionary/list').then(() => {
