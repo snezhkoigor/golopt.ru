@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "jquery": "^3.2.1",
     "moment": "^2.18.1",
     "style-loader": "^0.18.2",
     "vue": "^2.3.3",
@@ -20,6 +21,7 @@
     "vue-ls": "^2.3.0",
     "vue-meta": "^1.1.0",
     "vue-moment": "^2.0.2",
+    "vue-multiple-back-top": "^1.0.2",
     "vue-router": "^2.3.0",
     "vue-smooth-scroll": "^1.0.13",
     "vue-youtube-embed": "^2.1.2",

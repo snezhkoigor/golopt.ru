@@ -34,7 +34,7 @@ Vue.use(VueI18nManager, {
 Vue.use(Meta);
 Vue.use(VueCurrencyFilter, {symbol : '$'})
 Vue.initI18nManager();
-Vue.use(VueYouTubeEmbed)
+Vue.use(VueYouTubeEmbed);
 
 new Vue({
     el: '#app',
