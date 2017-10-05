@@ -2,14 +2,10 @@
     <v-app class="subheading" id="toTop" v-scroll="onScroll">
         <div v-if="dictionary.length !== 0">
             <header-component v-if="$route.name !== 'notFound'" class="mb-5"/>
+
             <main class="content">
                 <router-view />
             </main>
-
-            <vm-back-top :bottom="100" :duration="1000" :timing="'ease'">
-                <div class="top">返回顶端</div>
-            </vm-back-top>
-
 
             <v-btn
                     raised
@@ -25,7 +21,6 @@
             >
                 <v-icon>mdi-chevron-up</v-icon>
             </v-btn>
-
 
             <footer-component />
         </div>
