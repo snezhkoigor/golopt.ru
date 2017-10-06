@@ -3,13 +3,17 @@
         <v-navigation-drawer
                 v-model="drawer"
                 light
+                app
+                temporary
+                overflow
+                absolute
                 class="hidden-lg-and-up"
         >
             <v-list>
                 <v-list-tile
                         v-for="item in $router.options.routes"
                         :key="item.name"
-                        v-if="item.meta.available && ((isLogin && item.meta.access.auth === true) || (!isLogin && item.meta.access.guest === true))"
+                        v-if="drawer && item.meta.available && ((isLogin && item.meta.access.auth === true) || (!isLogin && item.meta.access.guest === true))"
                         :to="{ name: item.name, params: { lang: urlPrefix } }"
                 >
                     <v-list-tile-action>

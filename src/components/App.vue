@@ -1,5 +1,10 @@
 <template>
-    <v-app class="subheading" id="toTop" v-scroll="onScroll">
+    <v-app class="subheading"
+           id="toTop"
+           v-scroll="onScroll"
+           toolbar
+           footer
+    >
         <div v-if="dictionary.length !== 0">
             <header-component v-if="$route.name !== 'notFound'" class="mb-5"/>
 
@@ -41,20 +46,7 @@
     export default {
         data () {
             return {
-                title: '',
-                description: '',
-                offsetTop: 0,
-
-                direction: "top",
-                fab: false,
-                fling: false,
-                hover: false,
-                tabs: null,
-                top: false,
-                right: true,
-                bottom: true,
-                left: false,
-                transition: 'slide-y-reverse-transition'
+                offsetTop: 0
             }
         },
         components: {
@@ -69,11 +61,12 @@
 
                 this.$store.dispatch(events.ADD_TRANSLATION, { trans, code });
 
-                this.title = this.$router.currentRoute.meta.title ? this.$t(this.$router.currentRoute.meta.title) : this.$router.currentRoute.name;
-                this.description = this.$router.currentRoute.meta.description ? this.$t(this.$router.currentRoute.meta.description) : this.$router.currentRoute.name;
+//                this.$store.dispatch('Meta/setTitle', this.$route.meta.title ? this.$t(this.$route.meta.title) : this.$route.name);
+//                this.$store.dispatch('Meta/setDescription', this.$route.meta.description ? this.$t(this.$route.meta.description) : this.$route.name);
             });
         },
         mounted() {
+
         },
         methods: {
             onScroll (e) {
@@ -90,12 +83,16 @@
         computed: {
             ...mapGetters('Dictionary', [
                 'dictionary'
+            ]),
+            ...mapGetters('Meta', [
+                'title', 'description'
             ])
         },
         watch: {
             '$route' (toRoute) {
-                this.title = toRoute.meta.title ? this.$t(toRoute.meta.title) : toRoute.name;
-                this.description = toRoute.meta.description ? this.$t(toRoute.meta.description) : toRoute.name;
+                console.log('1');
+                this.$store.dispatch('Meta/setTitle', toRoute.meta.title ? this.$t(toRoute.meta.title) : toRoute.name);
+                this.$store.dispatch('Meta/setDescription', toRoute.meta.description ? this.$t(toRoute.meta.description) : toRoute.name);
             }
         },
         metaInfo () {

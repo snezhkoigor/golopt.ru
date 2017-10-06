@@ -40,22 +40,8 @@ new Vue({
     el: '#app',
     router,
     store,
-    data: {
-        title: '',
-        description: ''
-    },
-    beforeMount: function (store, events) {
+    beforeMount: function () {
         this.$store.dispatch('User/resetPending');
-
-        this.$store.dispatch('Dictionary/list').then(() => {
-            // const code = 'ru-Ru';
-            // const trans = this.dictionary.locales;
-            //
-            // this.$store.dispatch(events.ADD_TRANSLATION, { trans, code });
-            //
-            // this.title = this.$router.currentRoute.meta.title ? this.$t(this.$router.currentRoute.meta.title) : this.$router.currentRoute.name;
-            // this.description = this.$router.currentRoute.meta.description ? this.$t(this.$router.currentRoute.meta.description) : this.$router.currentRoute.name;
-        });
     },
     render: h => h(App)
 });

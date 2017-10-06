@@ -4,6 +4,7 @@ import User from './user';
 import Product from './product';
 import Dictionary from './dictionary';
 import Youtube from './youtube';
+import Meta from './meta';
 import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
@@ -13,7 +14,8 @@ export default new Vuex.Store({
         User,
         Product,
         Dictionary,
-        Youtube
+        Youtube,
+        Meta
     },
     plugins: [createPersistedState()]
 })
