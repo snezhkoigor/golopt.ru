@@ -146,18 +146,18 @@
                                                         </v-list>
                                                     </div>
                                                 </v-card-title>
-                                                <v-card-actions>
+                                                <v-card-actions v-if="!isLogin"
+                                                                class="mb-3"
+                                                >
                                                     <v-menu
                                                             origin="center center"
                                                             transition="scale-transition"
                                                             bottom
                                                     >
-                                                        <v-btn dark slot="activator" v-if="!isLogin">
+                                                        <v-btn dark
+                                                               slot="activator"
+                                                               v-if="!isLogin">
                                                             {{ $t('Buy') }}
-                                                        </v-btn>
-                                                        <v-btn dark slot="activator" v-else="isLogin">
-                                                            <span v-if="!productItem.users[0]">{{ $t('Buy') }}</span>
-                                                            <span v-if="!!productItem.users[0]">{{ $t('Renew subscription') }}</span>
                                                         </v-btn>
                                                         <v-list>
                                                             <v-list-tile
@@ -176,6 +176,13 @@
                                                            v-if="productItem.has_demo === 1"
                                                            @click="paymentSystemSelected(dictionary.payment_systems[dictionary.const.PAYMENT_SYSTEM_DEMO], productItem)">
                                                         {{ $t(dictionary.payment_systems[dictionary.const.PAYMENT_SYSTEM_DEMO].text) }}
+                                                    </v-btn>
+                                                </v-card-actions>
+                                                <v-card-actions v-if="isLogin" class="ml-3 mb-3">
+                                                    <v-btn dark
+                                                           @click="goToProfile()"
+                                                    >
+                                                        {{ $t('Go to profile') }}
                                                     </v-btn>
                                                 </v-card-actions>
                                             </v-card>
@@ -332,6 +339,11 @@
             ...mapActions('Product', [
                 'pricing'
             ]),
+            goToProfile() {
+                this.$router.push({
+                    'name': 'profile'
+                });
+            },
             paymentSystemSelected: function(paymentSystem, product) {
                 this.psSelected = paymentSystem;
                 this.productSelected = product;

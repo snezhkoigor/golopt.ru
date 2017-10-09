@@ -48,7 +48,7 @@
                                         </div>
                                     </v-card-title>
 
-                                    <v-card-actions>
+                                    <v-card-actions class="mb-3">
                                         <v-menu
                                                 origin="center center"
                                                 transition="scale-transition"
