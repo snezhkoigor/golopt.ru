@@ -1,8 +1,10 @@
 const SET_TITLE = "SET_TITLE";
 const SET_DESCRIPTION = "SET_DESCRIPTION";
+const SET_PENDING = "SET_PENDING";
 
 const state = {
-    title: ''
+    title: '',
+    pending: false
 };
 
 const actions = {
@@ -11,8 +13,11 @@ const actions = {
     },
     setDescription({ commit }, description) {
         commit(SET_DESCRIPTION, description);
+    },
+    setPending({ commit }, pending) {
+        commit(SET_DESCRIPTION, pending);
     }
-}
+};
 
 const mutations = {
     SET_TITLE (state, title) {
@@ -20,8 +25,11 @@ const mutations = {
     },
     SET_DESCRIPTION (state, description) {
         state.description = description;
+    },
+    SET_PENDING (state, pending) {
+        state.pending = pending;
     }
-}
+};
 
 const getters = {
     title (state) {
@@ -29,6 +37,9 @@ const getters = {
     },
     description (state) {
         return state.description
+    },
+    pending (state) {
+        return state.pending
     }
 };
 

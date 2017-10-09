@@ -123,11 +123,13 @@
                 if (language.urlPrefix !== this.currentLanguage.urlPrefix) {
                     moment.locale(language.urlPrefix);
 
+                    this.$store.dispatch(events.SET_FORCE_TRANSLATION, true);
+
                     this.$store.dispatch(events.SET_LANGUAGE, language.code).then(() => {
                         this.$router.push({
                             name: this.$router.currentRoute.name
                         });
-                    })
+                    });
                 }
 
                 this.$refs.select_language.blur();

@@ -79,6 +79,12 @@
                                                @click="paymentSystemSelected(dictionary.payment_systems[dictionary.const.PAYMENT_SYSTEM_DEMO], productItem)">
                                             {{ $t(dictionary.payment_systems[dictionary.const.PAYMENT_SYSTEM_DEMO].text) }}
                                         </v-btn>
+                                        <v-btn v-if="!!productItem.users[0]"
+                                               @click="downloadProduct(productItem)"
+                                               class="green darken-1"
+                                        >
+                                            <v-icon>mdi-download</v-icon>
+                                        </v-btn>
                                     </v-card-actions>
                                 </v-card>
                             </v-flex>
@@ -231,6 +237,10 @@
             ...mapActions('User', [
                 'findProduct'
             ]),
+            downloadProduct: function(product) {
+                console.log(product.id);
+                this.$store.dispatch('Product/download', product.id);
+            },
             editSelected: function(product) {
                 this.productSelected = product;
                 this.trade_account = product.users[0].pivot.trade_account;

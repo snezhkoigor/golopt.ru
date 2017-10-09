@@ -60,9 +60,6 @@
                 const trans = this.dictionary.locales;
 
                 this.$store.dispatch(events.ADD_TRANSLATION, { trans, code });
-
-//                this.$store.dispatch('Meta/setTitle', this.$route.meta.title ? this.$t(this.$route.meta.title) : this.$route.name);
-//                this.$store.dispatch('Meta/setDescription', this.$route.meta.description ? this.$t(this.$route.meta.description) : this.$route.name);
             });
         },
         mounted() {
@@ -86,11 +83,13 @@
             ]),
             ...mapGetters('Meta', [
                 'title', 'description'
-            ])
+            ]),
+            ...mapGetters([
+                'urlPrefix', 'availableLanguages', 'currentLanguage'
+            ]),
         },
         watch: {
             '$route' (toRoute) {
-                console.log('1');
                 this.$store.dispatch('Meta/setTitle', toRoute.meta.title ? this.$t(toRoute.meta.title) : toRoute.name);
                 this.$store.dispatch('Meta/setDescription', toRoute.meta.description ? this.$t(toRoute.meta.description) : toRoute.name);
             }
@@ -99,7 +98,8 @@
             return {
                 title: this.title,
                 meta: [
-                    { name: 'description', content: this.description }
+                    { name: 'description', content: this.description },
+                    { name: 'viewport', content: 'width=device-width, initial-scale=1' }
                 ]
             }
         },

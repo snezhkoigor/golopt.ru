@@ -17,6 +17,9 @@ const state = {
 };
 
 const actions = {
+    download({ commit }, id) {
+        api.download(id);
+    },
     pricing({ commit }) {
         return new Promise((resolve, reject) => {
             commit(GET_LIST);

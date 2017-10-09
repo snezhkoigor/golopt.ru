@@ -59,5 +59,8 @@ export default {
         };
 
         return HTTP.get('/products/pricing', { headers: headers });
+    },
+    download(id) {
+        window.open('http://api.goloption.com/api/product/' + id + '/get', '_blank');
     }
 }

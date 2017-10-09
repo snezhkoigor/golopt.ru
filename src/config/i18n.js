@@ -27,8 +27,8 @@ const config = {
 const proxy = {
     getTranslation: function () {
         return HTTP.get('/dictionary/fragment/' + store.getters.currentLanguage.urlPrefix).then(response => {
-            return response.data
-        })
+            return response.data;
+        });
     },
     localStorage: localStorage
 };
