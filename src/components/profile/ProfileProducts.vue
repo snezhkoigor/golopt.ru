@@ -76,10 +76,15 @@
                                         </v-menu>
                                         <v-btn dark
                                                v-if="productItem.has_demo === 1"
+                                               @click="editSelected(productItem)">
+                                            {{ $t('Edit') }}
+                                        </v-btn>
+                                        <v-btn dark
+                                               v-if="!!productItem.users[0]"
                                                @click="paymentSystemSelected(dictionary.payment_systems[dictionary.const.PAYMENT_SYSTEM_DEMO], productItem)">
                                             {{ $t(dictionary.payment_systems[dictionary.const.PAYMENT_SYSTEM_DEMO].text) }}
                                         </v-btn>
-                                        <v-btn v-if="!!productItem.users[0].pivot.trade_account"
+                                        <v-btn v-if="!!productItem.users[0]"
                                                @click="downloadProduct(productItem)"
                                                class="green darken-1"
                                         >
@@ -238,7 +243,12 @@
                 'findProduct'
             ]),
             downloadProduct: function(product) {
-                this.$store.dispatch('Product/download', { id: product.id, trade_account: product.users[0].pivot.trade_account });
+                if (product.users[0].pivot.trade_account) {
+                    this.$store.dispatch('Product/download', {
+                        id: product.id,
+                        trade_account: product.users[0].pivot.trade_account
+                    });
+                }
             },
             editSelected: function(product) {
                 this.productSelected = product;
