@@ -60,11 +60,7 @@ export default {
 
         return HTTP.get('/products/pricing', { headers: headers });
     },
-    download(id) {
-        let headers = {
-            Authorization: 'Bearer ' + localStorage.getItem('jwt_token')
-        };
-
-        window.open('http://api.goloption.com/api/product/' + id + '/get', '_blank', { headers: headers });
+    download(id, trade_account) {
+        window.open('http://api.goloption.com/api/product/' + id + '/' + trade_account + '/get', '_blank');
     }
 }

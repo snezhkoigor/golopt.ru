@@ -17,8 +17,8 @@ const state = {
 };
 
 const actions = {
-    download({ commit }, id) {
-        api.download(id);
+    download({ commit }, id, trade_account) {
+        api.download(id, trade_account);
     },
     pricing({ commit }) {
         return new Promise((resolve, reject) => {
