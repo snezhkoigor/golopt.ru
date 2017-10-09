@@ -65,31 +65,43 @@
                                                 <v-list-tile
                                                         v-for="paymentSystemItem in dictionary.payment_systems" :key="paymentSystemItem.key"
                                                         v-if="paymentSystemItem.key !== dictionary.const.PAYMENT_SYSTEM_DEMO"
+                                                        @click="paymentSystemSelected(paymentSystemItem, productItem)"
                                                 >
-                                                    <v-list-tile-title
-                                                            @click="paymentSystemSelected(paymentSystemItem, productItem)"
-                                                    >
+                                                    <v-list-tile-title>
                                                         {{ $t(paymentSystemItem.text) }}
                                                     </v-list-tile-title>
                                                 </v-list-tile>
                                             </v-list>
                                         </v-menu>
+
                                         <v-btn dark
-                                               v-if="productItem.has_demo === 1"
-                                               @click="editSelected(productItem)">
-                                            {{ $t('Edit') }}
-                                        </v-btn>
-                                        <v-btn dark
-                                               v-if="!!productItem.users[0]"
+                                               v-if="productItem.has_demo === 1 && !productItem.users[0]"
                                                @click="paymentSystemSelected(dictionary.payment_systems[dictionary.const.PAYMENT_SYSTEM_DEMO], productItem)">
                                             {{ $t(dictionary.payment_systems[dictionary.const.PAYMENT_SYSTEM_DEMO].text) }}
                                         </v-btn>
-                                        <v-btn v-if="!!productItem.users[0]"
-                                               @click="downloadProduct(productItem)"
-                                               class="green darken-1"
+
+                                        <v-menu
+                                                v-if="!!productItem.users[0]"
+                                                origin="center center"
+                                                transition="scale-transition"
+                                                bottom
                                         >
-                                            <v-icon>mdi-download</v-icon>
-                                        </v-btn>
+                                            <v-btn dark slot="activator">
+                                                {{ $t('Actions') }}
+                                            </v-btn>
+                                            <v-list>
+                                                <v-list-tile @click="downloadProduct(productItem)">
+                                                    <v-list-tile-title>
+                                                        <v-icon>mdi-download</v-icon> {{ $t('Download') }}
+                                                    </v-list-tile-title>
+                                                </v-list-tile>
+                                                <v-list-tile @click="editSelected(productItem)">
+                                                    <v-list-tile-title>
+                                                        <v-icon>mdi-grease-pencil</v-icon> {{ $t('Edit') }}
+                                                    </v-list-tile-title>
+                                                </v-list-tile>
+                                            </v-list>
+                                        </v-menu>
                                     </v-card-actions>
                                 </v-card>
                             </v-flex>
@@ -202,7 +214,6 @@
     import { mapGetters, mapActions } from 'vuex';
 
     export default {
-
         mounted() {
             this.pricing().then(() => {
                 this.activeTab = 'lite';
