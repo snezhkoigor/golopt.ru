@@ -51,7 +51,7 @@ export default {
             broker: formBody.broker
         };
 
-        return HTTP.post('/product/demo', data, { headers: headers });
+        return HTTP.post('/product/' + formBody.product_id + '/demo', data, { headers: headers });
     },
     pricing() {
         let headers = {

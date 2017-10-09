@@ -304,19 +304,45 @@
                 })
             },
             goToPayPage: function (formBody) {
-                this.$store.dispatch('Product/pay', formBody).then(response => {
-                    this.errors = [];
-                    this.dialog = false;
-                    this.systemDialog = false;
+                if (formBody.payment_system === this.dictionary.const.PAYMENT_SYSTEM_DEMO) {
+                    this.$store.dispatch('Product/demo', formBody).then(() => {
+                        this.$store.dispatch('Product/pricing').then(() => {
+                            this.$store.dispatch('User/profile').then(() => {
+                                this.errors = [];
+                                this.dialog = false;
+                                this.systemDialog = false;
+                            });
+                        });
+                    }).catch(errors => {
+                        this.errors = errors;
 
-                    this.redirect(response.data.data);
-                }).catch(errors => {
-                    this.errors = errors;
+                        if (this.errors && this.errors.system) {
+                            this.systemDialog = true;
+                        }
+                    });
+                } else {
+                    this.$store.dispatch('Product/pay', formBody).then(response => {
+                        this.errors = [];
+                        this.dialog = false;
+                        this.systemDialog = false;
 
-                    if (this.errors && this.errors.system) {
-                        this.systemDialog = true;
-                    }
-                })
+                        this.$store.dispatch('Product/pricing').then(() => {
+                            this.$store.dispatch('User/profile').then(() => {
+                                this.errors = [];
+                                this.dialog = false;
+                                this.systemDialog = false;
+
+                                this.redirect(response.data.data);
+                            });
+                        });
+                    }).catch(errors => {
+                        this.errors = errors;
+
+                        if (this.errors && this.errors.system) {
+                            this.systemDialog = true;
+                        }
+                    });
+                }
             },
             redirect: function(formSettings) {
                 let form = document.createElement('form');
