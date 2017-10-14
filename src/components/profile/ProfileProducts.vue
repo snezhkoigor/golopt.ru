@@ -351,7 +351,14 @@
                 let keys = Object.keys(formSettings.params);
 
                 keys.forEach((item, i) => {
-                    form.innerHTML += '<input type="hidden" name="' + item + '" ' + (item === 'sum' ? 'data-type="number"' : '') + ' value="' + formSettings.params[item] + '">';
+                    if (item === 'need-fio') {
+                        form.innerHTML += '<input type="hidden" name="' + item + '" value="false">';
+                    }
+                    else if (item === 'need-email') {
+                        form.innerHTML += '<input type="hidden" name="' + item + '" value="false">';
+                    } else {
+                        form.innerHTML += '<input type="hidden" name="' + item + '" ' + (item === 'sum' ? 'data-type="number"' : '') + ' value="' + formSettings.params[item] + '">';
+                    }
                 });
 
                 form.submit();
