@@ -2,7 +2,7 @@
     <v-layout row wrap id="pricing" class="mb-10 home-product-advantages" v-if="products && activeTab">
         <v-flex xs12>
             <v-list three-line v-for="(val, key) in products">
-                <v-subheader>{{ key }}</v-subheader>
+                <v-subheader>{{ key | uppercase }}</v-subheader>
                 <v-list-tile
                         v-for="productItem in products[key]"
                         :key="productItem.name"
@@ -64,7 +64,7 @@
                             </span>
                         </v-list-tile-title>
                         <v-list-tile-sub-title class="mb-2">
-                            {{ productItem.description }}
+                            {{ $t(productItem.description) }}
                         </v-list-tile-sub-title>
                     </v-list-tile-content>
                 </v-list-tile>
@@ -206,6 +206,11 @@
             ...mapGetters('User', [
                 'profile', 'pending', 'isLogin'
             ]),
+        },
+        filters: {
+            uppercase: function(v) {
+                return v.toUpperCase();
+            }
         },
         methods: {
             ...mapActions('Product', [
