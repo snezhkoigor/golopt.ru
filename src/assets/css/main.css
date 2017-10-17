@@ -2,6 +2,15 @@
     display: none;
 }
 
+.product-list-title {
+    height: auto;
+    line-height: normal;
+}
+
+.product-list-title .product-list-title-buttons {
+    margin-left: -20px;
+}
+
 .parallax-text {
     text-align: center;
     text-shadow: 1px 1px 2px black, 0 0 1em black;

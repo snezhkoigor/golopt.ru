@@ -1,83 +1,72 @@
 <template>
     <v-layout row wrap id="pricing" class="mb-10 home-product-advantages" v-if="products && activeTab">
         <v-flex xs12>
-            <v-list two-line v-for="(val, key) in products">
+            <v-list three-line v-for="(val, key) in products">
                 <v-subheader>{{ key }}</v-subheader>
                 <v-list-tile
                         v-for="productItem in products[key]"
                         :key="productItem.name"
                 >
                     <v-list-tile-content>
-                        <v-list-tile-title>
-                            {{ productItem.name }}
-                            <span v-if="!!productItem.users[0]" v-bind:class="{ 'green--text': productItem.users[0].pivot.active === 1, 'red--text': productItem.users[0].pivot.active === 0 }">
-                                 {{ $t('untill') }} {{ productItem.users[0].pivot.subscribe_date_until | moment('Do MMM') }}
+                        <v-list-tile-title class="product-list-title">
+                            <span>{{ productItem.name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<v-icon>mdi-trending-neutral</v-icon></span>
+                            <span >
+                                <v-menu
+                                        origin="center center"
+                                        transition="scale-transition"
+                                        bottom
+                                        class="text-xs-right"
+                                >
+                                    <v-btn primary flat slot="activator" v-if="!isLogin">
+                                        {{ $t('Buy') }}
+                                    </v-btn>
+                                    <v-btn primary flat slot="activator" v-else="isLogin">
+                                        <span v-if="!productItem.users[0]">{{ $t('Buy') }}</span>
+                                        <span v-if="!!productItem.users[0]">{{ $t('Renew subscription') }}</span>
+                                    </v-btn>
+                                    <v-list>
+                                        <v-list-tile
+                                                v-for="paymentSystemItem in dictionary.payment_systems" :key="paymentSystemItem.key"
+                                                v-if="paymentSystemItem.key !== dictionary.const.PAYMENT_SYSTEM_DEMO"
+                                                @click="paymentSystemSelected(paymentSystemItem, productItem)"
+                                        >
+                                            <v-list-tile-title>
+                                                {{ $t(paymentSystemItem.text) }}
+                                            </v-list-tile-title>
+                                        </v-list-tile>
+                                    </v-list>
+                                </v-menu>
+                            </span>
+                            <span v-if="productItem.has_demo === 1 && !productItem.users[0]" class="product-list-title-buttons">
+                                <v-btn primary flat
+                                       @click="paymentSystemSelected(dictionary.payment_systems[dictionary.const.PAYMENT_SYSTEM_DEMO], productItem)">
+                                    {{ $t(dictionary.payment_systems[dictionary.const.PAYMENT_SYSTEM_DEMO].text) }}
+                                </v-btn>
+                            </span>
+                            <span v-if="!!productItem.users[0]" class="product-list-title-buttons">
+                                <v-btn primary flat
+                                       @click="downloadProduct(productItem)">
+                                    {{ $t('Download') }}
+                                </v-btn>
+                            </span>
+                            <span v-if="!!productItem.users[0]" class="product-list-title-buttons">
+                                <v-btn primary flat
+                                       @click="editSelected(productItem)">
+                                    {{ $t('Edit') }}
+                                </v-btn>
+
                             </span>
                         </v-list-tile-title>
                         <v-list-tile-title>
                             {{ productItem.price | currency }}/{{ $t(productItem.price_by) }}
+                            <span v-if="!!productItem.users[0]" v-bind:class="{ 'green--text': productItem.users[0].pivot.active === 1, 'red--text': productItem.users[0].pivot.active === 0 }">
+                                 ({{ $t('untill') }} {{ productItem.users[0].pivot.subscribe_date_until | moment('Do MMM') }})
+                            </span>
                         </v-list-tile-title>
                         <v-list-tile-sub-title class="mb-2">
                             {{ productItem.description }}
                         </v-list-tile-sub-title>
                     </v-list-tile-content>
-                    <v-list-tile-action
-                            class="ml-2"
-                    >
-                        <v-menu
-                                origin="center center"
-                                transition="scale-transition"
-                                bottom
-                                class="text-xs-right"
-                        >
-                            <v-btn dark slot="activator" v-if="!isLogin">
-                                {{ $t('Buy') }}
-                            </v-btn>
-                            <v-btn dark slot="activator" v-else="isLogin">
-                                <span v-if="!productItem.users[0]">{{ $t('Buy') }}</span>
-                                <span v-if="!!productItem.users[0]">{{ $t('Renew subscription') }}</span>
-                            </v-btn>
-                            <v-list>
-                                <v-list-tile
-                                        v-for="paymentSystemItem in dictionary.payment_systems" :key="paymentSystemItem.key"
-                                        v-if="paymentSystemItem.key !== dictionary.const.PAYMENT_SYSTEM_DEMO"
-                                        @click="paymentSystemSelected(paymentSystemItem, productItem)"
-                                >
-                                    <v-list-tile-title>
-                                        {{ $t(paymentSystemItem.text) }}
-                                    </v-list-tile-title>
-                                </v-list-tile>
-                            </v-list>
-                        </v-menu>
-                    </v-list-tile-action>
-                    <v-list-tile-action
-                            v-if="productItem.has_demo === 1 && !productItem.users[0]"
-                            class="ml-2"
-                    >
-                        <v-btn dark
-                               @click="paymentSystemSelected(dictionary.payment_systems[dictionary.const.PAYMENT_SYSTEM_DEMO], productItem)">
-                            {{ $t(dictionary.payment_systems[dictionary.const.PAYMENT_SYSTEM_DEMO].text) }}
-                        </v-btn>
-                    </v-list-tile-action>
-                    <v-list-tile-action
-                            v-if="!!productItem.users[0]"
-                            class="ml-2"
-                    >
-                        <v-btn dark
-                               @click="downloadProduct(productItem)">
-                            {{ $t('Download') }}
-                        </v-btn>
-                    </v-list-tile-action>
-                    <v-list-tile-action
-                            v-if="!!productItem.users[0]"
-                            class="ml-2"
-                    >
-                        <v-btn dark
-                               @click="editSelected(productItem)">
-                            {{ $t('Edit') }}
-                        </v-btn>
-
-                    </v-list-tile-action>
                 </v-list-tile>
                 <v-divider></v-divider>
             </v-list>

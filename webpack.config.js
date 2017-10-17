@@ -2,6 +2,8 @@ var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
+var currentdate = new Date();
+
 module.exports = {
     entry: './src/main.js',
     output: {
@@ -89,6 +91,7 @@ if (process.env.NODE_ENV === 'production') {
             minimize: true
         }),
         new HtmlWebpackPlugin({
+            date: currentdate.getSeconds(),
             template: './index.ejs'
         })
     ]);
