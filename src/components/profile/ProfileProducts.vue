@@ -7,10 +7,10 @@
                         v-for="productItem in products[key]"
                         :key="productItem.name"
                 >
-                    <v-list-tile-content>
-                        <v-list-tile-title class="product-list-title">
+                    <v-list-tile-content class="product-list-title">
+                        <v-list-tile-title class="product-list-title-title">
                             <span>{{ productItem.name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<v-icon>mdi-trending-neutral</v-icon></span>
-                            <span >
+                            <span>
                                 <v-menu
                                         origin="center center"
                                         transition="scale-transition"

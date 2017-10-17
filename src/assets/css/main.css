@@ -2,12 +2,17 @@
     display: none;
 }
 
-.product-list-title {
-    height: auto;
-    line-height: normal;
+.profile .list--three-line .list__tile {
+    height: 100%;
 }
 
-.product-list-title .product-list-title-buttons {
+.product-list-title-title {
+    height: 100%;
+    line-height: normal;
+    overflow: auto;
+}
+
+.product-list-title-title .product-list-title-buttons {
     margin-left: -20px;
 }
 
