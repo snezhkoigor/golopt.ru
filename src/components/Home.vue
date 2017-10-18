@@ -149,32 +149,38 @@
                                                 <v-card-actions v-if="!isLogin"
                                                                 class="mb-3"
                                                 >
-                                                    <v-menu
-                                                            origin="center center"
-                                                            transition="scale-transition"
-                                                            bottom
-                                                    >
-                                                        <v-btn dark
-                                                               slot="activator"
-                                                               v-if="!isLogin">
-                                                            {{ $t('Buy') }}
-                                                        </v-btn>
-                                                        <v-list>
-                                                            <v-list-tile
-                                                                    v-for="paymentSystemItem in dictionary.payment_systems" :key="paymentSystemItem.key"
-                                                                    v-if="paymentSystemItem.key !== dictionary.const.PAYMENT_SYSTEM_DEMO"
-                                                            >
-                                                                <v-list-tile-title
-                                                                        @click="paymentSystemSelected(paymentSystemItem, productItem)"
-                                                                >
-                                                                    {{ $t(paymentSystemItem.text) }}
-                                                                </v-list-tile-title>
-                                                            </v-list-tile>
-                                                        </v-list>
-                                                    </v-menu>
+                                                    <v-btn dark
+                                                           @click="goToLogin()"
+                                                           v-if="!isLogin">
+                                                        {{ $t('Buy') }}
+                                                    </v-btn>
+                                                    <!--<v-menu-->
+                                                            <!--origin="center center"-->
+                                                            <!--transition="scale-transition"-->
+                                                            <!--bottom-->
+                                                    <!--&gt;-->
+                                                        <!--<v-btn dark-->
+                                                               <!--@click="goToLogin()"-->
+                                                               <!--v-if="!isLogin">-->
+                                                            <!--{{ $t('Buy') }}-->
+                                                        <!--</v-btn>-->
+                                                        <!--<v-list>-->
+                                                            <!--<v-list-tile-->
+                                                                    <!--v-for="paymentSystemItem in dictionary.payment_systems" :key="paymentSystemItem.key"-->
+                                                                    <!--v-if="paymentSystemItem.key !== dictionary.const.PAYMENT_SYSTEM_DEMO"-->
+                                                            <!--&gt;-->
+                                                                <!--<v-list-tile-title-->
+                                                                        <!--@click="paymentSystemSelected(paymentSystemItem, productItem)"-->
+                                                                <!--&gt;-->
+                                                                    <!--{{ $t(paymentSystemItem.text) }}-->
+                                                                <!--</v-list-tile-title>-->
+                                                            <!--</v-list-tile>-->
+                                                        <!--</v-list>-->
+                                                    <!--</v-menu>-->
                                                     <v-btn dark
                                                            v-if="productItem.has_demo === 1"
-                                                           @click="paymentSystemSelected(dictionary.payment_systems[dictionary.const.PAYMENT_SYSTEM_DEMO], productItem)">
+                                                           @click="goToLogin()"
+                                                    >
                                                         {{ $t(dictionary.payment_systems[dictionary.const.PAYMENT_SYSTEM_DEMO].text) }}
                                                     </v-btn>
                                                 </v-card-actions>
@@ -213,90 +219,90 @@
             </v-card>
         </v-dialog>
 
-        <v-dialog v-model="dialog" fullscreen transition="dialog-bottom-transition" :overlay=false persistent>
-            <v-card>
-                <v-toolbar dark class="primary">
-                    <v-btn icon @click.native="dialog = false" dark>
-                        <v-icon>close</v-icon>
-                    </v-btn>
-                    <v-toolbar-title v-if="psSelected">{{ $t(dictionary.payment_systems[psSelected.key].text) }} :: {{ productSelected.name }}</v-toolbar-title>
-                    <v-spacer></v-spacer>
-                    <v-toolbar-items>
-                        <v-btn dark
-                               flat
-                               :loading="pending"
-                               :disabled="pending"
-                               @click="submitForm({ email: email, trade_account: trade_account, broker: broker, skype: skype, product_id: productSelected.id, payment_system: psSelected.key })"
-                        >
-                            <span v-if="psSelected && psSelected.key !== dictionary.const.PAYMENT_SYSTEM_DEMO">
-                                {{ $t('Buy') }}
-                            </span>
-                            <span v-else="psSelected && psSelected.key === dictionary.const.PAYMENT_SYSTEM_DEMO">
-                                {{ $t('Get') }}
-                            </span>
+        <!--<v-dialog v-model="dialog" fullscreen transition="dialog-bottom-transition" :overlay=false persistent>-->
+            <!--<v-card>-->
+                <!--<v-toolbar dark class="primary">-->
+                    <!--<v-btn icon @click.native="dialog = false" dark>-->
+                        <!--<v-icon>close</v-icon>-->
+                    <!--</v-btn>-->
+                    <!--<v-toolbar-title v-if="psSelected">{{ $t(dictionary.payment_systems[psSelected.key].text) }} :: {{ productSelected.name }}</v-toolbar-title>-->
+                    <!--<v-spacer></v-spacer>-->
+                    <!--<v-toolbar-items>-->
+                        <!--<v-btn dark-->
+                               <!--flat-->
+                               <!--:loading="pending"-->
+                               <!--:disabled="pending"-->
+                               <!--@click="submitForm({ email: email, trade_account: trade_account, broker: broker, skype: skype, product_id: productSelected.id, payment_system: psSelected.key })"-->
+                        <!--&gt;-->
+                            <!--<span v-if="psSelected && psSelected.key !== dictionary.const.PAYMENT_SYSTEM_DEMO">-->
+                                <!--{{ $t('Buy') }}-->
+                            <!--</span>-->
+                            <!--<span v-else="psSelected && psSelected.key === dictionary.const.PAYMENT_SYSTEM_DEMO">-->
+                                <!--{{ $t('Get') }}-->
+                            <!--</span>-->
+                            <!--&lt;!&ndash;<span slot="loader">{{ $t('Processing') }}...</span>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<span v-if="productSelected && (!isLogin || !productSelected.users[0])">{{ $t('Buy') }}</span>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<span v-else="productSelected && !!productSelected.users[0]">{{ $t('Renew subscription') }}</span>&ndash;&gt;-->
                             <!--<span slot="loader">{{ $t('Processing') }}...</span>-->
-                            <!--<span v-if="productSelected && (!isLogin || !productSelected.users[0])">{{ $t('Buy') }}</span>-->
-                            <!--<span v-else="productSelected && !!productSelected.users[0]">{{ $t('Renew subscription') }}</span>-->
-                            <span slot="loader">{{ $t('Processing') }}...</span>
-                        </v-btn>
-                    </v-toolbar-items>
-                </v-toolbar>
-                <v-card class="grey lighten-4 elevation-0">
-                    <v-card-text>
-                        <v-container fluid>
-                            <v-layout row>
-                                <v-flex xs12>
-                                    <v-text-field
-                                            :label="$t('Your e-mail/login')"
-                                            :hint="$t('Enter the e-mail provided during registration')"
-                                            v-model="email"
-                                            required
-                                            :disabled="this.isLogin === true"
-                                            :error-messages="errors && errors.email ? $t(errors.email[0]) : []"
-                                            :error="errors && !!errors.email"
-                                    ></v-text-field>
-                                </v-flex>
-                            </v-layout>
-                            <v-layout row>
-                                <v-flex xs12>
-                                    <v-text-field
-                                            :label="$t('Your trade account')"
-                                            :hint="$t('Enter your trade account number')"
-                                            v-model="trade_account"
-                                            required
-                                            :error-messages="errors && errors.trade_account ? $t(errors.trade_account[0]) : []"
-                                            :error="errors && !!errors.trade_account"
-                                    ></v-text-field>
-                                </v-flex>
-                            </v-layout>
-                            <v-layout row>
-                                <v-flex xs12>
-                                    <v-text-field
-                                            :label="$t('Trade account broker')"
-                                            :hint="$t('Enter broker name of your trade account')"
-                                            v-model="broker"
-                                            required
-                                            :error-messages="errors && errors.broker ? $t(errors.broker[0]) : []"
-                                            :error="errors && !!errors.broker"
-                                    ></v-text-field>
-                                </v-flex>
-                            </v-layout>
-                            <v-layout row>
-                                <v-flex xs12>
-                                    <v-text-field
-                                            label="Skype"
-                                            :hint="$t('Enter your skype for fast contact with you')"
-                                            v-model="skype"
-                                            :error-messages="errors && errors.skype ? $t(errors.skype[0]) : []"
-                                            :error="errors && !!errors.skype"
-                                    ></v-text-field>
-                                </v-flex>
-                            </v-layout>
-                        </v-container>
-                    </v-card-text>
-                </v-card>
-            </v-card>
-        </v-dialog>
+                        <!--</v-btn>-->
+                    <!--</v-toolbar-items>-->
+                <!--</v-toolbar>-->
+                <!--<v-card class="grey lighten-4 elevation-0">-->
+                    <!--<v-card-text>-->
+                        <!--<v-container fluid>-->
+                            <!--<v-layout row>-->
+                                <!--<v-flex xs12>-->
+                                    <!--<v-text-field-->
+                                            <!--:label="$t('Your e-mail/login')"-->
+                                            <!--:hint="$t('Enter the e-mail provided during registration')"-->
+                                            <!--v-model="email"-->
+                                            <!--required-->
+                                            <!--:disabled="this.isLogin === true"-->
+                                            <!--:error-messages="errors && errors.email ? $t(errors.email[0]) : []"-->
+                                            <!--:error="errors && !!errors.email"-->
+                                    <!--&gt;</v-text-field>-->
+                                <!--</v-flex>-->
+                            <!--</v-layout>-->
+                            <!--<v-layout row>-->
+                                <!--<v-flex xs12>-->
+                                    <!--<v-text-field-->
+                                            <!--:label="$t('Your trade account')"-->
+                                            <!--:hint="$t('Enter your trade account number')"-->
+                                            <!--v-model="trade_account"-->
+                                            <!--required-->
+                                            <!--:error-messages="errors && errors.trade_account ? $t(errors.trade_account[0]) : []"-->
+                                            <!--:error="errors && !!errors.trade_account"-->
+                                    <!--&gt;</v-text-field>-->
+                                <!--</v-flex>-->
+                            <!--</v-layout>-->
+                            <!--<v-layout row>-->
+                                <!--<v-flex xs12>-->
+                                    <!--<v-text-field-->
+                                            <!--:label="$t('Trade account broker')"-->
+                                            <!--:hint="$t('Enter broker name of your trade account')"-->
+                                            <!--v-model="broker"-->
+                                            <!--required-->
+                                            <!--:error-messages="errors && errors.broker ? $t(errors.broker[0]) : []"-->
+                                            <!--:error="errors && !!errors.broker"-->
+                                    <!--&gt;</v-text-field>-->
+                                <!--</v-flex>-->
+                            <!--</v-layout>-->
+                            <!--<v-layout row>-->
+                                <!--<v-flex xs12>-->
+                                    <!--<v-text-field-->
+                                            <!--label="Skype"-->
+                                            <!--:hint="$t('Enter your skype for fast contact with you')"-->
+                                            <!--v-model="skype"-->
+                                            <!--:error-messages="errors && errors.skype ? $t(errors.skype[0]) : []"-->
+                                            <!--:error="errors && !!errors.skype"-->
+                                    <!--&gt;</v-text-field>-->
+                                <!--</v-flex>-->
+                            <!--</v-layout>-->
+                        <!--</v-container>-->
+                    <!--</v-card-text>-->
+                <!--</v-card>-->
+            <!--</v-card>-->
+        <!--</v-dialog>-->
     </v-container>
 </template>
 
@@ -339,6 +345,11 @@
             ...mapActions('Product', [
                 'pricing'
             ]),
+            goToLogin() {
+                this.$router.push({
+                    'name': 'login'
+                });
+            },
             goToProfile() {
                 this.$router.push({
                     'name': 'profile'

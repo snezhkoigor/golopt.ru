@@ -47,6 +47,13 @@
                     >
                         {{ $t('Reset password') }}
                     </v-btn>
+                    |
+                    <v-btn flat
+                           primary
+                           :to="'registration'"
+                    >
+                        {{ $t('Registration') }}
+                    </v-btn>
                 </p>
             </v-flex>
         </v-layout>
@@ -67,6 +74,15 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
+
+        <v-snackbar
+                timeout="6000"
+                top
+                multi-line
+                v-model="snackbar"
+        >
+            {{ $t('Hello, you have been successfully log in on the website') }}
+        </v-snackbar>
     </v-container>
 </template>
 
@@ -81,7 +97,8 @@
                 password: '',
                 loader: null,
                 errors: [],
-                dialog: false
+                dialog: false,
+                snackbar: false,
             }
         },
         computed: {
@@ -92,9 +109,10 @@
         methods: {
             submitForm: function (formData) {
                 this.$store.dispatch('User/login', formData).then(() => {
-                    this.errors = []
+                    this.errors = [];
+                    this.snackbar = true;
                 }).catch(errors => {
-                    this.errors = errors
+                    this.errors = errors;
 
                     if (this.errors && this.errors.system) {
                         this.dialog = true
