@@ -1,7 +1,7 @@
 <template>
     <v-layout row wrap id="pricing" class="mb-10 home-product-advantages" v-if="products && activeTab">
         <v-flex xs12>
-            <v-list three-line v-for="(val, key) in products">
+            <v-list three-line v-for="(val, key) in products" :key="key">
                 <v-subheader>{{ key | uppercase }}</v-subheader>
                 <v-list-tile
                         v-for="productItem in products[key]"

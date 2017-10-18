@@ -8,6 +8,7 @@
                     :no-data-text="$t('No payment transactions')"
                     :rows-per-page-text="$t('By page')"
                     :rows-per-page-items="perPage"
+                    v-bind:pagination.sync="pagination"
             >
                 <template slot="headerCell" scope="props">
                 <span v-tooltip:bottom="{ 'html': $t(props.header.text) }">
@@ -30,8 +31,14 @@
     import { mapGetters, mapActions } from 'vuex'
 
     export default {
+        mounted() {
+            this.pagination.descending = !this.pagination.descending
+        },
         data () {
             return {
+                pagination: {
+                    sortBy: 'created_at'
+                },
                 header: [
                     { text: 'Create date', value: 'created_at' },
                     { text: 'Finish date', value: 'updated_at' },
