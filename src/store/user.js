@@ -81,7 +81,7 @@ const actions = {
         }).then(function () {
             dispatch('profile').then(() => {
                 router.push({
-                    name: 'home'
+                    name: 'profile'
                 })
             })
         })
