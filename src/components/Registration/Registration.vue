@@ -100,6 +100,23 @@
                 </v-card>
             </v-flex>
         </v-layout>
+
+        <v-dialog v-model="dialog" persistent>
+            <v-card>
+                <v-card-title class="headline">
+                    <v-icon class="red--text darken-1">
+                        mdi-comment-alert-outline
+                    </v-icon>
+                </v-card-title>
+                <v-card-text v-if="errors.system">
+                    {{ $t(errors.system) }}
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn class="red--text darken-1" flat="flat" @click.native="dialog = false">{{ $t('Close') }}</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
     </v-container>
 </template>
 
@@ -117,7 +134,8 @@
                 last_name: '',
                 country: null,
                 loader: null,
-                errors: []
+                errors: [],
+                dialog: false
             }
         },
         computed: {
@@ -132,11 +150,16 @@
             submitForm: function (formData) {
                 this.$store.dispatch('User/registration', formData).then(() => {
                     this.errors = [];
+                    this.dialog = false;
                     this.$router.push({
                         'name': 'activationByPhone'
                     });
                 }).catch(errors => {
                     this.errors = errors;
+
+                    if (this.errors && this.errors.system) {
+                        this.dialog = true
+                    }
                 })
             },
             isNumber: function(evt) {
