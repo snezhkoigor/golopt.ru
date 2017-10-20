@@ -190,3 +190,9 @@
 .toolbar__title {
     margin-left: 0 !important;
 }
+
+@media only screen and (max-width: 599px) {
+    .container {
+        padding: 5px !important;
+    }
+}

@@ -47,7 +47,6 @@
                     >
                         {{ $t('Reset password') }}
                     </v-btn>
-                    |
                     <v-btn flat
                            color="primary"
                            :to="'registration'"
