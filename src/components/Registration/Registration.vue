@@ -34,7 +34,7 @@
                                     :label="$t('Phone number')"
                                     :hint="$t('Enter your phone number without country code')"
                                     v-model="phone"
-                                    v-on:keypress="isNumber()"
+                                    mask="phone"
                                     required
                                     :error-messages="errors && errors.phone ? $t(errors.phone[0]) : []"
                                     :error="errors && !!errors.phone"
@@ -86,7 +86,7 @@
                         </v-layout>
 
                         <v-btn
-                                info
+                                color="info"
                                 large
                                 block
                                 :loading="pending"

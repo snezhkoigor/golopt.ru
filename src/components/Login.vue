@@ -26,7 +26,7 @@
                                 :error="errors && !!errors.password"
                         ></v-text-field>
                         <v-btn
-                                info
+                                color="info"
                                 large
                                 block
                                 :loading="pending"
@@ -42,14 +42,14 @@
             <v-flex xs12 md6 offset-md3>
                 <p class="text-xs-center">
                     <v-btn flat
-                           primary
+                           color="primary"
                            :to="'/new/password'"
                     >
                         {{ $t('Reset password') }}
                     </v-btn>
                     |
                     <v-btn flat
-                           primary
+                           color="primary"
                            :to="'registration'"
                     >
                         {{ $t('Registration') }}
@@ -76,7 +76,7 @@
         </v-dialog>
 
         <v-snackbar
-                timeout="6000"
+                :timeout="timeout"
                 top
                 multi-line
                 v-model="snackbar"
@@ -99,6 +99,7 @@
                 errors: [],
                 dialog: false,
                 snackbar: false,
+                timeout: 6000
             }
         },
         computed: {

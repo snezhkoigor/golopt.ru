@@ -2,6 +2,15 @@
     display: none;
 }
 
+.parallax {
+    margin-left: -17px;
+    margin-right: -17px;
+}
+
+.profile {
+    width: 100%;
+}
+
 .profile .list--three-line .list__tile {
     height: 100%;
 }

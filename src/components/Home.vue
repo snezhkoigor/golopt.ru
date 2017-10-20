@@ -5,10 +5,9 @@
                 <h3 class="white--text parallax-text" v-html="$t('Option analysis with Option Profit indicator in the Forex market - the path to stable profit')" />
                 <p>
                     <v-btn
-                            info
+                            color="info"
                             large
                             block
-                            secondary
                             :to="'#pricing'"
                             v-smooth-scroll="{ duration: 1000, offset: -50 }"
                             class="mt-5 blue darken-1"

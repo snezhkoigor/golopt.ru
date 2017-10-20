@@ -1,7 +1,7 @@
 <template>
     <v-footer dark
               fixed
-              class="primary"
+              color="primary"
     >
         <div class="white--text footer-year">© {{ date | moment('YYYY') }}</div>
         <div class="white--text footer-menu">

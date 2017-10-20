@@ -27,7 +27,7 @@
                         ></v-text-field>
 
                         <p class="mt-4 button-for-small-screens">
-                            <v-btn info
+                            <v-btn color="info"
                                    large
                                    block
                                    :loading="pending"
@@ -40,7 +40,7 @@
                             </v-btn>
                         </p>
                         <p class="mt-4 button-for-big-screens">
-                            <v-btn info
+                            <v-btn color="info"
                                    large
                                    :loading="pending"
                                    :disabled="pending"

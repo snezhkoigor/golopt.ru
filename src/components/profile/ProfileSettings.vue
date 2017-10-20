@@ -1,5 +1,5 @@
 <template>
-    <div class="profile-settings" v-if="isLogin">
+    <div class="profile-settings" v-if="isLogin" style="width: 100%">
         <v-card class="grey lighten-4 elevation-0">
             <v-card-text>
                 <v-container fluid grid-list-md>
@@ -214,7 +214,7 @@
                     </div>
 
                     <p class="mt-4 button-for-small-screens">
-                        <v-btn info
+                        <v-btn color="info"
                                large
                                block
                                :loading="pending"
@@ -227,7 +227,7 @@
                         </v-btn>
                     </p>
                     <p class="mt-4 button-for-big-screens">
-                        <v-btn info
+                        <v-btn color="info"
                                large
                                :loading="pending"
                                :disabled="pending"

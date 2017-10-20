@@ -9,7 +9,9 @@
             <header-component v-if="$route.name !== 'notFound'" class="mb-5"/>
 
             <main class="content">
-                <router-view />
+                <v-container fluid fill-height>
+                    <router-view />
+                </v-container>
             </main>
 
             <v-btn

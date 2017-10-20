@@ -10,12 +10,10 @@
                     :rows-per-page-items="perPage"
                     v-bind:pagination.sync="pagination"
             >
-                <template slot="headerCell" scope="props">
-
+                <template slot="headerCell" slot-scope="props">
                     {{ $t(props.header.text) }}
-
                 </template>
-                <template slot="items" scope="props">
+                <template slot="items" slot-scope="props">
                     <td class="text-xs-right">{{ props.item.created_at | moment('Do MMM, h:mm a') }} (GMT)</td>
                     <td class="text-xs-right" v-if="!!props.item.updated_at">{{ props.item.updated_at | moment('Do MMM, h:mm a') }} (GMT)</td>
                     <td class="text-xs-right" v-if="!props.item.updated_at"></td>

@@ -1,10 +1,10 @@
 <template>
     <v-container fluid>
         <v-navigation-drawer
-                v-model="drawer"
                 persistent
-                app
+                v-model="drawer"
                 enable-resize-watcher
+                app
                 overflow
                 class="hidden-lg-and-up"
         >
@@ -27,7 +27,7 @@
         <v-toolbar
                 dark
                 fixed
-                class="primary"
+                color="primary"
         >
             <v-toolbar-title>
                 <v-toolbar-side-icon class="hidden-lg-and-up" @click.stop="drawer=!drawer"></v-toolbar-side-icon>

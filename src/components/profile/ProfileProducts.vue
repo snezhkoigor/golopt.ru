@@ -1,5 +1,5 @@
 <template>
-    <v-layout row wrap id="pricing" class="mb-10 home-product-advantages">
+    <v-layout row wrap id="pricing" class="mb-10 home-product-advantages" v-if="products">
         <v-flex xs12>
             <v-list three-line v-for="(val, key) in products" :key="key">
                 <v-subheader>{{ key | uppercase }}</v-subheader>
@@ -17,10 +17,10 @@
                                         bottom
                                         class="text-xs-right"
                                 >
-                                    <v-btn primary flat slot="activator" v-if="!isLogin">
+                                    <v-btn color="primary" flat slot="activator" v-if="!isLogin">
                                         {{ $t('Buy') }}
                                     </v-btn>
-                                    <v-btn primary flat slot="activator" v-else="isLogin">
+                                    <v-btn color="primary" flat slot="activator" v-else="isLogin">
                                         <span v-if="!productItem.users[0]">{{ $t('Buy') }}</span>
                                         <span v-if="!!productItem.users[0]">{{ $t('Renew subscription') }}</span>
                                     </v-btn>
@@ -38,19 +38,19 @@
                                 </v-menu>
                             </span>
                             <span v-if="productItem.has_demo === 1 && !productItem.users[0]" class="product-list-title-buttons">
-                                <v-btn primary flat
+                                <v-btn color="primary" flat
                                        @click="paymentSystemSelected(dictionary.payment_systems[dictionary.const.PAYMENT_SYSTEM_DEMO], productItem)">
                                     {{ $t(dictionary.payment_systems[dictionary.const.PAYMENT_SYSTEM_DEMO].text) }}
                                 </v-btn>
                             </span>
                             <span v-if="!!productItem.users[0]" class="product-list-title-buttons">
-                                <v-btn primary flat
+                                <v-btn color="primary" flat
                                        @click="downloadProduct(productItem)">
                                     {{ $t('Download') }}
                                 </v-btn>
                             </span>
                             <span v-if="!!productItem.users[0]" class="product-list-title-buttons">
-                                <v-btn primary flat
+                                <v-btn color="primary" flat
                                        @click="editSelected(productItem)">
                                     {{ $t('Edit') }}
                                 </v-btn>
@@ -91,7 +91,7 @@
 
         <v-dialog v-model="dialog" fullscreen transition="dialog-bottom-transition" :overlay=false persistent>
             <v-card>
-                <v-toolbar dark class="primary">
+                <v-toolbar dark color="primary">
                     <v-btn icon @click.native="dialog = false" dark>
                         <v-icon>close</v-icon>
                     </v-btn>

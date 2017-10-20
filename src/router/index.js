@@ -8,7 +8,6 @@ import ResetPassword from '@/components/profile/ProfileResetPassword.vue';
 import Activate from '@/components/profile/ProfileActivate.vue';
 import ActivateByPhone from '@/components/profile/ProfileActivateByPhone.vue';
 import Profile from '@/components/Profile.vue';
-import Product from '@/components/Product.vue';
 import NotFound from '@/components/NotFound.vue';
 import PaySuccess from '@/components/Pay/Success.vue';
 import PayFail from '@/components/Pay/Fail.vue';
@@ -165,27 +164,6 @@ export default new Router({
                 title: 'Profile',
                 icon: 'mdi-contacts',
                 available: true,
-                externalUrl: null
-            }
-        },
-        {
-            path: '/product',
-            name: 'product',
-            component: Product,
-            beforeEnter: AuthGuard,
-            meta: {
-                access: {
-                    guest: false,
-                    auth: true,
-                    roles: [
-                        ''
-                    ]
-                },
-                name: 'Products',
-                title: 'Products',
-                description: 'Products',
-                icon: 'mdi-apps',
-                available: false,
                 externalUrl: null
             }
         },

@@ -15,7 +15,7 @@
                                 :error="errors && !!errors.code"
                         ></v-text-field>
                         <v-btn
-                                info
+                                color="info"
                                 large
                                 block
                                 :loading="pending"
