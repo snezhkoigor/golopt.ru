@@ -6,7 +6,7 @@
            footer
     >
         <div v-if="dictionary.length !== 0">
-            <header-component v-if="$route.name !== 'notFound'"/>
+            <header-component v-if="$route.name !== 'notFound'" class="mb-5"/>
 
             <main class="content">
                 <v-container fluid fill-height>
