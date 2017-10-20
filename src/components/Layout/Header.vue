@@ -2,11 +2,10 @@
     <v-container fluid>
         <v-navigation-drawer
                 v-model="drawer"
-                light
+                persistent
                 app
-                temporary
+                enable-resize-watcher
                 overflow
-                absolute
                 class="hidden-lg-and-up"
         >
             <v-list>

@@ -11,9 +11,9 @@
                     v-bind:pagination.sync="pagination"
             >
                 <template slot="headerCell" scope="props">
-                <span v-tooltip:bottom="{ 'html': $t(props.header.text) }">
+
                     {{ $t(props.header.text) }}
-                </span>
+
                 </template>
                 <template slot="items" scope="props">
                     <td class="text-xs-right">{{ props.item.created_at | moment('Do MMM, h:mm a') }} (GMT)</td>

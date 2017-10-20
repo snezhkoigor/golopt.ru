@@ -1,5 +1,5 @@
 <template>
-    <v-layout row wrap id="pricing" class="mb-10 home-product-advantages" v-if="products && activeTab">
+    <v-layout row wrap id="pricing" class="mb-10 home-product-advantages">
         <v-flex xs12>
             <v-list three-line v-for="(val, key) in products" :key="key">
                 <v-subheader>{{ key | uppercase }}</v-subheader>
@@ -175,11 +175,6 @@
     import { mapGetters, mapActions } from 'vuex';
 
     export default {
-        mounted() {
-            this.pricing().then(() => {
-                this.activeTab = 'lite';
-            });
-        },
         data () {
             return {
                 psSelected: null,
@@ -192,7 +187,6 @@
                 trade_account: '',
                 modifyProducts: [],
                 isEdit: false,
-                activeTab: null,
                 skype: ''
             }
         },

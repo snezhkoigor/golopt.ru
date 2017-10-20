@@ -36,15 +36,24 @@
 </template>
 
 <script>
-    import ProfileSettings from './profile/ProfileSettings.vue'
-    import ProfileProducts from './profile/ProfileProducts.vue'
-    import ProfilePayments from './profile/ProfilePayments.vue'
+    import { mapGetters, mapActions } from 'vuex';
+    import ProfileSettings from './profile/ProfileSettings.vue';
+    import ProfileProducts from './profile/ProfileProducts.vue';
+    import ProfilePayments from './profile/ProfilePayments.vue';
 
     export default {
         components: {
             ProfileSettings,
             ProfileProducts,
             ProfilePayments
+        },
+        mounted() {
+            this.pricing();
+        },
+        methods: {
+            ...mapActions('Product', [
+                'pricing'
+            ])
         },
         data () {
             return {
@@ -62,7 +71,7 @@
                         title: 'Payments'
                     }
                 ],
-                active: 'product'
+                active: 'edit'
             }
         }
     }
