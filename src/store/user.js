@@ -276,6 +276,7 @@ const actions = {
                     resolve(response);
                 } else {
                     commit(CHANGE_EMAIL_FAIL);
+                    commit(LOGOUT);
 
                     let errors = null;
                     if ((response.data.message !== null) && (typeof( response.data.message ) === 'object')) {

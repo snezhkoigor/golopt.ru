@@ -16,6 +16,7 @@ import Feedback from '@/components/Feedback.vue';
 import Theory from '@/components/Theory.vue';
 
 import AuthGuard from '@/router/guard';
+import ChangeEmailGuard from '@/router/changeEmailGuard';
 import store from '@/store/index';
 
 Vue.use(Router);
@@ -171,17 +172,7 @@ export default new Router({
             path: '/:lang?/new/email/:token',
             name: 'changeEmail',
             component: null,
-            beforeEnter: function (to, from, next) {
-                if (to.params.token !== undefined) {
-                    store.dispatch('User/changeEmail', { token: to.params.token }).then(() => {
-                        store.dispatch('User/profile').then(() => {
-                            next('/' + store.getters.currentLanguage.urlPrefix + '/profile');
-                        })
-                    }).catch(() => {
-                        next('/' + store.getters.currentLanguage.urlPrefix + '/login');
-                    })
-                }
-            },
+            beforeEnter: ChangeEmailGuard,
             meta: {
                 access: {
                     guest: true,
