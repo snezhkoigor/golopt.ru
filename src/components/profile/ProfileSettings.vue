@@ -137,7 +137,7 @@
                                     <div v-for="item in profile.active_change_email_requests" class="mb-3">
                                         <v-icon class="active-change-email">mdi-subdirectory-arrow-right</v-icon>
                                         <span class="subheading">
-                                            {{ item.created_at | moment('calendar') }} {{ $t('was request for change') }} {{ item.new }}
+                                            {{ item.created_at | moment('calendar') }} (GMT) {{ $t('was request for change') }} {{ item.new }}
                                         </span>
                                         <span>
                                             <v-btn flat
