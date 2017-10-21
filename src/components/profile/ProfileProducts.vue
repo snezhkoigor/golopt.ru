@@ -99,26 +99,18 @@
                     <v-spacer></v-spacer>
                     <v-toolbar-items>
                         <v-btn dark
-                            flat
-                            :loading="pending"
-                            :disabled="pending"
-                            v-if="isEdit === true"
-                            @click="saveProductSettings({ trade_account: trade_account, broker: broker, product_id: productSelected.id })"
+                               flat
+                               :loading="pending || userPending"
+                               :disabled="pending || userPending"
+                               @click="isEdit ? saveProductSettings({ trade_account: trade_account, broker: broker, product_id: productSelected.id }) : goToPayPage({email: profile.email, trade_account: trade_account, broker: broker, skype: skype, product_id: productSelected.id, payment_system: psSelected.key })"
                         >
-                            {{ $t('Save') }}
-                            <span slot="loader">{{ $t('Processing') }}...</span>
-                        </v-btn>
-                        <v-btn dark
-                            flat
-                            v-if="isEdit === false"
-                            :loading="pending"
-                            :disabled="pending"
-                            @click="goToPayPage({email: profile.email, trade_account: trade_account, broker: broker, skype: skype, product_id: productSelected.id, payment_system: psSelected.key })"
-                        >
+                            <span v-if="isEdit === true">
+                                {{ $t('Save') }}
+                            </span>
                             <span v-if="psSelected && psSelected.key !== dictionary.const.PAYMENT_SYSTEM_DEMO">
                                 {{ $t('Buy') }}
                             </span>
-                            <span v-else="psSelected && psSelected.key === dictionary.const.PAYMENT_SYSTEM_DEMO">
+                            <span v-if="psSelected && psSelected.key === dictionary.const.PAYMENT_SYSTEM_DEMO">
                                 {{ $t('Get') }}
                             </span>
                             <span slot="loader">{{ $t('Processing') }}...</span>
@@ -191,15 +183,14 @@
             }
         },
         computed: {
-            ...mapGetters('Product', [
-                'products', 'pending'
-            ]),
-            ...mapGetters('Dictionary', [
-                'dictionary'
-            ]),
-            ...mapGetters('User', [
-                'profile', 'pending', 'isLogin'
-            ]),
+            ...mapGetters({
+                products: 'Product/products',
+                pending: 'Product/pending',
+                dictionary: 'Dictionary/dictionary',
+                profile: 'User/profile',
+                isLogin: 'User/isLogin',
+                userPending: 'User/pending',
+            })
         },
         filters: {
             uppercase: function(v) {
