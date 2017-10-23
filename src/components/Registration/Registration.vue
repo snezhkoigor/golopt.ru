@@ -30,15 +30,23 @@
                             ></v-select>
                         </v-layout>
                         <v-layout row>
-                            <v-text-field
-                                    :label="$t('Phone number')"
-                                    :hint="$t('Enter your phone number without country code')"
-                                    v-model="phone"
-                                    mask="phone"
-                                    required
-                                    :error-messages="errors && errors.phone ? $t(errors.phone[0]) : []"
-                                    :error="errors && !!errors.phone"
-                            ></v-text-field>
+                            <v-flex xs12 sm1>
+                                <v-text-field
+                                        :prefix="phonePrefix"
+                                        disabled
+                                ></v-text-field>
+                            </v-flex>
+                            <v-flex xs12 sm12>
+                                <v-text-field
+                                        :label="$t('Phone number')"
+                                        :hint="$t('Enter your phone number without country code')"
+                                        v-model="phone"
+                                        mask="phone"
+                                        required
+                                        :error-messages="errors && errors.phone ? $t(errors.phone[0]) : []"
+                                        :error="errors && !!errors.phone"
+                                ></v-text-field>
+                            </v-flex>
                         </v-layout>
                         <v-layout row>
                             <v-text-field
@@ -135,7 +143,8 @@
                 country: null,
                 loader: null,
                 errors: [],
-                dialog: false
+                dialog: false,
+                phonePrefix: ""
             }
         },
         computed: {
@@ -145,6 +154,11 @@
             ...mapGetters('User', [
                 'pending'
             ])
+        },
+        watch: {
+            country: function (val) {
+                this.phonePrefix = '+' + this.dictionary.codes[val] + '   '
+            },
         },
         methods: {
             submitForm: function (formData) {
