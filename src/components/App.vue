@@ -93,7 +93,7 @@
             ]),
         },
         watch: {
-            '$route' (toRoute) {
+            '$route'(toRoute) {
                 this.$store.dispatch('Meta/setTitle', toRoute.meta.title ? this.$t(toRoute.meta.title) : toRoute.name);
                 this.$store.dispatch('Meta/setDescription', toRoute.meta.description ? this.$t(toRoute.meta.description) : toRoute.name);
             }
