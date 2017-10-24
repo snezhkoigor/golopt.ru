@@ -49,6 +49,12 @@
                                     {{ $t('Download') }}
                                 </v-btn>
                             </span>
+                            <span v-if="!!productItem.users[0] && !!productItem.set_path" class="product-list-title-buttons">
+                                <v-btn color="primary" flat
+                                       @click="downloadSet(productItem)">
+                                    .set
+                                </v-btn>
+                            </span>
                             <span v-if="!!productItem.users[0]" class="product-list-title-buttons">
                                 <v-btn color="primary" flat
                                        @click="editSelected(productItem)">
@@ -207,6 +213,14 @@
             downloadProduct: function(product) {
                 if (product.users[0].pivot.trade_account) {
                     this.$store.dispatch('Product/download', {
+                        id: product.id,
+                        trade_account: product.users[0].pivot.trade_account
+                    });
+                }
+            },
+            downloadSet: function(product) {
+                if (product.users[0].pivot.trade_account) {
+                    this.$store.dispatch('Product/downloadSetFile', {
                         id: product.id,
                         trade_account: product.users[0].pivot.trade_account
                     });

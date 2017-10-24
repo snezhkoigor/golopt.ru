@@ -20,6 +20,9 @@ const actions = {
     download({ commit }, formBody) {
         api.download(formBody);
     },
+    downloadSetFile({ commit }, formBody) {
+        api.downloadSetFile(formBody);
+    },
     pricing({ commit }) {
         return new Promise((resolve, reject) => {
             commit(GET_LIST);

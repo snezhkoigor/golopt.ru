@@ -62,5 +62,8 @@ export default {
     },
     download(formBody) {
         window.open('http://api.goloption.com/api/product/' + formBody.id + '/' + formBody.trade_account + '/get', '_blank');
+    },
+    downloadSetFile(formBody) {
+        window.open('http://api.goloption.com/api/product/' + formBody.id + '/' + formBody.trade_account + '/getSetFile', '_blank');
     }
 }
