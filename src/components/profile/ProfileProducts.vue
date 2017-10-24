@@ -45,6 +45,13 @@
                             </span>
                             <span v-if="!!productItem.users[0]" class="product-list-title-buttons">
                                 <v-btn color="primary" flat
+                                       @click="editSelected(productItem)">
+                                    {{ $t('Edit') }}
+                                </v-btn>
+
+                            </span>
+                            <span v-if="!!productItem.users[0]" class="product-list-title-buttons">
+                                <v-btn color="primary" flat
                                        @click="downloadProduct(productItem)">
                                     {{ $t('Download') }}
                                 </v-btn>
@@ -54,13 +61,6 @@
                                        @click="downloadSet(productItem)">
                                     .set
                                 </v-btn>
-                            </span>
-                            <span v-if="!!productItem.users[0]" class="product-list-title-buttons">
-                                <v-btn color="primary" flat
-                                       @click="editSelected(productItem)">
-                                    {{ $t('Edit') }}
-                                </v-btn>
-
                             </span>
                         </v-list-tile-title>
                         <v-list-tile-title>
