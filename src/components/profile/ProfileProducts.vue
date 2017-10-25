@@ -59,7 +59,7 @@
                             <span v-if="!!productItem.users[0] && !!productItem.set_path" class="product-list-title-buttons">
                                 <v-btn color="primary" flat
                                        @click="downloadSet(productItem)">
-                                    .set
+                                    {{ $t('Base settings set file') }}
                                 </v-btn>
                             </span>
                         </v-list-tile-title>
