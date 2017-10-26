@@ -1,5 +1,5 @@
 <template>
-    <v-container fluid>
+    <v-container fluid grid-list-md>
         <v-layout row wrap>
             <v-flex xs12 md6 offset-md3>
                 <v-card>
@@ -30,13 +30,13 @@
                             ></v-select>
                         </v-layout>
                         <v-layout row>
-                            <v-flex xs12 sm1>
+                            <v-flex xs2 sm1>
                                 <v-text-field
                                         :prefix="phonePrefix"
                                         disabled
                                 ></v-text-field>
                             </v-flex>
-                            <v-flex xs12 sm12>
+                            <v-flex xs12>
                                 <v-text-field
                                         :label="$t('Phone number')"
                                         :hint="$t('Enter your phone number without country code')"
