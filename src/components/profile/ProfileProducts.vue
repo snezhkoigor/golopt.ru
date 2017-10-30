@@ -78,6 +78,20 @@
             </v-list>
         </v-flex>
 
+        <v-dialog v-model="successGoToPayDialog" persistent>
+            <v-card>
+                <v-card-title class="headline">
+                    <v-icon class="green--text darken-1">
+                        mdi-comment-alert-outline
+                    </v-icon>
+                </v-card-title>
+                <v-card-text>
+                    {{ $t('Now you are going to pay page of your payment system selected') }}
+                </v-card-text>
+                <v-card-actions />
+            </v-card>
+        </v-dialog>
+
         <v-dialog v-model="systemDialog" persistent>
             <v-card>
                 <v-card-title class="headline">
@@ -185,6 +199,7 @@
                 trade_account: '',
                 modifyProducts: [],
                 isEdit: false,
+                successGoToPayDialog: false,
                 skype: ''
             }
         },
@@ -296,6 +311,7 @@
                                 this.errors = [];
                                 this.dialog = false;
                                 this.systemDialog = false;
+                                this.successGoToPayDialog = true;
 
                                 this.redirect(response.data.data);
                             });
