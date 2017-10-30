@@ -326,6 +326,9 @@
                     }
                 });
 
+                form.innerHTML += '<input type="submit" value="go">';
+                window.document.body.appendChild(form);
+
                 form.submit();
             }
         }
