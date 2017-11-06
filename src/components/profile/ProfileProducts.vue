@@ -313,7 +313,6 @@
                 let form = document.createElement('form');
                 form.action = formSettings.actionUrl;
                 form.method = formSettings.method;
-                form.target = '_blank';
                 let keys = Object.keys(formSettings.params);
 
                 keys.forEach((item, i) => {
