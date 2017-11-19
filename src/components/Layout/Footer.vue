@@ -6,13 +6,26 @@
         <div class="white--text footer-year">© {{ date | moment('YYYY') }}</div>
         <div class="white--text footer-menu">
             <span>
-                <v-btn  flat
-                        dark
-                        @click="goTo('https://www.youtube.com/channel/UCaCmSeb1GwQ9OHTXkpXAJVg')"
+                <v-menu
+                        origin="center center"
+                        transition="scale-transition"
+                        bottom
+                        class="text-xs-right"
                 >
-                    <v-icon left dark>mdi-youtube-play</v-icon>
-                    Youtube
-                </v-btn>
+                    <v-btn flat dark slot="activator">
+                        Мы в соц. сетях
+                    </v-btn>
+                    <v-list>
+                        <v-list-tile
+                                v-for="item in social" :key="item.key"
+                                @click="goTo(item.link)"
+                        >
+                            <v-list-tile-title>
+                                <v-icon left>{{item.ico}}</v-icon>  {{ $t(item.text) }}
+                            </v-list-tile-title>
+                        </v-list-tile>
+                    </v-list>
+                </v-menu>
             </span>
         </div>
     </v-footer>
@@ -23,6 +36,32 @@
         data () {
             return {
                 date: '',
+                social: [
+                    {
+                        'key': 'youtube',
+                        'text': 'Youtube',
+                        'link': 'https://www.youtube.com/channel/UCaCmSeb1GwQ9OHTXkpXAJVg',
+                        'ico': 'mdi-youtube-play'
+                    },
+                    {
+                        'key': 'vk',
+                        'text': 'Vk',
+                        'link': 'https://vk.com/svobodnyi_trading',
+                        'ico': 'mdi-vk-box'
+                    },
+                    {
+                        'key': 'facebook',
+                        'text': 'Facebook',
+                        'link': 'https://www.facebook.com/groups/svobodnyitraiding',
+                        'ico': 'mdi-facebook-box'
+                    },
+                    {
+                        'key': 'ok',
+                        'text': 'Ok',
+                        'link': 'https://ok.ru/svobodnytr',
+                        'ico': 'mdi-odnoklassniki'
+                    }
+                ]
             }
         },
         mounted() {
