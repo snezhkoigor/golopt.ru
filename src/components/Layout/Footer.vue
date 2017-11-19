@@ -13,7 +13,7 @@
                         class="text-xs-right"
                 >
                     <v-btn flat dark slot="activator">
-                        {{ $t('See us in') }}
+                        {{ $t('Read us in') }}
                     </v-btn>
                     <v-list>
                         <v-list-tile
