@@ -13,7 +13,7 @@
                         class="text-xs-right"
                 >
                     <v-btn flat dark slot="activator">
-                        Мы в соц. сетях
+                        {{ $t('See us in') }}
                     </v-btn>
                     <v-list>
                         <v-list-tile
