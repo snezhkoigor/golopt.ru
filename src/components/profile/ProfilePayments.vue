@@ -18,7 +18,7 @@
                     <td class="text-xs-right" v-if="!!props.item.updated_at">{{ props.item.updated_at | moment('Do MMM, h:mm a') }} (GMT)</td>
                     <td class="text-xs-right" v-if="!props.item.updated_at"></td>
                     <td class="text-xs-right">{{ props.item.amount | currency }}</td>
-                    <td class="text-xs-right">{{ $t(dictionary.payment_systems[props.item.payment_system].text) }}</td>
+                    <td class="text-xs-right">{{ props.item.payment_system }}</td>
                 </template>
             </v-data-table>
         </v-card-text>
