@@ -69,6 +69,7 @@
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
+                    <v-btn class="green--text darken-1" flat="flat" @click="goToActivate">{{ $t('Activate') }}</v-btn>
                     <v-btn class="red--text darken-1" flat="flat" @click.native="dialog = false">{{ $t('Close') }}</v-btn>
                 </v-card-actions>
             </v-card>
@@ -118,7 +119,12 @@
                         this.dialog = true
                     }
                 })
-            }
+            },
+            goToActivate() {
+                this.$router.push({
+                    'name': 'activationByPhone'
+                });
+            },
         }
     }
 </script>
