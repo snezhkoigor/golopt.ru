@@ -41,6 +41,17 @@
 			<v-flex d-flex xs12 sm6 md6>
 				<iframe width="560" height="315" src="https://www.youtube.com/embed/wZPmUfIMcxU" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 			</v-flex>
+			<v-flex xs12>
+				<p class="ma-3 headline text-xs-center">
+					<v-btn
+							color="info"
+							large
+							@click="!isLogin ? goToLogin() : goToProfile()"
+					>
+						{{ $t('Download for free') }}
+					</v-btn>
+				</p>
+			</v-flex>
         </v-layout>
 
         <v-layout row wrap id="pricing" class="mb-10 home-product-advantages" v-if="products && activeTab">
@@ -149,8 +160,12 @@
 			</v-flex>
 			<v-flex xs12>
 				<p class="ma-3 headline text-xs-center">
-					<v-btn color="primary" @click="goToYoutube()">
-						{{ $t('Watch all') }}
+					<v-btn
+							color="info"
+							large
+							@click="!isLogin ? goToLogin() : goToProfile()"
+					>
+						{{ $t('Download for free') }}
 					</v-btn>
 				</p>
 			</v-flex>
