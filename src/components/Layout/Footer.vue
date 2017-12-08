@@ -4,7 +4,7 @@
               color="primary"
     >
         <div class="white--text footer-year" style="font-size: 11px;">
-            © {{ date | moment('YYYY') }}, <b>{{$t('Consultation')}}</b>: 8 (909) 789-29-89
+            © {{ date | moment('YYYY') }}
         </div>
         <div class="white--text footer-menu hidden-lg-and-up">
             <span>
