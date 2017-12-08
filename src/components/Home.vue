@@ -42,7 +42,7 @@
 				<iframe width="560" height="315" src="https://www.youtube.com/embed/wZPmUfIMcxU" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 			</v-flex>
 			<v-flex xs12>
-				<p class="ma-3 headline text-xs-center">
+				<p class=" headline text-xs-center">
 					<v-btn
 							color="info"
 							large
