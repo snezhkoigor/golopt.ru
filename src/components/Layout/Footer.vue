@@ -3,8 +3,10 @@
               fixed
               color="primary"
     >
-        <div class="white--text footer-year">© {{ date | moment('YYYY') }}</div>
-        <div class="white--text footer-menu">
+        <div class="white--text footer-year" style="font-size: 11px;">
+            © {{ date | moment('YYYY') }}, <b>{{$t('Consultation')}}</b>: 8 (909) 789-29-89
+        </div>
+        <div class="white--text footer-menu hidden-lg-and-up">
             <span>
                 <v-menu
                         origin="center center"
@@ -27,6 +29,12 @@
                     </v-list>
                 </v-menu>
             </span>
+        </div>
+        <div class="white--text footer-menu hidden-md-and-down">
+            <v-icon style="cursor: pointer; margin-right: 10px" dark left @click="goTo('https://www.youtube.com/channel/UCaCmSeb1GwQ9OHTXkpXAJVg')">mdi-youtube-play</v-icon>
+            <v-icon style="cursor: pointer; margin-right: 10px" dark left @click="goTo('https://vk.com/svobodnyi_trading')">mdi-vk-box</v-icon>
+            <v-icon style="cursor: pointer; margin-right: 10px" dark left @click="goTo('https://www.facebook.com/groups/svobodnyitraiding')">mdi-facebook-box</v-icon>
+            <v-icon style="cursor: pointer" dark left @click="goTo('https://ok.ru/svobodnytr')">mdi-odnoklassniki</v-icon>
         </div>
     </v-footer>
 </template>

@@ -1,92 +1,46 @@
 <template>
     <v-container fluid  grid-list-md class="pa-0">
-        <v-parallax src="./src/assets/images/graph-2.jpg" style="margin-top: -40px;">
+        <v-parallax src="./src/assets/images/top.jpg" style="margin-top: -40px;">
             <v-layout column align-center justify-center>
-                <h3 class="white--text parallax-text" v-html="$t('Option analysis with Option Profit indicator in the Forex market - the path to stable profit')" />
-                <p>
+                <h3 class="white--text parallax-text" v-html="$t('Volume indicator and options online')" />
+				<h3 class="white--text parallax-text" style="color: yellow">
+					<span style="color: yellow">Option Profit</span>
+				</h3>
+				<p style="position: absolute; bottom: 100px;">
+					{{ $t('Exclusive data analysis from CME to MT4') }}
+				</p>
+                <p style="position: absolute; bottom: 10px;">
                     <v-btn
                             color="info"
                             large
                             block
-                            :to="'#pricing'"
-                            v-smooth-scroll="{ duration: 1000, offset: -50 }"
-                            class="mt-5 blue darken-1"
+                            @click="!isLogin ? goToLogin() : goToProfile()"
                     >
-                        {{ $t('Test for free') }}
+                        {{ $t('Download for free') }}
                     </v-btn>
                 </p>
 
             </v-layout>
         </v-parallax>
 
-        <v-layout row wrap class="mb-10 home-product-advantages">
-            <v-flex xs12>
-                <v-card light class="elevation-0">
-                    <v-card-text>
-                        <div>
-                            <p class="ma-3 headline text-xs-center content-title">
-                                {{ $t('Home revolution title') }}
-                            </p>
-                            <p v-html="$t('Home revolution text')"></p>
-                        </div>
-                    </v-card-text>
-                </v-card>
-            </v-flex>
-        </v-layout>
-
         <v-layout row-md wrap class="mb-10 home-product-advantages">
-            <v-flex xs12>
-                <v-card light class="elevation-0">
-                    <v-card-text>
-                        <div>
-                            <p class="ma-3 headline text-xs-center content-title">
-                                {{ $t('What you will get in the Basic version') }}
-                            </p>
-                        </div>
-                    </v-card-text>
-                </v-card>
-            </v-flex>
-
-            <v-flex d-flex xs12 sm6 md3>
-                <v-card dark class="ma-2 what-you-will-get">
-                    <v-card-title>
-                        <v-icon class="display-2 red--text darken-1">mdi-truck-fast</v-icon>
-                    </v-card-title>
-                    <v-card-text class="subheading">
-                        {{ $t('Actual data from CME') }}
-                    </v-card-text>
-                </v-card>
-            </v-flex>
-            <v-flex d-flex xs12 sm6 md3>
-                <v-card dark class="ma-2 what-you-will-get">
-                    <v-card-title>
-                        <v-icon class="display-2 red--text darken-1">mdi-cached</v-icon>
-                    </v-card-title>
-                    <v-card-text class="subheading">
-                        {{ $t('Streaming data to the MetaTrader 4 terminal') }}
-                    </v-card-text>
-                </v-card>
-            </v-flex>
-            <v-flex d-flex xs12 sm6 md3>
-                <v-card dark class="ma-2 what-you-will-get">
-                    <v-card-title>
-                        <v-icon class="display-2 red--text darken-1">mdi-alarm</v-icon>
-                    </v-card-title>
-                    <v-card-text class="subheading">
-                        {{ $t('Actual data 24 hours a day') }}
-                    </v-card-text>
-                </v-card>
-            </v-flex>
-            <v-flex d-flex xs12 sm6 md3>
-                <v-card dark class="ma-2 what-you-will-get ">
-                    <v-card-title>
-                        <v-icon class="display-2 red--text darken-1">mdi-cart-off</v-icon>
-                    </v-card-title>
-                    <v-card-text class="subheading">
-                        {{ $t('Free testing within two trading weeks') }}
-                    </v-card-text>
-                </v-card>
-            </v-flex>
+			<v-flex xs12>
+				<v-card light class="elevation-0">
+					<v-card-text>
+						<div>
+							<p class="ma-3 headline text-xs-center content-title">
+								{{ $t('What is it Option Profit') }}
+							</p>
+						</div>
+					</v-card-text>
+				</v-card>
+			</v-flex>
+			<v-flex d-flex xs12 sm6 md6>
+				<p v-html="$t('Video left text')"></p>
+			</v-flex>
+			<v-flex d-flex xs12 sm6 md6>
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/wZPmUfIMcxU" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+			</v-flex>
         </v-layout>
 
         <v-layout row wrap id="pricing" class="mb-10 home-product-advantages" v-if="products && activeTab">
@@ -153,29 +107,6 @@
                                                            v-if="!isLogin">
                                                         {{ $t('Buy') }}
                                                     </v-btn>
-                                                    <!--<v-menu-->
-                                                            <!--origin="center center"-->
-                                                            <!--transition="scale-transition"-->
-                                                            <!--bottom-->
-                                                    <!--&gt;-->
-                                                        <!--<v-btn dark-->
-                                                               <!--@click="goToLogin()"-->
-                                                               <!--v-if="!isLogin">-->
-                                                            <!--{{ $t('Buy') }}-->
-                                                        <!--</v-btn>-->
-                                                        <!--<v-list>-->
-                                                            <!--<v-list-tile-->
-                                                                    <!--v-for="paymentSystemItem in dictionary.payment_systems" :key="paymentSystemItem.key"-->
-                                                                    <!--v-if="paymentSystemItem.key !== dictionary.const.PAYMENT_SYSTEM_DEMO"-->
-                                                            <!--&gt;-->
-                                                                <!--<v-list-tile-title-->
-                                                                        <!--@click="paymentSystemSelected(paymentSystemItem, productItem)"-->
-                                                                <!--&gt;-->
-                                                                    <!--{{ $t(paymentSystemItem.text) }}-->
-                                                                <!--</v-list-tile-title>-->
-                                                            <!--</v-list-tile>-->
-                                                        <!--</v-list>-->
-                                                    <!--</v-menu>-->
                                                     <v-btn dark
                                                            v-if="productItem.has_demo === 1"
                                                            @click="goToLogin()"
@@ -201,6 +132,41 @@
             </v-flex>
         </v-layout>
 
+		<v-layout row-md wrap class="mb-4">
+			<v-flex xs12>
+				<v-card light class="elevation-0">
+					<v-card-text>
+						<div>
+							<p class="ma-3 headline text-xs-center content-title">
+								{{ $t('Video with indicator') }}
+							</p>
+						</div>
+					</v-card-text>
+				</v-card>
+			</v-flex>
+			<v-flex d-flex xs12 sm6 md6 v-for="video in videos" :key="video.id.videoId">
+				<iframe width="500" height="315" v-bind:src='video.src' frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+			</v-flex>
+			<v-flex xs12>
+				<p class="ma-3 headline text-xs-center">
+					<v-btn color="primary" @click="goToYoutube()">
+						{{ $t('Watch all') }}
+					</v-btn>
+				</p>
+			</v-flex>
+		</v-layout>
+
+		<v-parallax src="./src/assets/images/footer.png" height="300" style="margin-bottom: -20px">
+			<v-layout column align-center justify-center>
+				<p class="text-lg-center parallax-text" v-html="$t('Footer feedback')">
+
+				</p>
+				<p class="text-lg-center parallax-text">
+					<router-link :to="{ name: 'feedback'}" replace style="color: white">{{ $t('Feedback') }}</router-link>
+				</p>
+			</v-layout>
+		</v-parallax>
+
         <v-dialog v-model="systemDialog" persistent>
             <v-card>
                 <v-card-title class="headline">
@@ -217,91 +183,6 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
-
-        <!--<v-dialog v-model="dialog" fullscreen transition="dialog-bottom-transition" :overlay=false persistent>-->
-            <!--<v-card>-->
-                <!--<v-toolbar dark class="primary">-->
-                    <!--<v-btn icon @click.native="dialog = false" dark>-->
-                        <!--<v-icon>close</v-icon>-->
-                    <!--</v-btn>-->
-                    <!--<v-toolbar-title v-if="psSelected">{{ $t(dictionary.payment_systems[psSelected.key].text) }} :: {{ productSelected.name }}</v-toolbar-title>-->
-                    <!--<v-spacer></v-spacer>-->
-                    <!--<v-toolbar-items>-->
-                        <!--<v-btn dark-->
-                               <!--flat-->
-                               <!--:loading="pending"-->
-                               <!--:disabled="pending"-->
-                               <!--@click="submitForm({ email: email, trade_account: trade_account, broker: broker, skype: skype, product_id: productSelected.id, payment_system: psSelected.key })"-->
-                        <!--&gt;-->
-                            <!--<span v-if="psSelected && psSelected.key !== dictionary.const.PAYMENT_SYSTEM_DEMO">-->
-                                <!--{{ $t('Buy') }}-->
-                            <!--</span>-->
-                            <!--<span v-else="psSelected && psSelected.key === dictionary.const.PAYMENT_SYSTEM_DEMO">-->
-                                <!--{{ $t('Get') }}-->
-                            <!--</span>-->
-                            <!--&lt;!&ndash;<span slot="loader">{{ $t('Processing') }}...</span>&ndash;&gt;-->
-                            <!--&lt;!&ndash;<span v-if="productSelected && (!isLogin || !productSelected.users[0])">{{ $t('Buy') }}</span>&ndash;&gt;-->
-                            <!--&lt;!&ndash;<span v-else="productSelected && !!productSelected.users[0]">{{ $t('Renew subscription') }}</span>&ndash;&gt;-->
-                            <!--<span slot="loader">{{ $t('Processing') }}...</span>-->
-                        <!--</v-btn>-->
-                    <!--</v-toolbar-items>-->
-                <!--</v-toolbar>-->
-                <!--<v-card class="grey lighten-4 elevation-0">-->
-                    <!--<v-card-text>-->
-                        <!--<v-container fluid>-->
-                            <!--<v-layout row>-->
-                                <!--<v-flex xs12>-->
-                                    <!--<v-text-field-->
-                                            <!--:label="$t('Your e-mail/login')"-->
-                                            <!--:hint="$t('Enter the e-mail provided during registration')"-->
-                                            <!--v-model="email"-->
-                                            <!--required-->
-                                            <!--:disabled="this.isLogin === true"-->
-                                            <!--:error-messages="errors && errors.email ? $t(errors.email[0]) : []"-->
-                                            <!--:error="errors && !!errors.email"-->
-                                    <!--&gt;</v-text-field>-->
-                                <!--</v-flex>-->
-                            <!--</v-layout>-->
-                            <!--<v-layout row>-->
-                                <!--<v-flex xs12>-->
-                                    <!--<v-text-field-->
-                                            <!--:label="$t('Your trade account')"-->
-                                            <!--:hint="$t('Enter your trade account number')"-->
-                                            <!--v-model="trade_account"-->
-                                            <!--required-->
-                                            <!--:error-messages="errors && errors.trade_account ? $t(errors.trade_account[0]) : []"-->
-                                            <!--:error="errors && !!errors.trade_account"-->
-                                    <!--&gt;</v-text-field>-->
-                                <!--</v-flex>-->
-                            <!--</v-layout>-->
-                            <!--<v-layout row>-->
-                                <!--<v-flex xs12>-->
-                                    <!--<v-text-field-->
-                                            <!--:label="$t('Trade account broker')"-->
-                                            <!--:hint="$t('Enter broker name of your trade account')"-->
-                                            <!--v-model="broker"-->
-                                            <!--required-->
-                                            <!--:error-messages="errors && errors.broker ? $t(errors.broker[0]) : []"-->
-                                            <!--:error="errors && !!errors.broker"-->
-                                    <!--&gt;</v-text-field>-->
-                                <!--</v-flex>-->
-                            <!--</v-layout>-->
-                            <!--<v-layout row>-->
-                                <!--<v-flex xs12>-->
-                                    <!--<v-text-field-->
-                                            <!--label="Skype"-->
-                                            <!--:hint="$t('Enter your skype for fast contact with you')"-->
-                                            <!--v-model="skype"-->
-                                            <!--:error-messages="errors && errors.skype ? $t(errors.skype[0]) : []"-->
-                                            <!--:error="errors && !!errors.skype"-->
-                                    <!--&gt;</v-text-field>-->
-                                <!--</v-flex>-->
-                            <!--</v-layout>-->
-                        <!--</v-container>-->
-                    <!--</v-card-text>-->
-                <!--</v-card>-->
-            <!--</v-card>-->
-        <!--</v-dialog>-->
     </v-container>
 </template>
 
@@ -309,6 +190,9 @@
     import { mapGetters, mapActions } from 'vuex';
 
     export default {
+        beforeMount() {
+            this.$store.dispatch('Youtube/list');
+        },
         mounted() {
             this.pricing().then(() => {
                 this.activeTab = 'lite';
@@ -338,6 +222,9 @@
             ]),
             ...mapGetters('User', [
                 'profile', 'isLogin', 'pending'
+            ]),
+            ...mapGetters('Youtube', [
+                'pending', 'videos'
             ])
         },
         methods: {
@@ -348,6 +235,9 @@
                 this.$router.push({
                     'name': 'login'
                 });
+            },
+            goToYoutube: function() {
+                window.open('https://www.youtube.com/channel/UCaCmSeb1GwQ9OHTXkpXAJVg', '_blank');
             },
             goToProfile() {
                 this.$router.push({

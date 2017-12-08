@@ -29,6 +29,7 @@
                 fixed
                 color="primary"
         >
+            <img src="../../assets/images/logo.png" width="44"/>
             <v-toolbar-title>
                 <v-toolbar-side-icon class="hidden-lg-and-up" @click.stop="drawer=!drawer"></v-toolbar-side-icon>
                 <v-btn icon
@@ -38,17 +39,49 @@
                     <v-icon>mdi-home</v-icon>
                 </v-btn>
             </v-toolbar-title>
+            <v-btn flat
+                class="hidden-md-and-down"
+                style="height: 100%"
+                @click.native="goByMenu('theory')"
+            >
+                {{ $t('Theory') }}
+            </v-btn>
+            <v-btn flat
+                class="hidden-md-and-down"
+                style="height: 100%"
+                @click.native="goByMenu('odrplus')"
+            >
+                {{ $t('Odrplus') }}
+            </v-btn>
+            <v-btn flat
+                class="hidden-md-and-down"
+                style="height: 100%"
+                @click.native="goByMenu('feedback')"
+            >
+                {{ $t('Feedback') }}
+            </v-btn>
             <v-spacer />
             <v-toolbar-items class="hidden-md-and-down">
-                <v-btn
-                        flat
-                        v-for="item in $router.options.routes"
-                        :key="item.name"
-                        v-if="item.meta.available && ((isLogin && item.meta.access.auth === true) || (!isLogin && item.meta.access.guest === true))"
-                        @click.native="goByMenu((!item.meta.externalUrl ? item.name : item.meta.externalUrl), urlPrefix, !!item.meta.externalUrl)"
+                <v-btn flat
+                        style="height: 100%"
+                        v-if="!isLogin"
+                        @click.native="goByMenu('registration')"
                 >
-                    <v-icon left dark>{{ item.meta.icon }}</v-icon>
-                    {{ $t(item.meta.name) }}
+                    {{ $t('Registration') }}
+                </v-btn>
+                <v-btn flat
+                        style="height: 100%"
+                        v-if="!isLogin"
+                        @click.native="goByMenu('login')"
+                >
+                    {{ $t('Login') }}
+                </v-btn>
+                <v-btn flat
+                        style="height: 100%"
+                        v-if="isLogin"
+                        @click.native="goByMenu('profile')"
+                >
+                    {{ $t('Profile') }}
                 </v-btn>
             </v-toolbar-items>
             <v-select
@@ -59,10 +92,28 @@
                     item-value="code"
                     return-object
                     persistent-hint
+                    single-line
                     ref="select_language"
                     class="ml-2"
-                    style="max-width: 100px; margin-top: 8px"
-            ></v-select>
+                    style="max-width: 70px; margin-top: 25px"
+            >
+                <template slot="selection" slot-scope="data">
+                    <v-list-tile-content
+                            style="color: white"
+                            dark
+                    >
+                        <img v-if="data.item.code === 'ru-Ru'" src="../../assets/images/ru.png"/>
+                        <img v-if="data.item.code === 'en-US'" src="../../assets/images/us.png"/>
+                    </v-list-tile-content>
+                </template>
+                <template slot="item" slot-scope="data">
+                    <template>
+                        <v-list-tile-content>
+                            <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
+                        </v-list-tile-content>
+                    </template>
+                </template>
+            </v-select>
         </v-toolbar>
     </v-container>
 </template>
