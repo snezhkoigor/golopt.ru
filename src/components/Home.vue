@@ -16,7 +16,7 @@
                             large
                             block
 							style="font-size: 15px; font-family: 'Roboto', sans-serif"
-                            @click="!isLogin ? goToLogin() : goToProfile()"
+                            @click="!isLogin ? goToRegistration() : goToProfile()"
                     >
                         {{ $t('Download for free') }}
                     </v-btn>
@@ -47,7 +47,7 @@
 					<v-btn
 							color="info"
 							large
-							@click="!isLogin ? goToLogin() : goToProfile()"
+							@click="!isLogin ? goToRegistration() : goToProfile()"
 					>
 						{{ $t('Download for free') }}
 					</v-btn>
@@ -164,7 +164,7 @@
 					<v-btn
 							color="info"
 							large
-							@click="!isLogin ? goToLogin() : goToProfile()"
+							@click="!isLogin ? goToRegistration() : goToProfile()"
 					>
 						{{ $t('Download for free') }}
 					</v-btn>
@@ -257,6 +257,11 @@
             goToProfile() {
                 this.$router.push({
                     'name': 'profile'
+                });
+            },
+            goToRegistration() {
+                this.$router.push({
+                    'name': 'registration'
                 });
             },
             paymentSystemSelected: function(paymentSystem, product) {

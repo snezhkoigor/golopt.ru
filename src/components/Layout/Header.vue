@@ -63,7 +63,7 @@
             <v-btn flat
                     class="hidden-md-and-down"
                     style="height: 100%"
-                    @click="!isLogin ? goToLogin() : goToProfile()"
+                    @click="!isLogin ? goToRegistration() : goToProfile()"
             >
                 {{ $t('Download menu') }}
             </v-btn>
@@ -159,9 +159,9 @@
             ...mapActions('Dictionary', [
                 'list'
             ]),
-            goToLogin() {
+            goToRegistration() {
                 this.$router.push({
-                    'name': 'login'
+                    'name': 'registration'
                 });
             },
             goToProfile() {
