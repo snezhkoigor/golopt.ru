@@ -168,7 +168,7 @@
 			</v-flex>
 		</v-layout>
 
-		<v-parallax jumbotron src="./src/assets/images/footer.jpg" height="400" style="margin-bottom: -20px">
+		<v-parallax jumbotron src="./src/assets/images/footer.jpg" height="475" style="margin-bottom: -20px">
 			<v-layout column align-center justify-center style="font-size: 22px; font-family: 'Roboto', sans-serif">
 				<p class="text-lg-center parallax-text" v-html="$t('Footer feedback')">
 				</p>

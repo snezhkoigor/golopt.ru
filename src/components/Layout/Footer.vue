@@ -2,7 +2,7 @@
     <v-footer dark
               color="primary"
     >
-        <div class="white--text footer-year" style="font-size: 11px;">
+        <div class="white--text footer-year">
             © {{ date | moment('YYYY') }}
         </div>
         <div class="white--text footer-menu hidden-lg-and-up">
@@ -81,3 +81,9 @@
         }
     }
 </script>
+
+<style>
+    .footer {
+        height: 70px
+    }
+</style>
