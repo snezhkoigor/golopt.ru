@@ -25,7 +25,7 @@
 				<v-card light class="elevation-0">
 					<v-card-text>
 						<div>
-							<p class="ma-3 text-xs-center content-title" style="font-size: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif">
+							<p class="ma-3 text-xs-center content-title" style="text-transform: uppercase; font-size: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif">
 								{{ $t('What is it Option Profit') }}
 							</p>
 						</div>
@@ -56,7 +56,7 @@
                 <v-card light class="elevation-0">
                     <v-card-text>
                         <div>
-                            <p class="ma-3 text-xs-center content-title" style="font-size: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif">
+                            <p class="ma-3 text-xs-center content-title" style="text-transform: uppercase; font-size: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif">
                                 {{ $t('Our products') }}
                             </p>
                         </div>
@@ -145,7 +145,7 @@
 				<v-card light class="elevation-0">
 					<v-card-text>
 						<div>
-							<p class="ma-3 text-xs-center content-title" style="font-size: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif">
+							<p class="ma-3 text-xs-center content-title" style="text-transform: uppercase; font-size: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif">
 								{{ $t('Video with indicator') }}
 							</p>
 						</div>
