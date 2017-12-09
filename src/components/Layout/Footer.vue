@@ -1,6 +1,5 @@
 <template>
     <v-footer dark
-              fixed
               color="primary"
     >
         <div class="white--text footer-year" style="font-size: 11px;">
