@@ -1,6 +1,6 @@
 <template>
     <v-container fluid  grid-list-md class="pa-0">
-        <v-parallax src="./src/assets/images/graph.jpg" style="margin-top: -40px;" height="400" jumbotron>
+        <v-parallax src="./src/assets/images/iu-2.jpeg" style="margin-top: -40px;" height="350" jumbotron>
             <v-layout column align-center justify-center>
                 <h3 style="position: absolute; top: 100px; font-size: 48px; font-family: 'Roboto', sans-serif" class="white--text parallax-text" v-html="$t('Volume indicator and options online')" />
 				<p style="position: absolute; bottom: 100px; font-size: 22px; font-family: 'Roboto', sans-serif">
