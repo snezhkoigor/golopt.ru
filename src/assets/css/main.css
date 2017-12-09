@@ -150,11 +150,11 @@
     content: '';
     display: block;
     position: absolute;
-    width: 40px;
-    background: #242a30;
-    height: 2px;
+    width: 151px;
+    background: #0080ff;
+    height: 5px;
     bottom: 0;
-    left: 50%;
+    left: 46%;
     margin-left: -20px;
 }
 
