@@ -84,6 +84,6 @@
 
 <style>
     .footer {
-        height: 100px
+        height: 70px
     }
 </style>
