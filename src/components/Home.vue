@@ -4,13 +4,7 @@
 				jumbotron>
             <v-layout column align-center justify-center>
                 <h3 style="font-size: 48px; font-family: 'Roboto', sans-serif" class="white--text parallax-text" v-html="$t('Volume indicator and options online')" />
-				<h3 style="font-size: 48px; font-family: 'Roboto', sans-serif; color: yellow" class="white--text parallax-text">
-					<span style="color: yellow">Option Profit</span>
-				</h3>
-				<p style="position: absolute; bottom: 100px; font-size: 22px; font-family: 'Roboto', sans-serif">
-					{{ $t('Exclusive data analysis from CME to MT4') }}
-				</p>
-                <p style="position: absolute; bottom: 10px;">
+				<p style="position: absolute; bottom: 10px;">
                     <v-btn
                             color="info"
                             large
