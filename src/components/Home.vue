@@ -25,7 +25,7 @@
 				<v-card light class="elevation-0">
 					<v-card-text>
 						<div>
-							<p class="ma-3 headline text-xs-center content-title">
+							<p class="ma-3 text-xs-center content-title" style="font-size: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif">
 								{{ $t('What is it Option Profit') }}
 							</p>
 						</div>
@@ -56,7 +56,7 @@
                 <v-card light class="elevation-0">
                     <v-card-text>
                         <div>
-                            <p class="ma-3 headline text-xs-center content-title">
+                            <p class="ma-3 text-xs-center content-title" style="font-size: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif">
                                 {{ $t('Our products') }}
                             </p>
                         </div>
@@ -145,7 +145,7 @@
 				<v-card light class="elevation-0">
 					<v-card-text>
 						<div>
-							<p class="ma-3 headline text-xs-center content-title">
+							<p class="ma-3 text-xs-center content-title" style="font-size: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif">
 								{{ $t('Video with indicator') }}
 							</p>
 						</div>
@@ -168,7 +168,7 @@
 			</v-flex>
 		</v-layout>
 
-		<v-parallax jumbotron src="./src/assets/images/footer.jpg" height="475" style="margin-bottom: -20px">
+		<v-parallax jumbotron src="./src/assets/images/footer.jpg" height="300" style="margin-bottom: -20px">
 			<v-layout column align-center justify-center style="font-size: 22px; font-family: 'Roboto', sans-serif">
 				<p class="text-lg-center parallax-text" v-html="$t('Footer feedback')">
 				</p>
