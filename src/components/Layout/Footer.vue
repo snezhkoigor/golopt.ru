@@ -30,10 +30,10 @@
             </span>
         </div>
         <div class="white--text footer-menu hidden-md-and-down">
-            <v-icon style="cursor: pointer; margin-right: 10px" dark left @click="goTo('https://www.youtube.com/channel/UCaCmSeb1GwQ9OHTXkpXAJVg')">mdi-youtube-play</v-icon>
-            <v-icon style="cursor: pointer; margin-right: 10px" dark left @click="goTo('https://vk.com/svobodnyi_trading')">mdi-vk-box</v-icon>
-            <v-icon style="cursor: pointer; margin-right: 10px" dark left @click="goTo('https://www.facebook.com/groups/svobodnyitraiding')">mdi-facebook-box</v-icon>
-            <v-icon style="cursor: pointer" dark left @click="goTo('https://ok.ru/svobodnytr')">mdi-odnoklassniki</v-icon>
+            <v-icon style="cursor: pointer; margin-right: 10px" dark left large @click="goTo('https://www.youtube.com/channel/UCaCmSeb1GwQ9OHTXkpXAJVg')">mdi-youtube-play</v-icon>
+            <v-icon style="cursor: pointer; margin-right: 10px" dark left large @click="goTo('https://vk.com/svobodnyi_trading')">mdi-vk-box</v-icon>
+            <v-icon style="cursor: pointer; margin-right: 10px" dark left large @click="goTo('https://www.facebook.com/groups/svobodnyitraiding')">mdi-facebook-box</v-icon>
+            <v-icon style="cursor: pointer" dark left large @click="goTo('https://ok.ru/svobodnytr')">mdi-odnoklassniki</v-icon>
         </div>
     </v-footer>
 </template>
@@ -84,6 +84,6 @@
 
 <style>
     .footer {
-        height: 70px
+        height: 100px
     }
 </style>
