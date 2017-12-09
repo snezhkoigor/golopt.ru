@@ -1,12 +1,13 @@
 <template>
     <v-container fluid  grid-list-md class="pa-0">
-        <v-parallax src="./src/assets/images/top.jpg" style="margin-top: -40px;">
+        <v-parallax src="./src/assets/images/top.jpg" style="margin-top: -40px;" height="400"
+				jumbotron>
             <v-layout column align-center justify-center>
-                <h3 class="white--text parallax-text" v-html="$t('Volume indicator and options online')" />
-				<h3 class="white--text parallax-text" style="color: yellow">
+                <h3 style="font-size: 48px; font-family: 'Roboto', sans-serif" class="white--text parallax-text" v-html="$t('Volume indicator and options online')" />
+				<h3 style="font-size: 48px; font-family: 'Roboto', sans-serif; color: yellow" class="white--text parallax-text">
 					<span style="color: yellow">Option Profit</span>
 				</h3>
-				<p style="position: absolute; bottom: 100px;">
+				<p style="position: absolute; bottom: 100px; font-size: 22px; font-family: 'Roboto', sans-serif">
 					{{ $t('Exclusive data analysis from CME to MT4') }}
 				</p>
                 <p style="position: absolute; bottom: 10px;">
@@ -14,12 +15,12 @@
                             color="info"
                             large
                             block
+							style="font-size: 15px; font-family: 'Roboto', sans-serif"
                             @click="!isLogin ? goToLogin() : goToProfile()"
                     >
                         {{ $t('Download for free') }}
                     </v-btn>
                 </p>
-
             </v-layout>
         </v-parallax>
 
@@ -38,8 +39,8 @@
 			<v-flex d-flex xs12 sm6 md6>
 				<p v-html="$t('Video left text')"></p>
 			</v-flex>
-			<v-flex d-flex xs12 sm6 md6>
-				<iframe width="560" height="315" src="https://www.youtube.com/embed/wZPmUfIMcxU" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+			<v-flex d-flex xs12 sm6 md6 class="indicator-video">
+				`<iframe width="560" height="315" src="https://www.youtube.com/embed/wZPmUfIMcxU" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 			</v-flex>
 			<v-flex xs12>
 				<p class=" headline text-xs-center">
@@ -143,7 +144,7 @@
             </v-flex>
         </v-layout>
 
-		<v-layout row-md wrap class="mb-4">
+		<v-layout row-md wrap class="mb-4 indicator-video">
 			<v-flex xs12>
 				<v-card light class="elevation-0">
 					<v-card-text>
@@ -155,8 +156,8 @@
 					</v-card-text>
 				</v-card>
 			</v-flex>
-			<v-flex d-flex xs12 sm6 md6 v-for="video in videos" :key="video.id.videoId">
-				<iframe width="500" height="315" v-bind:src='video.src' frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+			<v-flex d-flex xs12 sm3 md3 v-for="video in videos" :key="video.id.videoId">
+				<iframe width="300" height="200" v-bind:src='video.src' frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 			</v-flex>
 			<v-flex xs12>
 				<p class="ma-3 headline text-xs-center">
@@ -171,10 +172,9 @@
 			</v-flex>
 		</v-layout>
 
-		<v-parallax src="./src/assets/images/footer.png" height="300" style="margin-bottom: -20px">
-			<v-layout column align-center justify-center>
+		<v-parallax jumbotron src="./src/assets/images/footer.png" height="300" style="margin-bottom: -20px">
+			<v-layout column align-center justify-center style="font-size: 22px; font-family: 'Roboto', sans-serif">
 				<p class="text-lg-center parallax-text" v-html="$t('Footer feedback')">
-
 				</p>
 				<p class="text-lg-center parallax-text">
 					<router-link :to="{ name: 'feedback'}" replace style="color: white">{{ $t('Feedback') }}</router-link>
@@ -325,3 +325,9 @@
         }
     }
 </script>
+
+<style>
+	.home-product-advantages .flex {
+		padding: 15px !important;
+	}
+</style>

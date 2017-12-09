@@ -60,6 +60,13 @@
             >
                 {{ $t('Feedback') }}
             </v-btn>
+            <v-btn flat
+                    class="hidden-md-and-down"
+                    style="height: 100%"
+                    @click="!isLogin ? goToLogin() : goToProfile()"
+            >
+                {{ $t('Download menu') }}
+            </v-btn>
             <v-spacer />
             <v-toolbar-items class="hidden-md-and-down">
                 <v-btn flat
@@ -152,6 +159,16 @@
             ...mapActions('Dictionary', [
                 'list'
             ]),
+            goToLogin() {
+                this.$router.push({
+                    'name': 'login'
+                });
+            },
+            goToProfile() {
+                this.$router.push({
+                    'name': 'profile'
+                });
+            },
             goHome: function() {
                 this.$router.push({
                     name: 'home'
