@@ -3,7 +3,7 @@
         <v-parallax src="./src/assets/images/top.jpg" style="margin-top: -40px;" height="400"
 				jumbotron>
             <v-layout column align-center justify-center>
-                <h3 style="font-size: 48px; font-family: 'Roboto', sans-serif" class="white--text parallax-text" v-html="$t('Volume indicator and options online')" />
+                <h3 style="position: absolute; top: 100px; font-size: 48px; font-family: 'Roboto', sans-serif" class="white--text parallax-text" v-html="$t('Volume indicator and options online')" />
 				<p style="position: absolute; bottom: 100px; font-size: 22px; font-family: 'Roboto', sans-serif">
 					{{ $t('Exclusive data analysis from CME to MT4') }}
 				</p>
