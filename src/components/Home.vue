@@ -35,7 +35,7 @@
 			<v-flex d-flex xs12 sm6 md6 style="margin-left: 8%">
 				<p v-html="$t('Video left text')"></p>
 			</v-flex>
-			<v-flex d-flex xs12 sm4 md4 class="indicator-video" style="margin-top: 4%; margin-left: 30px">
+			<v-flex d-flex xs12 sm4 md4 class="indicator-video" style="margin-top: 3%; margin-left: 30px">
 				<iframe width="460" height="200" src="https://www.youtube.com/embed/wZPmUfIMcxU" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 			</v-flex>
 			<v-flex xs12>
@@ -155,17 +155,17 @@
 			</v-flex>
 
 
-				<v-flex d-flex xs12 sm3 md3>
+				<v-flex d-flex xs12 sm4 md4>
 					<iframe width="300" height="200" v-bind:src='videos[0].src' frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 				</v-flex>
-				<v-flex d-flex xs12 sm3 md3>
+				<v-flex d-flex xs12 sm4 md4>
 					<iframe width="300" height="200" v-bind:src='videos[1].src' frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 				</v-flex>
 
-				<v-flex d-flex xs12 sm3 md3>
+				<v-flex d-flex xs12 sm4 md4>
 					<iframe width="300" height="200" v-bind:src='videos[2].src' frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 				</v-flex>
-				<v-flex d-flex xs12 sm3 md3>
+				<v-flex d-flex xs12 sm4 md4>
 					<iframe width="300" height="200" v-bind:src='videos[3].src' frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 				</v-flex>
 
