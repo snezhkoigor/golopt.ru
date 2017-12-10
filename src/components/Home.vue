@@ -35,8 +35,8 @@
 			<v-flex d-flex xs12 sm6 md6>
 				<p v-html="$t('Video left text')"></p>
 			</v-flex>
-			<v-flex d-flex xs12 sm6 md6 class="indicator-video">
-				`<iframe width="560" height="315" src="https://www.youtube.com/embed/wZPmUfIMcxU" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+			<v-flex d-flex xs12 sm4 md4 class="indicator-video">
+				`<iframe width="460" height="200" src="https://www.youtube.com/embed/wZPmUfIMcxU" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 			</v-flex>
 			<v-flex xs12>
 				<p class=" headline text-xs-center">
