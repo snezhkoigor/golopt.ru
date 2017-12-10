@@ -3,7 +3,7 @@
         <v-parallax src="./src/assets/images/top.jpg" style="margin-top: -40px;" height="600">
             <v-layout column align-center justify-center>
                 <h3 style="position: absolute; top: 150px; font-size: 48px; font-family: 'Roboto', sans-serif" class="white--text parallax-text" v-html="$t('Volume indicator and options online')" />
-				<p style="position: absolute; bottom: 180px; font-size: 22px; font-family: 'Roboto', sans-serif">
+				<p style="position: absolute; bottom: 200px; font-size: 22px; font-family: 'Roboto', sans-serif">
 					{{ $t('Exclusive data analysis from CME to MT4') }}
 				</p>
                 <p style="position: absolute; bottom: 100px;">
@@ -35,7 +35,7 @@
 			<v-flex d-flex xs12 sm6 md6 style="margin-left: 8%">
 				<p v-html="$t('Video left text')"></p>
 			</v-flex>
-			<v-flex d-flex xs12 sm4 md4 class="indicator-video" style="margin-top: 4%">
+			<v-flex d-flex xs12 sm4 md4 class="indicator-video" style="margin-top: 4%; margin-left: 30px">
 				<iframe width="460" height="200" src="https://www.youtube.com/embed/wZPmUfIMcxU" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 			</v-flex>
 			<v-flex xs12>
