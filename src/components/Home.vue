@@ -2,11 +2,11 @@
     <v-container fluid  grid-list-md class="pa-0">
         <v-parallax src="./src/assets/images/top.jpg" style="margin-top: -40px;" height="600">
             <v-layout column align-center justify-center>
-                <h3 style="position: absolute; top: 150px; font-size: 48px; font-family: 'Roboto', sans-serif" class="white--text parallax-text" v-html="$t('Volume indicator and options online')" />
+                <h3 style="position: absolute; top: 180px; font-size: 48px; font-family: 'Roboto', sans-serif" class="white--text parallax-text" v-html="$t('Volume indicator and options online')" />
 				<p style="position: absolute; bottom: 150px; font-size: 22px; font-family: 'Roboto', sans-serif">
 					{{ $t('Exclusive data analysis from CME to MT4') }}
 				</p>
-                <p style="position: absolute; bottom: 70px;">
+                <p style="position: absolute; bottom: 100px;">
                     <v-btn
                             color="info"
                             large
@@ -35,7 +35,7 @@
 			<v-flex d-flex xs12 sm6 md6 style="margin-left: 8%">
 				<p v-html="$t('Video left text')"></p>
 			</v-flex>
-			<v-flex d-flex xs12 sm4 md4 class="indicator-video" style="margin-top: 5%">
+			<v-flex d-flex xs12 sm4 md4 class="indicator-video" style="margin-top: 4%">
 				<iframe width="460" height="200" src="https://www.youtube.com/embed/wZPmUfIMcxU" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 			</v-flex>
 			<v-flex xs12>
@@ -43,6 +43,7 @@
 					<v-btn
 							color="info"
 							large
+							style="width: 300px; height: 60px;"
 							@click="!isLogin ? goToRegistration() : goToProfile()"
 					>
 						{{ $t('Download for free') }}
@@ -153,9 +154,22 @@
 				</v-card>
 			</v-flex>
 
-			<v-flex d-flex xs12 sm3 md3 v-for="video in videos" :key="video.id.videoId">
-				<iframe width="300" height="200" v-bind:src='video.src' frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
-			</v-flex>
+
+				<v-flex d-flex xs12 sm3 md3>
+					<iframe width="300" height="200" v-bind:src='videos[0].src' frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+				</v-flex>
+				<v-flex d-flex xs12 sm3 md3>
+					<iframe width="300" height="200" v-bind:src='videos[1].src' frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+				</v-flex>
+
+				<v-flex d-flex xs12 sm3 md3>
+					<iframe width="300" height="200" v-bind:src='videos[2].src' frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+				</v-flex>
+				<v-flex d-flex xs12 sm3 md3>
+					<iframe width="300" height="200" v-bind:src='videos[3].src' frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+				</v-flex>
+
+
 			<v-flex xs12>
 				<p class="ma-3 headline text-xs-center">
 					<v-btn
@@ -329,7 +343,5 @@
 </script>
 
 <style>
-	.home-product-advantages .flex {
-		padding: 15px !important;
-	}
+
 </style>
