@@ -32,11 +32,11 @@
 					</v-card-text>
 				</v-card>
 			</v-flex>
-			<v-flex d-flex xs12 sm6 md6>
+			<v-flex d-flex xs12 sm6 md6 style="margin-left: 8%">
 				<p v-html="$t('Video left text')"></p>
 			</v-flex>
-			<v-flex d-flex xs12 sm4 md4 class="indicator-video">
-				`<iframe width="460" height="200" src="https://www.youtube.com/embed/wZPmUfIMcxU" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+			<v-flex d-flex xs12 sm4 md4 class="indicator-video" style="margin-top: 5%">
+				<iframe width="460" height="200" src="https://www.youtube.com/embed/wZPmUfIMcxU" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 			</v-flex>
 			<v-flex xs12>
 				<p class=" headline text-xs-center">
