@@ -8,10 +8,8 @@
         <div v-if="dictionary.length !== 0">
             <header-component v-if="$route.name !== 'notFound'" class="mb-5"/>
 
-
-
-            <main class="content">
-                <v-container fluid fill-height>
+            <main class="content" style="margin-bottom: 70px">
+                <v-container fluid>
                     <router-view />
                 </v-container>
             </main>
