@@ -1,6 +1,6 @@
 <template>
     <v-container fluid  grid-list-md class="pa-0">
-        <v-parallax src="./src/assets/images/top.jpg" style="margin-top: -40px;" height="670">
+        <v-parallax src="./src/assets/images/top.jpg" style="margin-top: -40px;" height="600">
             <v-layout column align-center justify-center>
                 <h3 style="position: absolute; top: 250px; font-size: 48px; font-family: 'Roboto', sans-serif" class="white--text parallax-text" v-html="$t('Volume indicator and options online')" />
 				<p style="position: absolute; bottom: 100px; font-size: 22px; font-family: 'Roboto', sans-serif">
@@ -163,7 +163,7 @@
 							large
 							@click="!isLogin ? goToRegistration() : goToProfile()"
 					>
-						{{ $t('Download for free') }}
+						{{ $t('Watch all') }}
 					</v-btn>
 				</p>
 			</v-flex>
