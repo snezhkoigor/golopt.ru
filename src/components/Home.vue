@@ -1,8 +1,8 @@
 <template>
     <v-container fluid  grid-list-md class="pa-0">
-        <v-parallax src="./src/assets/images/iu-2.jpeg" style="margin-top: -40px;" height="350" jumbotron>
+        <v-parallax src="./src/assets/images/top.jpg" style="margin-top: -40px;" height="670">
             <v-layout column align-center justify-center>
-                <h3 style="position: absolute; top: 100px; font-size: 48px; font-family: 'Roboto', sans-serif" class="white--text parallax-text" v-html="$t('Volume indicator and options online')" />
+                <h3 style="position: absolute; top: 150px; font-size: 48px; font-family: 'Roboto', sans-serif" class="white--text parallax-text" v-html="$t('Volume indicator and options online')" />
 				<p style="position: absolute; bottom: 100px; font-size: 22px; font-family: 'Roboto', sans-serif">
 					{{ $t('Exclusive data analysis from CME to MT4') }}
 				</p>
@@ -152,6 +152,7 @@
 					</v-card-text>
 				</v-card>
 			</v-flex>
+
 			<v-flex d-flex xs12 sm3 md3 v-for="video in videos" :key="video.id.videoId">
 				<iframe width="300" height="200" v-bind:src='video.src' frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 			</v-flex>
