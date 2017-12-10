@@ -36,14 +36,14 @@
 			<v-flex d-flex xs12 sm6 md6 style="margin-left: 8%" class="hidden-md-and-down">
 				<p v-html="$t('Video left text')"></p>
 			</v-flex>
-			<v-flex d-flex xs12 sm6 md6>
+			<v-flex d-flex xs12 sm6 md6 class="hidden-lg-and-up">
 				<p v-html="$t('Video left text')"></p>
 			</v-flex>
 
 			<v-flex d-flex xs12 sm4 md4 class="indicator-video hidden-md-and-down" style="margin-top: 3%; margin-left: 30px">
 				<iframe width="460" height="200" src="https://www.youtube.com/embed/wZPmUfIMcxU" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 			</v-flex>
-			<v-flex d-flex xs12 sm4 md4 class="indicator-video">
+			<v-flex d-flex xs12 sm4 md4 class="indicator-video hidden-lg-and-up">
 				<iframe width="460" height="200" src="https://www.youtube.com/embed/wZPmUfIMcxU" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 			</v-flex>
 
@@ -204,7 +204,7 @@
 				</p>
 			</v-layout>
 
-			<v-layout column align-center justify-center style="font-size: 18px; font-family: 'Roboto', sans-serif">
+			<v-layout class="hidden-lg-and-up" column align-center justify-center style="font-size: 18px; font-family: 'Roboto', sans-serif">
 				<p class="text-lg-center parallax-text" v-html="$t('Footer feedback')">
 				</p>
 				<p class="text-lg-center parallax-text">
