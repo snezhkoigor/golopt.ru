@@ -6,12 +6,12 @@
 				<p style="position: absolute; bottom: 100px; font-size: 22px; font-family: 'Roboto', sans-serif">
 					{{ $t('Exclusive data analysis from CME to MT4') }}
 				</p>
-                <p style="position: absolute; bottom: 10px;">
+                <p style="position: absolute; bottom: 20px;">
                     <v-btn
                             color="info"
                             large
                             block
-							style="font-size: 15px; font-family: 'Roboto', sans-serif"
+							style="width: 300px; height: 60px; font-size: 18px; font-family: 'Roboto', sans-serif"
                             @click="!isLogin ? goToRegistration() : goToProfile()"
                     >
                         {{ $t('Download for free') }}
