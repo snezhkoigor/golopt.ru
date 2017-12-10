@@ -43,7 +43,7 @@
 					<v-btn
 							color="info"
 							large
-							style="width: 300px; height: 60px;"
+							style="width: 300px; height: 60px; font-size: 18px;"
 							@click="!isLogin ? goToRegistration() : goToProfile()"
 					>
 						{{ $t('Download for free') }}
