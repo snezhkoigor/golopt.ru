@@ -154,15 +154,20 @@
 				</v-card>
 			</v-flex>
 
+			<v-flex d-flex xs12 sm4 md4>
 
-				<v-flex d-flex xs12 sm4 md4>
+			</v-flex>
+
+				<v-flex d-flex xs12 sm4 md4 style="margin-left: -200px">
 					<iframe width="300" height="200" v-bind:src='videos[0].src' frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 				</v-flex>
 				<v-flex d-flex xs12 sm4 md4>
 					<iframe width="300" height="200" v-bind:src='videos[1].src' frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 				</v-flex>
+			<v-flex d-flex xs12 sm4 md4>
 
-				<v-flex d-flex xs12 sm4 md4>
+			</v-flex>
+				<v-flex d-flex xs12 sm4 md4 style="margin-left: -200px">
 					<iframe width="300" height="200" v-bind:src='videos[2].src' frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 				</v-flex>
 				<v-flex d-flex xs12 sm4 md4>
