@@ -40,7 +40,7 @@
 				<p v-html="$t('Video left text')"></p>
 			</v-flex>
 
-			<v-flex class="hidden-md-and-down" d-flex xs12 sm4 md4 class="indicator-video" style="margin-top: 3%; margin-left: 30px">
+			<v-flex d-flex xs12 sm4 md4 class="indicator-video hidden-md-and-down" style="margin-top: 3%; margin-left: 30px">
 				<iframe width="460" height="200" src="https://www.youtube.com/embed/wZPmUfIMcxU" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 			</v-flex>
 			<v-flex d-flex xs12 sm4 md4 class="indicator-video">
