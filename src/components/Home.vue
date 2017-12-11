@@ -8,11 +8,11 @@
 				<p class="hidden-md-and-down" style="position: absolute; bottom: 200px; font-size: 22px; font-family: 'Roboto', sans-serif">
 					{{ $t('Exclusive data analysis from CME to MT4') }}
 				</p>
-				<p class="hidden-lg-and-up text-md-center" style="text-align: center; position: absolute; bottom: 180px; font-size: 16px; font-family: 'Roboto', sans-serif">
+				<p class="hidden-lg-and-up text-md-center" style="text-align: center; position: absolute; bottom: 140px; font-size: 16px; font-family: 'Roboto', sans-serif">
 					{{ $t('Exclusive data analysis from CME to MT4') }}
 				</p>
 
-                <p style="position: absolute; bottom: 100px;">
+                <p class="hidden-md-and-down" style="position: absolute; bottom: 100px;">
                     <v-btn
                             color="info"
                             large
@@ -23,6 +23,18 @@
                         {{ $t('Download for free') }}
                     </v-btn>
                 </p>
+
+				<p class="hidden-lg-and-up" style="position: absolute; bottom: 60px;">
+					<v-btn
+							color="info"
+							large
+							block
+							style="width: 300px; height: 60px; font-size: 18px; font-family: 'Roboto', sans-serif"
+							@click="!isLogin ? goToRegistration() : goToProfile()"
+					>
+						{{ $t('Download for free') }}
+					</v-btn>
+				</p>
             </v-layout>
         </v-parallax>
 
