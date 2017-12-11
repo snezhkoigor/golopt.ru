@@ -2,10 +2,16 @@
     <v-container fluid  grid-list-md class="pa-0">
         <v-parallax src="./src/assets/images/top.jpg" style="margin-top: -40px;" height="600">
             <v-layout column align-center justify-center>
-                <h3 style="position: absolute; top: 150px; font-size: 48px; font-family: 'Roboto', sans-serif" class="white--text parallax-text" v-html="$t('Volume indicator and options online')" />
+                <h3 style="position: absolute; top: 150px; font-size: 48px; font-family: 'Roboto', sans-serif" class="white--text parallax-text hidden-md-and-down" v-html="$t('Volume indicator and options online')" />
+				<h3 style="position: absolute; top: 150px; font-size: 40px; font-family: 'Roboto', sans-serif" class="white--text parallax-text hidden-lg-and-up" v-html="$t('Volume indicator and options online')" />
+
 				<p class="hidden-md-and-down" style="position: absolute; bottom: 200px; font-size: 22px; font-family: 'Roboto', sans-serif">
 					{{ $t('Exclusive data analysis from CME to MT4') }}
 				</p>
+				<p class="hidden-lg-and-up" style="position: absolute; bottom: 200px; font-size: 18px; font-family: 'Roboto', sans-serif">
+					{{ $t('Exclusive data analysis from CME to MT4') }}
+				</p>
+
                 <p style="position: absolute; bottom: 100px;">
                     <v-btn
                             color="info"
