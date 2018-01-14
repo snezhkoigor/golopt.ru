@@ -54,6 +54,13 @@
                 {{ $t('Odrplus') }}
             </v-btn>
             <v-btn flat
+                    class="hidden-md-and-down"
+                    style="height: 100%"
+                    @click.native="goByMenu('newsView')"
+            >
+                {{ $t('News') }}
+            </v-btn>
+            <v-btn flat
                 class="hidden-md-and-down"
                 style="height: 100%"
                 @click.native="goByMenu('feedback')"
