@@ -5,6 +5,7 @@ import Product from './product';
 import Dictionary from './dictionary';
 import Youtube from './youtube';
 import Meta from './meta';
+import News from './news';
 import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
@@ -15,7 +16,8 @@ export default new Vuex.Store({
         Product,
         Dictionary,
         Youtube,
-        Meta
+        Meta,
+        News
     },
     plugins: [createPersistedState()]
 })

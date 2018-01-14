@@ -14,6 +14,8 @@ import PayFail from '@/components/Pay/Fail.vue';
 import OdrPlus from '@/components/OdrPlus.vue';
 import Feedback from '@/components/Feedback.vue';
 import Theory from '@/components/Theory.vue';
+import NewsView from '@/components/News/View.vue';
+import NewsShow from '@/components/News/Show.vue';
 
 import AuthGuard from '@/router/guard';
 import ChangeEmailGuard from '@/router/changeEmailGuard';
@@ -56,6 +58,42 @@ export default new Router({
                 },
                 icon: 'mdi-book-open',
                 available: true,
+                externalUrl: null
+            }
+        },
+        {
+            path: '/:lang?/news',
+            name: 'newsView',
+            component: NewsView,
+            meta: {
+                title: 'News',
+                name: 'News',
+                description: 'News',
+                localized: true,
+                access: {
+                    guest: true,
+                    auth: true
+                },
+                icon: 'mdi-book-open',
+                available: true,
+                externalUrl: null
+            }
+        },
+        {
+            path: '/:lang?/news/:newsId',
+            name: 'newsShow',
+            component: NewsShow,
+            meta: {
+                title: 'News',
+                name: 'News',
+                description: 'News',
+                localized: true,
+                access: {
+                    guest: true,
+                    auth: true
+                },
+                icon: 'mdi-book-open',
+                available: false,
                 externalUrl: null
             }
         },
