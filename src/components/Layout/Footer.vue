@@ -34,6 +34,7 @@
             <v-icon style="cursor: pointer; margin-right: 10px" dark left large @click="goTo('https://www.youtube.com/channel/UCaCmSeb1GwQ9OHTXkpXAJVg')">mdi-youtube-play</v-icon>
             <v-icon style="cursor: pointer; margin-right: 10px" dark left large @click="goTo('https://vk.com/svobodnyi_trading')">mdi-vk-box</v-icon>
             <v-icon style="cursor: pointer; margin-right: 10px" dark left large @click="goTo('https://www.facebook.com/groups/svobodnyitraiding')">mdi-facebook-box</v-icon>
+            <v-icon style="cursor: pointer; margin-right: 10px" dark left large @click="goTo('https://t.me/TSODRPlus')">mdi-telegram</v-icon>
             <v-icon style="cursor: pointer" dark left large @click="goTo('https://ok.ru/svobodnytr')">mdi-odnoklassniki</v-icon>
         </div>
     </v-footer>
@@ -62,6 +63,12 @@
                         'text': 'Facebook',
                         'link': 'https://www.facebook.com/groups/svobodnyitraiding',
                         'ico': 'mdi-facebook-box'
+                    },
+                    {
+                        'key': 'telegram',
+                        'text': 'Telegram',
+                        'link': 'https://t.me/TSODRPlus',
+                        'ico': 'mdi-telegram'
                     },
                     {
                         'key': 'ok',
