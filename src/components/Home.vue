@@ -59,10 +59,10 @@
 			</v-flex>
 
 			<v-flex d-flex xs12 sm4 md4 class="indicator-video hidden-md-and-down" style="margin-top: 3%; margin-left: 30px">
-				<iframe width="460" height="200" src="https://www.youtube.com/embed/W1EvviUyjkQ" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+				<iframe width="460" height="200" src="https://www.youtube.com/embed/haTC9LLONfA" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 			</v-flex>
 			<v-flex d-flex xs12 sm4 md4 class="indicator-video hidden-lg-and-up">
-				<iframe width="460" height="200" src="https://www.youtube.com/embed/W1EvviUyjkQ" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+				<iframe width="460" height="200" src="https://www.youtube.com/embed/haTC9LLONfA" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 			</v-flex>
 
 			<v-flex xs12>
