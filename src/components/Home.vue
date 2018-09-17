@@ -11,6 +11,9 @@
 				<p class="hidden-lg-and-up text-md-center" style="text-align: center; position: absolute; bottom: 140px; font-size: 16px; font-family: 'Roboto', sans-serif">
 					{{ $t('Exclusive data analysis from CME to MT4') }}
 				</p>
+				<p class="hidden-lg-and-up text-md-center"  style="text-align: center; position: absolute; bottom: 140px; font-size: 16px; font-family: 'Roboto', sans-serif">
+					{{ $t('Extra option analysis methods') }}
+				</p>
 
                 <p class="hidden-md-and-down" style="position: absolute; bottom: 100px;">
                     <v-btn
