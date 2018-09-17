@@ -87,9 +87,7 @@
                             <p class="ma-3 text-xs-center content-title" style="text-transform: uppercase; font-size: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif">
                                 {{ $t('Our products') }}
                             </p>
-			    <p class="ma-3 text-xs-center"  style="font-size: 16px; font-family: 'Roboto', sans-serif">
-				{{ $t('Extra option analysis methods') }}
-				</p>
+			    <p v-html="$t('Extra option analysis methods')" class="ma-3 text-xs-center"  style="font-size: 16px; font-family: 'Roboto', sans-serif"></p>
                         </div>
                     </v-card-text>
                 </v-card>
