@@ -123,7 +123,8 @@
                                                     <div class="white elevation-3 product-item-description">
                                                         <v-list two-line>
                                                             <template v-for="(val, key) in productItem.functional">
-                                                                <v-list-tile class="subheadline">
+							    	<v-divider inset v-if="key === 'divider'"/>
+                                                                <v-list-tile v-if="key !== 'divider'" class="subheadline">
                                                                     <v-list-tile-avatar>
                                                                         <v-icon v-if="val" class="green--text">mdi-check</v-icon>
                                                                         <v-icon v-if="!val" class="red--text">mdi-close</v-icon>
