@@ -130,7 +130,8 @@
                                                                         <v-icon v-if="!val" class="red--text">mdi-close</v-icon>
                                                                     </v-list-tile-avatar>
                                                                     <v-list-tile-content>
-                                                                        {{ $t(key) }}
+                                                                        <span v-if="key === 'Extra info panel'" class="red--text">{{ $t(key) }}</span>
+									<span v-else>{{ $t(key) }}</span>
                                                                     </v-list-tile-content>
                                                                 </v-list-tile>
                                                             </template>
