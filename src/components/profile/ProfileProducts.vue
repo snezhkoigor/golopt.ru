@@ -56,12 +56,6 @@
                                     {{ $t('Download') }}
                                 </v-btn>
                             </span>
-                            <span v-if="!!productItem.users[0] && !!productItem.set_path" class="product-list-title-buttons">
-                                <v-btn color="primary" flat
-                                       @click="downloadSet(productItem)">
-                                    {{ $t('Base settings set file') }}
-                                </v-btn>
-                            </span>
                         </v-list-tile-title>
                         <v-list-tile-title>
                             {{ productItem.price | currency }}/{{ $t(productItem.price_by) }}
