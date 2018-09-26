@@ -8,13 +8,13 @@ export default {
             Authorization: 'Bearer ' + localStorage.getItem('jwt_token')
         };
 
-        return HTTP.get('/news/view', { headers: headers });
+        return HTTP.get('/site/news/view', { headers: headers });
     },
     show(newsId) {
         let headers = {
             Authorization: 'Bearer ' + localStorage.getItem('jwt_token')
         };
 
-        return HTTP.get('/news/show/' + newsId, { headers: headers });
+        return HTTP.get('/site/news/show/' + newsId, { headers: headers });
     }
 }
