@@ -16,6 +16,8 @@ import Feedback from '@/components/Feedback.vue';
 import Theory from '@/components/Theory.vue';
 import NewsView from '@/components/News/View.vue';
 import NewsShow from '@/components/News/Show.vue';
+import LessonView from '@/components/Lesson/View.vue';
+import LessonShow from '@/components/Lesson/Show.vue';
 
 import AuthGuard from '@/router/guard';
 import ChangeEmailGuard from '@/router/changeEmailGuard';
@@ -80,19 +82,37 @@ export default new Router({
             }
         },
         {
-            path: '/:lang?/news/:newsId',
-            name: 'newsShow',
-            component: NewsShow,
+            path: '/:lang?/lessons',
+            name: 'lessonView',
+            component: LessonView,
             meta: {
-                title: 'News',
-                name: 'News',
-                description: 'News',
+                title: 'Lessons',
+                name: 'Lessons',
+                description: 'Lessons',
                 localized: true,
                 access: {
                     guest: true,
                     auth: true
                 },
-                icon: 'mdi-book-open',
+                icon: 'mdi-book-close',
+                available: true,
+                externalUrl: null
+            }
+        },
+        {
+            path: '/:lang?/lessons/:lessonId',
+            name: 'lessonShow',
+            component: LessonShow,
+            meta: {
+                title: 'Lessons',
+                name: 'Lessons',
+                description: 'Lessons',
+                localized: true,
+                access: {
+                    guest: true,
+                    auth: true
+                },
+                icon: 'mdi-book-close',
                 available: false,
                 externalUrl: null
             }
