@@ -13,7 +13,7 @@
 </template>
 
 <script>
-	VK.Widgets.Comments("vk_comments", {limit: 20, attach: "*"});
+	// VK.Widgets.Comments("vk_comments", {limit: 20, attach: "*"});
 
     import { mapGetters, mapActions } from 'vuex';
 
