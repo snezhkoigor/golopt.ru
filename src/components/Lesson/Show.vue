@@ -7,6 +7,14 @@
 					<div v-html="this.lesson.text"></div>
 				</v-card-text>	
 			</v-card>
+			<v-card class="grey lighten-4 elevation-0" v-if="this.lesson.text.length">
+				<v-card-text>
+					<div id="vk_comments"></div>
+					<script type="text/javascript">
+					VK.Widgets.Comments("vk_comments", {limit: 20, attach: "*"});
+					</script>
+				</v-card-text>	
+			</v-card>
 		</v-flex>
 	</v-layout>
 </template>
