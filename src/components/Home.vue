@@ -95,7 +95,7 @@
                 <v-card light class="elevation-0">
                     <v-card-text>
 			<v-layout row wrap child-flex class="product">
-			    <template v-for="productItem in products[key]">
+			    <template v-for="productItem in products['']">
 				<v-flex d-flex xs12 sm6 md4>
 				    <v-card class="ma-2 grey darken-2 white--text product-item">
 					<v-card-title primary-title>
