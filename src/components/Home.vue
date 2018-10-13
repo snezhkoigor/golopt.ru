@@ -94,78 +94,57 @@
 
                 <v-card light class="elevation-0">
                     <v-card-text>
-                        <v-tabs light fixed centered v-model="activeTab">
-                            <v-tabs-bar class="white lighten-4" light>
-                                <v-tabs-item
-                                        v-for="(val, key) in products"
-                                        :key="key"
-                                        :href="'#' + key"
-                                        ripple
-                                >
-                                    {{ key }}
-                                </v-tabs-item>
-                                <v-tabs-slider class="blue"></v-tabs-slider>
-                            </v-tabs-bar>
-
-                            <v-tabs-content
-                                    v-for="(val, key) in products"
-                                    :key="key"
-                                    :id="key"
-                                    class="mt-3"
-                            >
-                                <v-layout row wrap child-flex class="product">
-                                    <template v-for="productItem in products[key]">
-                                        <v-flex d-flex xs12 sm6 md4>
-                                            <v-card class="ma-2 grey darken-2 white--text product-item">
-                                                <v-card-title primary-title>
-                                                    <div class="headline mb-3 product-item-name">{{ productItem.name }}</div>
-                                                    <div class="display-1 mb-3 product-item-price">{{ productItem.price | currency}}/{{ $t(productItem.price_by) }}</div>
-                                                    <div class="white elevation-3 product-item-description">
-                                                        <v-list two-line>
-                                                            <template v-for="(val, key) in productItem.functional">
-							    	<v-divider inset v-if="key === 'divider'"/>
-                                                                <v-list-tile v-if="key !== 'divider'" class="subheadline">
-                                                                    <v-list-tile-avatar>
-                                                                        <v-icon v-if="val" class="green--text">mdi-check</v-icon>
-                                                                        <v-icon v-if="!val" class="red--text">mdi-close</v-icon>
-                                                                    </v-list-tile-avatar>
-                                                                    <v-list-tile-content>
-                                                                        <span v-if="key === 'Extra info panel'" class="font-weight-bold red--text">{{ $t(key) }}</span>
-									<span v-else>{{ $t(key) }}</span>
-                                                                    </v-list-tile-content>
-                                                                </v-list-tile>
-                                                            </template>
-                                                        </v-list>
-                                                    </div>
-                                                </v-card-title>
-                                                <v-card-actions v-if="!isLogin"
-                                                                class="mb-3"
-                                                >
-                                                    <v-btn dark
-                                                           @click="goToLogin()"
-                                                           v-if="!isLogin">
-                                                        {{ $t('Buy') }}
-                                                    </v-btn>
-                                                    <v-btn dark
-                                                           v-if="productItem.has_demo === 1"
-                                                           @click="goToLogin()"
-                                                    >
-                                                        {{ $t(dictionary.payment_systems[dictionary.const.PAYMENT_SYSTEM_DEMO].text) }}
-                                                    </v-btn>
-                                                </v-card-actions>
-                                                <v-card-actions v-if="isLogin" class="ml-3 mb-3">
-                                                    <v-btn dark
-                                                           @click="goToProfile()"
-                                                    >
-                                                        {{ $t('Go to profile') }}
-                                                    </v-btn>
-                                                </v-card-actions>
-                                            </v-card>
-                                        </v-flex>
-                                    </template>
-                                </v-layout>
-                            </v-tabs-content>
-                        </v-tabs>
+			<v-layout row wrap child-flex class="product">
+			    <template v-for="productItem in products[key]">
+				<v-flex d-flex xs12 sm6 md4>
+				    <v-card class="ma-2 grey darken-2 white--text product-item">
+					<v-card-title primary-title>
+					    <div class="headline mb-3 product-item-name">{{ productItem.name }}</div>
+					    <div class="display-1 mb-3 product-item-price">{{ productItem.price | currency}}/{{ $t(productItem.price_by) }}</div>
+					    <div class="white elevation-3 product-item-description">
+						<v-list two-line>
+						    <template v-for="(val, key) in productItem.functional">
+							<v-divider inset v-if="key === 'divider'"/>
+							<v-list-tile v-if="key !== 'divider'" class="subheadline">
+							    <v-list-tile-avatar>
+								<v-icon v-if="val" class="green--text">mdi-check</v-icon>
+								<v-icon v-if="!val" class="red--text">mdi-close</v-icon>
+							    </v-list-tile-avatar>
+							    <v-list-tile-content>
+								<span v-if="key === 'Extra info panel'" class="font-weight-bold red--text">{{ $t(key) }}</span>
+								<span v-else>{{ $t(key) }}</span>
+							    </v-list-tile-content>
+							</v-list-tile>
+						    </template>
+						</v-list>
+					    </div>
+					</v-card-title>
+					<v-card-actions v-if="!isLogin"
+							class="mb-3"
+					>
+					    <v-btn dark
+						   @click="goToLogin()"
+						   v-if="!isLogin">
+						{{ $t('Buy') }}
+					    </v-btn>
+					    <v-btn dark
+						   v-if="productItem.has_demo === 1"
+						   @click="goToLogin()"
+					    >
+						{{ $t(dictionary.payment_systems[dictionary.const.PAYMENT_SYSTEM_DEMO].text) }}
+					    </v-btn>
+					</v-card-actions>
+					<v-card-actions v-if="isLogin" class="ml-3 mb-3">
+					    <v-btn dark
+						   @click="goToProfile()"
+					    >
+						{{ $t('Go to profile') }}
+					    </v-btn>
+					</v-card-actions>
+				    </v-card>
+				</v-flex>
+			    </template>
+			</v-layout>
                     </v-card-text>
                 </v-card>
             </v-flex>
